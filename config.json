@@ -2,13 +2,14 @@
   "olaylar_url": "https://services-eu1.arcgis.com/uaOuNze8ggz2HsSW/arcgis/rest/services/kurtulustan_kurulusa/FeatureServer/0",
   "rota_url": "https://services-eu1.arcgis.com/uaOuNze8ggz2HsSW/arcgis/rest/services/kurtulustan_kurulusa/FeatureServer/1",
   "uc_boyut": {
-    "_aciklama": "3B yolculuk ayarları. Uzunluklar metre, süreler saniye. kameraYuksek: kameranın yerden yüksekliği; kameraUzak: izlenen noktaya yatay uzaklığı (eğiklik ikisinden hesaplanır, 55000/90000 ≈ 59 derece). maket: bina maketlerinin büyütme katsayısı. gecisSaniye: bir duraktan sonrakine geçiş süresi; yol bir anda çizilir, kamera bu sürede kayar. durakSaniye: dönüm noktasında en kısa bekleme. yumusak: dönüşlerde kameranın yumuşaklığı (küçüldükçe daha yumuşak). okumaKelimeSaniye: durakta anlatımın okunma hızı; bekleme süresi en az durakSaniye, metin uzunsa kelime sayısı / bu değer. Durağın ses dosyası varsa bekleme sesin süresi kadardır.",
+    "_aciklama": "3B yolculuk ayarları. Uzunluklar metre, hız saniyede km. kameraYuksek: kameranın yerden yüksekliği; kameraUzak: araca yatay uzaklığı (eğiklik ikisinden hesaplanır, 55000/90000 ≈ 59 derece). maket: araç ve bina maketlerinin büyütme katsayısı. kmSaniye: araç hızı. durakSaniye: dönüm noktasında bekleme. enAzYol: en kısa yolculuğun süresi (sn). yumusak: dönüşlerde kameranın yumuşaklığı (küçüldükçe daha yumuşak). okumaKelimeSaniye: durakta anlatımın okunma hızı; bekleme süresi en az durakSaniye, metin uzunsa kelime sayısı / bu değer.",
     "kameraYuksek": 55000,
     "kameraUzak": 90000,
     "maket": 6,
+    "kmSaniye": 100,
     "durakSaniye": 4,
+    "enAzYol": 5,
     "yumusak": 0.04,
-    "okumaKelimeSaniye": 3.2,
-    "gecisSaniye": 2.5
+    "okumaKelimeSaniye": 3.2
   }
 }

@@ -315,9 +315,9 @@
     <ul>
       <li>Haritada dönemin dönüm noktaları ve onları birbirine bağlayan yolculuklar var. Aradaki duraklar nokta olarak gösterilmez, yol onların içinden geçer.</li>
       <li>Alttaki çizelgeyi sürükleyin ya da oynatın; harita o güne gelir. Oynatırken bir şey olmayan günler atlanır.</li>
-      <li>Turuncu halka o gün bulunduğu yeri gösterir. Yoldaysa yol üzerinde ilerler, kayıt olmayan günlerde en son bulunduğu yerde kalır.</li>
+      <li>Turuncu halka o gün bulunduğu yeri gösterir. Yolculuk sırasında yola çıktığı yerde bekler, varınca bir sonraki noktaya geçer.</li>
       <li>Yolların rengi ulaşım şeklini gösterir; nasıl gidildiği kaynakta geçmiyorsa çizgi gridir. Parlak olan son yolculuktur.</li>
-      <li>"Yolculuğa başla" ile üç boyutlu görünüme geçilir: kamera yolu izler, araç yol boyunca ilerler, bazı duraklarda Nutuk'tan bir cümle görünür. Nasıl gidildiği bilinmeyen yollarda araç yarı saydamdır.</li>
+      <li>"Yolculuğa başla" ile üç boyutlu görünüme geçilir: kamera yolu izler, araç yol boyunca ilerler, duraklarda orada olanlar altyazıyla anlatılır. Nasıl gidildiği bilinmeyen yollarda araç yarı saydamdır.</li>
     </ul>
     <h3>Kaynaklar</h3>
     <ul>
@@ -327,7 +327,7 @@
       <li>Nutuk'un okunuşuyla ilgili bilgi: A. İlgazi, Atatürk Araştırma Merkezi Dergisi.</li>
     </ul>
     <h3>Yollar ve araçlar</h3>
-    <p>O yılların yolları bugün yok; çizgiler aynı güzergâhın bugünkü yol ve demiryolu karşılığını izler. Vapur yolu yaklaşıktır. Üç boyutlu görünümdeki vapur, otomobil ve tren dönemin taşıtlarını anımsatan maketlerdir; halkanın yol üzerindeki yeri yolculuğun başlangıç ve bitiş günlerine göre yaklaşık hesaplanır.</p>
+    <p>O yılların yolları bugün yok; çizgiler aynı güzergâhın bugünkü yol ve demiryolu karşılığını izler. Vapur yolu yaklaşıktır. Üç boyutlu görünümdeki vapur, otomobil ve tren dönemin taşıtlarını anımsatan maketlerdir; aracın yol üzerindeki yeri yolculuğun başlangıç ve bitiş günlerine göre yaklaşık hesaplanır.</p>
     <h3>Künye</h3>
     <p>Hazırlayan: Mehmet Ali Yanmaz · <a href="https://georehber.com/" target="_blank" rel="noopener">georehber.com</a> · Harita verisi © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap katkıcıları</a> (ODbL) · Yol hesabı: <a href="https://project-osrm.org/" target="_blank" rel="noopener">OSRM</a> · Altlık: Esri Dark Gray Canvas; üç boyutlu görünümde Esri World Imagery ve arazi yükseltisi · Yazı tipleri: Cormorant Garamond, Inter (SIL Open Font License) · Renkler: Okabe-Ito paletinin parlak tonları, renk körlüğüne uygun · Araç: Claude, Python, ArcGIS Online, ArcGIS Maps SDK for JavaScript</p>
   </div>
@@ -356,7 +356,7 @@ const SIMGE_ADI = { gemi: "Vapur yolculuğu", ferman: "Genelge", belge: "İstifa
                     meclis: "Meclis", kilic: "Muharebe", durbun: "Taarruzun başladığı yer", ileri: "Akdeniz'e ilerleme emri",
                     kosk: "Çankaya Köşkü", yildiz: "Cumhuriyet'in ilanı" };
 const simgeAdres = ad => new URL("img/simge/" + (ad || "yildiz") + ".png", location.href).href;
-const AYAR = { gecisSaniye: 2.5, durakSaniye: 7, kameraUzak: 90000, kameraYuksek: 55000, yumusak: 0.04, takip: 1, maket: 6, okumaKelimeSaniye: 3.2 };
+const AYAR = { kmSaniye: 100, enAzYol: 5, durakSaniye: 7, kameraUzak: 90000, kameraYuksek: 55000, yumusak: 0.04, takip: 1, maket: 6, okumaKelimeSaniye: 3.2 };
 document.getElementById("uc-lejant").innerHTML = ["tren", "otomobil", "vapur", "bilinmiyor"].map(t =>
   '<span><i style="background:' + hex(TURLER[t].renk) + '"></i>' + (TURLER[t].ad || "Bilinmeyen yol") + "</span>").join("");
 document.getElementById("lejant-simgeler").innerHTML = SIMGELER
@@ -577,19 +577,6 @@ require([
     }
     let gun = BAS;
     const halka2 = { type: "simple-marker", style: "circle", size: 36, color: [0, 0, 0, 0], outline: { color: [...KOR, 1], width: 2.5 } };
-    function yoldakiNokta(cizgi, oran) {
-      const yol = cizgi.paths.flat();
-      const parca = yol.slice(1).map((n, i) => Math.hypot(n[0] - yol[i][0], n[1] - yol[i][1]));
-      let kalan = parca.reduce((t, x) => t + x, 0) * oran;
-      for (let i = 0; i < parca.length; i++) {
-        if (kalan <= parca[i] || i === parca.length - 1) {
-          const k = parca[i] ? Math.min(1, kalan / parca[i]) : 0;
-          return { type: "point", x: yol[i][0] + (yol[i + 1][0] - yol[i][0]) * k, y: yol[i][1] + (yol[i + 1][1] - yol[i][1]) * k, spatialReference: cizgi.spatialReference };
-        }
-        kalan -= parca[i];
-      }
-      return { type: "point", x: yol[0][0], y: yol[0][1], spatialReference: cizgi.spatialReference };
-    }
     const kimlikSuzgeci = liste => new FeatureFilter({ where: liste.length ? "id IN (" + liste.map(f => "'" + f.attributes.id + "'").join(",") + ")" : "1=0" });
     function gunuGoster(t) {
       gun = Math.min(BIT, Math.max(BAS, gunBasi(t)));
@@ -604,21 +591,21 @@ require([
       const onceki = kayitlar.filter(f => f.attributes.zaman_bit < gun).sort((a, b) => b.attributes.zaman_bit - a.attributes.zaman_bit)[0];
       const yolda = basladi.filter(f => f.attributes.zaman_bit >= gun).sort((a, b) => b.attributes.zaman_bas - a.attributes.zaman_bas)[0];
       const sonYol = basladi.filter(f => f.attributes.zaman_bit < gun).sort((a, b) => b.attributes.zaman_bit - a.attributes.zaman_bit)[0];
-      let simdiki = [], konum = null, metin = "", belirgin = false;
+      let simdiki = [], metin = "", belirgin = false;
       if (oGun.length) {
         simdiki = oGun; belirgin = true;
         const s = oGun.reduce((a, b) => (b.attributes.zaman_bit - b.attributes.zaman_bas) < (a.attributes.zaman_bit - a.attributes.zaman_bas) ? b : a);
         metin = s.attributes.baslik + " · " + kisaAd(s.attributes.yer_adi_bugun);
-      } else if (yolda) {
-        const a = yolda.attributes, oran = Math.min(1, Math.max(0, (gun + GUN / 2 - a.zaman_bas) / (a.zaman_bit - a.zaman_bas + 1)));
-        konum = yoldakiNokta(yolda.geometry, oran); metin = "Yolda · " + kisaAd(a.baslangic) + " → " + kisaAd(a.bitis);
-      } else if (sonYol && (!onceki || sonYol.attributes.zaman_bit > onceki.attributes.zaman_bit)) {
-        konum = yoldakiNokta(sonYol.geometry, 1); metin = "Son bilinen yer: " + kisaAd(sonYol.attributes.bitis);
       } else if (onceki) {
-        simdiki = [onceki]; metin = "Son bilinen yer: " + kisaAd(onceki.attributes.yer_adi_bugun);
+        simdiki = [onceki];
+        const sonraki = kayitlar.filter(f => f.attributes.zaman_bas > son).sort((a, b) => a.attributes.zaman_bas - b.attributes.zaman_bas)[0];
+        const yolculukta = yolda || (sonYol && sonYol.attributes.zaman_bit > onceki.attributes.zaman_bit);
+        metin = yolculukta && sonraki
+          ? "Yolda · " + kisaAd(onceki.attributes.yer_adi_bugun) + " → " + kisaAd(sonraki.attributes.yer_adi_bugun)
+          : "Son bilinen yer: " + kisaAd(onceki.attributes.yer_adi_bugun);
       }
       olaylar.featureEffect = new FeatureEffect({ filter: kimlikSuzgeci(simdiki), includedEffect: "bloom(1.4, 0.4px, 0)", excludedEffect: "opacity(40%)" });
-      simdi.graphics = konum ? [new Graphic({ geometry: konum, symbol: halka2 })] : simdiki.map(f => new Graphic({ geometry: f.geometry, symbol: halka2 }));
+      simdi.graphics = simdiki.map(f => new Graphic({ geometry: f.geometry, symbol: halka2 }));
       adKatmani.graphics.forEach(g => { g.visible = g.attributes.bas <= son; });
       $("#gun-olay").textContent = metin; $("#gun-olay").classList.toggle("soluk", !belirgin);
       $("#gun-tarih").textContent = tarihYaz(gun);
@@ -644,9 +631,7 @@ require([
       if (adim) gunuGoster(gun + adim * GUN); else if (e.key === "Home") gunuGoster(BAS); else if (e.key === "End") gunuGoster(BIT); else return;
       e.preventDefault(); durdur(); adresiGuncelle();
     });
-    const baslayanGunler = new Set([...kayitlar, ...yollar].map(f => gunBasi(f.attributes.zaman_bas)));
-    const doluGunler = new Set(baslayanGunler);
-    yollar.forEach(f => { for (let t = gunBasi(f.attributes.zaman_bas); t <= f.attributes.zaman_bit; t += GUN) doluGunler.add(t); });
+    const doluGunler = new Set(kayitlar.map(f => gunBasi(f.attributes.zaman_bas)));
     const siradakiGun = t => { const s = [...doluGunler].filter(x => x > t); return s.length ? Math.min(...s) : null; };
     const OYNAT_SVG = '<svg viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z" fill="currentColor"/></svg>';
     const DUR_SVG = '<svg viewBox="0 0 24 24"><path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"/></svg>';
@@ -660,7 +645,7 @@ require([
       const sonraki = siradakiGun(gun);
       if (sonraki === null) { durdur(); return; }
       gunuGoster(sonraki);
-      zamanlayici = setTimeout(adim, baslayanGunler.has(gun) ? 1400 : 450);
+      zamanlayici = setTimeout(adim, 1400);
     }
     $("#oynat").addEventListener("click", () => {
       if (zamanlayici) { durdur(); return; }
@@ -683,6 +668,18 @@ require([
       const f2 = Math.asin(Math.sin(f1) * Math.cos(d) + Math.cos(f1) * Math.sin(d) * Math.cos(t));
       return [der(l1 + Math.atan2(Math.sin(t) * Math.sin(d) * Math.cos(f1), Math.cos(d) - Math.sin(f1) * Math.sin(f2))), der(f2)];
     }
+    function hat(koordlar) {
+      const birikim = [0];
+      for (let i = 1; i < koordlar.length; i++) birikim.push(birikim[i - 1] + km(koordlar[i - 1], koordlar[i]));
+      return { koordlar, birikim, uzunluk: birikim[birikim.length - 1] };
+    }
+    function hattaNokta(h, mesafe) {
+      const d = Math.max(0, Math.min(h.uzunluk, mesafe));
+      let i = 1;
+      while (i < h.birikim.length - 1 && h.birikim[i] < d) i++;
+      const a = h.koordlar[i - 1], b = h.koordlar[i], p = h.birikim[i] - h.birikim[i - 1], k = p ? (d - h.birikim[i - 1]) / p : 0;
+      return { nokta: [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k], i };
+    }
     const MERKEZ = new Point({ x: 0, y: 0, z: 0, spatialReference: { wkid: 102100 } });
     function parca(tur, en, boy, yuk, renk, dx, dy, dz, donme) {
       const M = AYAR.maket; en *= M; boy *= M; yuk *= M; dx *= M; dy *= M; dz *= M;
@@ -692,6 +689,45 @@ require([
       if (donme) m.rotate(donme[0], donme[1], donme[2], { origin: yer });
       return m;
     }
+    const tekerlek = (x, y, cap, renk) => parca("silindir", cap, cap, 70, renk, x, y, cap / 2, [0, 90, 0]);
+    function otomobil(saydam) {
+      const a = saydam ? 0.42 : 1, c = r => [...r, a];
+      return meshUtils.merge([
+        parca("kutu", 330, 900, 110, c([22, 52, 42]), 0, -40, 150),
+        parca("kutu", 260, 330, 120, c([30, 34, 36]), 0, 470, 150),
+        parca("kutu", 270, 40, 60, c([180, 160, 110]), 0, 650, 170),
+        parca("kutu", 310, 220, 130, c([88, 48, 28]), 0, -250, 260),
+        parca("kutu", 310, 160, 100, c([88, 48, 28]), 0, 80, 245),
+        parca("kutu", 300, 24, 150, c([210, 220, 230]), 0, 250, 300),
+        parca("kutu", 380, 300, 18, c([20, 20, 20]), 0, 420, 200),
+        parca("kutu", 380, 280, 18, c([20, 20, 20]), 0, -330, 200),
+        tekerlek(-185, 420, 230, c([18, 18, 18])), tekerlek(185, 420, 230, c([18, 18, 18])),
+        tekerlek(-185, -330, 230, c([18, 18, 18])), tekerlek(185, -330, 230, c([18, 18, 18]))
+      ]);
+    }
+    const MODELLER = {
+      vapur: () => meshUtils.merge([
+        parca("kutu", 260, 1800, 170, [22, 24, 30], 0, 0, 0),
+        parca("kutu", 200, 400, 110, [24, 26, 32], 0, 820, 80),
+        parca("kutu", 220, 1000, 100, [236, 228, 210], 0, -80, 170),
+        parca("kutu", 190, 340, 80, [236, 228, 210], 0, -200, 270),
+        parca("silindir", 100, 100, 340, [30, 30, 34], 0, 60, 270),
+        parca("silindir", 102, 102, 50, [190, 40, 40], 0, 60, 500),
+        parca("silindir", 22, 22, 600, [90, 70, 50], 0, 620, 170),
+        parca("silindir", 22, 22, 520, [90, 70, 50], 0, -620, 170)
+      ]),
+      otomobil: () => otomobil(false),
+      tren: () => meshUtils.merge([
+        parca("silindir", 240, 240, 700, [28, 28, 32], 0, 230, 230, [90, 0, 0]),
+        parca("kutu", 300, 280, 330, [28, 28, 32], 0, -230, 110),
+        parca("silindir", 80, 80, 200, [20, 20, 20], 0, 500, 330),
+        parca("kutu", 280, 620, 80, [140, 30, 30], 0, 140, 30),
+        parca("kutu", 290, 460, 250, [40, 36, 30], 0, -680, 40),
+        parca("kutu", 300, 1000, 320, [92, 46, 30], 0, -1460, 40),
+        parca("kutu", 320, 1040, 40, [60, 30, 20], 0, -1460, 360)
+      ]),
+      bilinmiyor: () => otomobil(true)
+    };
     let uc = null;
     function ucKur() {
       const perde = new GraphicsLayer({ elevationInfo: { mode: "on-the-ground" } });
@@ -700,8 +736,9 @@ require([
       const izler = new GraphicsLayer({ elevationInfo: { mode: "on-the-ground" } });
       const aktif = new GraphicsLayer({ elevationInfo: { mode: "on-the-ground" } });
       const yerler = new GraphicsLayer({ elevationInfo: { mode: "relative-to-ground" } });
+      const arac = new GraphicsLayer({ elevationInfo: { mode: "relative-to-ground" } });
       const sView = new SceneView({
-        container: "sahne", map: new EsriMap({ basemap: "satellite", ground: "world-elevation", layers: [perde, izler, aktif, yerler] }),
+        container: "sahne", map: new EsriMap({ basemap: "satellite", ground: "world-elevation", layers: [perde, izler, aktif, yerler, arac] }),
         qualityProfile: darEkran.matches ? "medium" : "high", ui: { components: ["attribution"] }, popupEnabled: false,
         environment: { lighting: { type: "virtual" }, atmosphereEnabled: true, starsEnabled: true },
         camera: { position: { longitude: 34.5, latitude: 31.5, z: 1300000 }, heading: 0, tilt: 35 }
@@ -742,20 +779,22 @@ require([
       const halka3 = new Graphic({ symbol: { type: "point-3d", symbolLayers: [
         { type: "icon", resource: { primitive: "circle" }, material: { color: [0, 0, 0, 0] }, outline: { color: [...KOR, 1], size: 2.5 }, size: 40 }] } });
       yerler.add(halka3);
-      return { sView, izler, aktif, halka3 };
+      const aracGrafik = new Graphic({ symbol: { type: "mesh-3d", symbolLayers: [{ type: "fill" }] } });
+      arac.add(aracGrafik);
+      return { sView, izler, aktif, halka3, aracGrafik, modeller: {} };
     }
     const duraklar = kayitlar.map(f => ({ ...f.attributes, k: [f.geometry.x, f.geometry.y] })).sort((a, b) => a.zaman_bas - b.zaman_bas || a.zaman_bit - b.zaman_bit);
-    const yolParcalari = yollar.map(f => ({ ...f.attributes, koordlar: f.geometry.paths.flat(), ayak: ayak(f) })).sort((a, b) => a.zaman_bas - b.zaman_bas);
+    const yolParcalari = yollar.map(f => ({ ...f.attributes, h: hat(f.geometry.paths.flat()), ayak: ayak(f) })).sort((a, b) => a.zaman_bas - b.zaman_bas);
     const sahneler = [];
     duraklar.forEach((d, i) => {
       if (i > 0) {
         const parcalar = yolParcalari.filter(y => y.ayak === i);
-        if (parcalar.length) sahneler.push({ tur: "yol", parcalar, nereden: duraklar[i - 1], nereye: d, bas: parcalar[0].zaman_bas });
+        if (parcalar.length) sahneler.push({ tur: "yol", parcalar, uzunluk: parcalar.reduce((t, p) => t + p.h.uzunluk, 0), bas: parcalar[0].zaman_bas });
       }
       sahneler.push({ tur: "durak", d, bas: d.zaman_bas });
     });
     const okumaSuresi = d => String((DETAY[d.id] || {}).anlatim || "").split(/\s+/).length / AYAR.okumaKelimeSaniye;
-    sahneler.forEach(s => { s.sure = s.tur === "durak" ? Math.max(AYAR.durakSaniye, okumaSuresi(s.d)) : AYAR.gecisSaniye; });
+    sahneler.forEach(s => { s.sure = s.tur === "durak" ? Math.max(AYAR.durakSaniye, okumaSuresi(s.d)) : Math.max(AYAR.enAzYol, s.uzunluk / AYAR.kmSaniye); });
     const SES_ARA = 0.8;
     const sesler = new Map();
     let sessiz = false;
@@ -788,7 +827,15 @@ require([
     function izleriCiz(n) {
       uc.izler.removeAll();
       sahneler.slice(0, n).filter(s => s.tur === "yol").forEach(s => s.parcalar.forEach(p =>
-        uc.izler.add(new Graphic({ geometry: cizgi(p.koordlar), symbol: yolSembolu(renkOf(p), 2, 0.45) }))));
+        uc.izler.add(new Graphic({ geometry: cizgi(p.h.koordlar), symbol: yolSembolu(renkOf(p), 2, 0.45) }))));
+    }
+    function araciKoy(tur, k, yonDer) {
+      const temel = uc.modeller[tur] || (uc.modeller[tur] = MODELLER[tur]());
+      const m = temel.clone();
+      m.rotate(0, 0, -yonDer, { origin: MERKEZ });
+      const [x, y] = wmu.lngLatToXY(k[0], k[1]);
+      m.offset(x, y, 0);
+      uc.aracGrafik.geometry = m;
     }
     let kamYon = 0, kamHedef = null, yakinlik = 1;
     function kameraTakip(k, hedefYon, ani) {
@@ -847,26 +894,31 @@ require([
     function sahneyiCiz(s, oran, ani) {
       if (s.tur === "durak") {
         const d = s.d;
+        uc.aracGrafik.visible = false;
         uc.halka3.geometry = new Point({ longitude: d.k[0], latitude: d.k[1] });
         ucTarih = d.zaman_bas + (d.zaman_bit - d.zaman_bas) * Math.min(1, oran);
         kameraTakip(d.k, kamYon + (ani ? 0 : 0.05), ani);
         altyazi(ucTarih, d, "", oran);
-        uc.aktif.removeAll(); uc.aktifSahne = null;
+        uc.aktif.removeAll();
         return;
       }
-      const a = s.nereden.k, b = s.nereye.k;
-      const o = Math.min(1, oran), e = o < 0.5 ? 2 * o * o : 1 - (2 - 2 * o) ** 2 / 2;
-      const nokta = [a[0] + (b[0] - a[0]) * e, a[1] + (b[1] - a[1]) * e];
-      uc.halka3.geometry = new Point({ longitude: b[0], latitude: b[1] });
-      if (uc.aktifSahne !== s) {
-        uc.aktifSahne = s;
-        uc.aktif.removeAll();
-        s.parcalar.forEach(q => uc.aktif.add(new Graphic({ geometry: cizgi(q.koordlar), symbol: yolSembolu(renkOf(q), 3, 1) })));
-      }
-      ucTarih = s.nereye.zaman_bas;
-      kameraTakip(nokta, km(a, b) > 0.05 ? yon(a, b) : kamYon, ani);
-      const ilk = s.parcalar[0], son = s.parcalar[s.parcalar.length - 1], arac = TURLER[ilk.ulasim]?.ad;
-      altyazi(ucTarih, null, (arac ? arac + " · " : "") + kisaAd(ilk.baslangic) + " → " + kisaAd(son.bitis));
+      let kalan = s.uzunluk * oran, i = 0;
+      while (i < s.parcalar.length - 1 && kalan > s.parcalar[i].h.uzunluk) { kalan -= s.parcalar[i].h.uzunluk; i++; }
+      const p = s.parcalar[i];
+      const { nokta, i: j } = hattaNokta(p.h, kalan);
+      const ileri = hattaNokta(p.h, kalan + 8).nokta;
+      const yonDer = km(nokta, ileri) > 0.05 ? yon(nokta, ileri) : kamYon;
+      araciKoy(p.ulasim in MODELLER ? p.ulasim : "bilinmiyor", nokta, yonDer);
+      uc.aracGrafik.visible = true;
+      uc.halka3.geometry = new Point({ longitude: nokta[0], latitude: nokta[1] });
+      uc.aktif.removeAll();
+      s.parcalar.slice(0, i).forEach(q => uc.aktif.add(new Graphic({ geometry: cizgi(q.h.koordlar), symbol: yolSembolu(renkOf(q), 3, 1) })));
+      const kismi = [...p.h.koordlar.slice(0, j), nokta];
+      if (kismi.length > 1) uc.aktif.add(new Graphic({ geometry: cizgi(kismi), symbol: yolSembolu(renkOf(p), 3, 1) }));
+      ucTarih = p.zaman_bas + (p.zaman_bit - p.zaman_bas) * (kalan / (p.h.uzunluk || 1));
+      kameraTakip(nokta, yonDer, ani);
+      const arac = TURLER[p.ulasim]?.ad;
+      altyazi(ucTarih, null, (arac ? arac + " · " : "") + kisaAd(p.baslangic) + " → " + kisaAd(p.bitis));
     }
     const ucSvg = $("#u-cizelge-svg"), ucCz = $("#u-cizelge");
     function sahneyeGit(n, oran = 0) {
@@ -919,7 +971,7 @@ require([
         uc.sView.on("drag", e => { if (oynuyor) e.stopPropagation(); });
         await uc.sView.when();
       }
-      const n = tariheSahne(t), s = sahneler[n], k = s.tur === "durak" ? s.d.k : s.parcalar[0].koordlar[0];
+      const n = tariheSahne(t), s = sahneler[n], k = s.tur === "durak" ? s.d.k : s.parcalar[0].h.koordlar[0];
       altyazi(s.bas, s.tur === "durak" ? s.d : null, "");
       await uc.sView.goTo({ position: { longitude: k[0], latitude: k[1] - 0.12, z: AYAR.kameraYuksek }, heading: 0,
                              tilt: der(Math.atan2(AYAR.kameraUzak, AYAR.kameraYuksek)) }, { duration: 3500, easing: "in-out-cubic" }).catch(() => {});
