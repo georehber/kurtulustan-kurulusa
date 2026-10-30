@@ -870,7 +870,8 @@ require([
       for (const c of String((DETAY[d.id] || {}).anlatim || "").split(/(?<=[.!?])\s+/).filter(Boolean)) {
         const son = parca[parca.length - 1];
         const acik = son && (son.split("“").length > son.split("”").length || (son.split("\"").length - 1) % 2 === 1);
-        if (son && (acik || c.length < 40)) parca[parca.length - 1] = son + " " + c; else parca.push(c);
+        const sira = son && /(^|\D)\d{1,2}\.$/.test(son);
+        if (son && (acik || sira || c.length < 40)) parca[parca.length - 1] = son + " " + c; else parca.push(c);
       }
       const toplam = parca.reduce((a, c) => a + c.length, 0) || 1;
       let birikim = 0;
