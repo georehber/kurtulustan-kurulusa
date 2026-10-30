@@ -1,12 +1,28 @@
 {
-  "_aciklama": "İngilizce metinler. Boş bırakılan Türkçe görünür. {n} yer tutucudur. Nutuk alıntıları çevrilmez, özgün Türkçeleriyle kalır.",
   "degerler": {
-    "Kamu malı": "Public domain", "Bilinmiyor": "Unknown", "Türk hükümeti": "Government of Turkey",
-    "Harbiye Nezareti; Samsun Kent Müzesi": "Ottoman War Ministry; Samsun City Museum", "Genelkurmay ATASE Başkanlığı": "Turkish General Staff, ATASE",
-    "T.C. Başbakanlık": "Prime Ministry of the Republic of Turkey", "Türk Silahlı Kuvvetleri": "Turkish Armed Forces",
+    "Kamu malı": "Public domain",
+    "Bilinmiyor": "Unknown",
+    "Türk hükümeti": "Government of Turkey",
+    "Harbiye Nezareti; Samsun Kent Müzesi": "Ottoman War Ministry; Samsun City Museum",
+    "Genelkurmay ATASE Başkanlığı": "Turkish General Staff, ATASE",
+    "T.C. Başbakanlık": "Prime Ministry of the Republic of Turkey",
+    "Türk Silahlı Kuvvetleri": "Turkish Armed Forces",
     "Frédéric Gadmer, Albert-Kahn Müzesi": "Frédéric Gadmer, Musée Albert-Kahn"
   },
-  "aylar": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+  "aylar": [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ],
   "acilis-bilgi": "These are the opening words of the Nutuk; in English they mean “On the 19th day of May 1919, I landed at Samsun.” The Nutuk is the speech Mustafa Kemal Atatürk delivered over 36 and a half hours at the Second Congress of the Republican People's Party on 15–20 October 1927. It tells the story of the National Struggle and the founding of the Republic through its documents. This map follows that journey, from his departure from İstanbul on 16 May 1919 to the proclamation of the Republic on 29 October 1923.\n      <small>Source: Nutuk–Söylev, Vol. I, p. 2, e-book of the Ministry of Culture and Tourism of Türkiye (<a href=\"https://ekitap.ktb.gov.tr/TR-273376/nutuk.html\" target=\"_blank\" rel=\"noopener\">ekitap.ktb.gov.tr</a>); A. İlgazi, Journal of the Atatürk Research Center. The quotation is given in the original Turkish.</small>",
   "acilis-gec": "Explore the map myself",
   "acilis-kimden": "Mustafa Kemal Atatürk, Nutuk (The Great Speech, 1927)",
