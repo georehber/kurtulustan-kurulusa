@@ -65,6 +65,22 @@
   .dugme:hover { border-color: var(--vurgu); }
   .dugme.vurgu { background: var(--vurgu); border-color: var(--vurgu); color: #fff; font-weight: 600; }
   .dugme.vurgu:hover { filter: brightness(1.08); }
+  .dil-dugme { display: inline-flex; padding: 2px; border: 1px solid var(--cizgi); border-radius: 999px; background: rgba(31, 29, 26, .04); }
+  .dil-dugme button { border: 0; background: none; padding: 5px 10px; border-radius: 999px; font-size: 12.5px; font-weight: 600;
+                      letter-spacing: .5px; color: var(--soluk); cursor: pointer; }
+  .dil-dugme button[aria-pressed="true"] { background: var(--vurgu); color: #fff; }
+  #adim-dil { width: min(480px, 100%); padding: 34px 30px 24px; text-align: center; }
+  #adim-dil h2 { margin: 0; font-family: var(--serif); font-size: 26px; font-weight: 600; }
+  #adim-dil .soru { margin: 8px 0 22px; color: var(--soluk); font-size: 14.5px; }
+  .dil-secim { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .dil-secim button { display: grid; gap: 4px; padding: 18px 12px; border: 1px solid var(--cizgi); border-radius: 14px;
+                      background: #fff; color: var(--metin); cursor: pointer; transition: border-color .15s, box-shadow .15s; }
+  .dil-secim button:hover, .dil-secim button:focus-visible { border-color: var(--vurgu); box-shadow: 0 0 0 3px rgba(0, 114, 178, .15); }
+  .dil-secim b { font-family: var(--serif); font-size: 22px; font-weight: 600; }
+  .dil-secim span { font-size: 12.5px; color: var(--soluk); }
+  .adimlar { display: flex; justify-content: center; gap: 6px; margin-top: 20px; }
+  .adimlar i { width: 22px; height: 4px; border-radius: 2px; background: var(--cizgi); }
+  .adimlar i.etkin { background: var(--vurgu); }
   #harita, #sahne { position: fixed; top: calc(var(--baslik) + env(safe-area-inset-top)); left: 0; right: 0; bottom: 0; }
   #sahne { top: 0; z-index: 40; background: var(--zemin); }
   #lejant { position: fixed; z-index: 20; top: calc(var(--baslik) + var(--kenar) + env(safe-area-inset-top)); left: var(--kenar);
@@ -219,9 +235,16 @@
   .esri-features__heading, .esri-popup__header-title { font-family: var(--serif) !important; font-size: 19px !important; font-weight: 600 !important; }
   @media (max-width: 720px) {
     :root { --zaman: 116px; }
-    .marka h1 { font-size: 20px; }
-    .marka .alt { font-size: 11.5px; }
+    header { gap: 8px; }
+    .marka { gap: 8px; }
+    .marka img { width: 32px; height: 32px; }
+    .marka > span { min-width: 0; }
+    .marka h1 { font-size: 18px; overflow: hidden; text-overflow: ellipsis; }
+    .marka .alt { font-size: 11px; }
+    .dil-dugme button { font-size: 11.5px; }
+    #hakkinda-ac { padding: 7px 9px; }
     #hakkinda-ac span { display: none; }
+    .dil-dugme button { padding: 5px 8px; }
     #lejant { right: calc(var(--kenar) + 44px); width: auto; }
     #harita { bottom: calc(var(--zaman) + env(safe-area-inset-bottom)); }
     #zaman { left: 0; right: 0; transform: none; bottom: 0; width: 100%; border-radius: 0; border-width: 1px 0 0;
@@ -242,36 +265,39 @@
 <header>
   <a class="marka" href="https://sdanacioglu.github.io/30daymapchallenge-2026/" target="_blank" rel="noopener" aria-label="BakırçayCBS #30DayMapChallenge 2026">
     <img src="img/bakircaycbs_logo.png" alt="BakırçayCBS logosu" width="38" height="38">
-    <span><h1>Kurtuluştan Kuruluşa</h1><span class="alt">Atatürk'ün izinde · 16 Mayıs 1919 – 29 Ekim 1923</span></span>
+    <span><h1>Kurtuluştan Kuruluşa</h1><span class="alt" data-m="altbaslik">Atatürk'ün izinde · 16 Mayıs 1919 – 29 Ekim 1923</span></span>
   </a>
-  <button class="dugme" type="button" id="hakkinda-ac" aria-haspopup="dialog" aria-label="Hakkında">
+  <div class="dil-dugme" role="group" aria-label="Dil / Language">
+    <button type="button" data-dil="tr" aria-pressed="true" lang="tr">TR</button><button type="button" data-dil="en" aria-pressed="false" lang="en">EN</button>
+  </div>
+  <button class="dugme" type="button" id="hakkinda-ac" aria-haspopup="dialog" aria-label="Hakkında" data-m-aria="hakkinda">
     <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6M12 7.2v.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-    <span>Hakkında</span>
+    <span data-m="hakkinda">Hakkında</span>
   </button>
 </header>
 <div id="harita" role="application" aria-label="Kurtuluştan Kuruluşa haritası"></div>
-<section id="lejant" data-acik="true" aria-label="Lejant">
-  <button id="lejant-ac" type="button" aria-expanded="true"><strong>Lejant</strong>
+<section id="lejant" data-acik="true" aria-label="Lejant" data-m-aria="lejant">
+  <button id="lejant-ac" type="button" aria-expanded="true"><strong data-m="lejant">Lejant</strong>
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
   <div class="lejant-govde">
-    <h4>Yerler</h4>
-    <div class="satir"><svg viewBox="0 0 34 18"><circle cx="17" cy="9" r="7.5" fill="none" stroke="#d55e00" stroke-width="2.2"/><circle cx="17" cy="9" r="3.5" fill="#0072b2"/></svg>O gün ya da en son bulunduğu yer</div>
+    <h4 data-m="yerler">Yerler</h4>
+    <div class="satir"><svg viewBox="0 0 34 18"><circle cx="17" cy="9" r="7.5" fill="none" stroke="#d55e00" stroke-width="2.2"/><circle cx="17" cy="9" r="3.5" fill="#0072b2"/></svg><span data-m="halka">O gün ya da en son bulunduğu yer</span></div>
     <div class="simgeler" id="lejant-simgeler"></div>
-    <h4>Yolculuklar</h4>
-    <div class="satir"><svg viewBox="0 0 34 18" data-tur="tren"></svg>Trenle</div>
-    <div class="satir"><svg viewBox="0 0 34 18" data-tur="otomobil"></svg>Otomobille</div>
-    <div class="satir"><svg viewBox="0 0 34 18" data-tur="vapur"></svg>Vapurla</div>
-    <div class="satir"><svg viewBox="0 0 34 18" data-tur="bilinmiyor"></svg>Nasıl gittiği bilinmiyor</div>
-    <p class="lejant-not">Çizgiler yolun bugünkü karşılığını izler. Belirgin olan son yolculuk, soluklar geride kalan yollar.</p>
+    <h4 data-m="yolculuklar">Yolculuklar</h4>
+    <div class="satir"><svg viewBox="0 0 34 18" data-tur="tren"></svg><span data-m="tur-tren-uzun">Trenle</span></div>
+    <div class="satir"><svg viewBox="0 0 34 18" data-tur="otomobil"></svg><span data-m="tur-otomobil-uzun">Otomobille</span></div>
+    <div class="satir"><svg viewBox="0 0 34 18" data-tur="vapur"></svg><span data-m="tur-vapur-uzun">Vapurla</span></div>
+    <div class="satir"><svg viewBox="0 0 34 18" data-tur="bilinmiyor"></svg><span data-m="tur-bilinmiyor-uzun">Nasıl gittiği bilinmiyor</span></div>
+    <p class="lejant-not" data-m="lejant-not">Çizgiler yolun bugünkü karşılığını izler. Belirgin olan son yolculuk, soluklar geride kalan yollar.</p>
   </div>
 </section>
-<section id="zaman" aria-label="Zaman çizelgesi">
-  <button id="oynat" type="button" aria-label="Oynat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l11 7-11 7z" fill="currentColor"/></svg></button>
+<section id="zaman" aria-label="Zaman çizelgesi" data-m-aria="zaman-cizelgesi">
+  <button id="oynat" type="button" aria-label="Oynat" data-m-aria="oynat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l11 7-11 7z" fill="currentColor"/></svg></button>
   <div class="gun-bilgi"><span id="gun-tarih">16 Mayıs 1919</span><span id="gun-olay"></span></div>
   <button class="dugme vurgu" id="yolculuga-basla" type="button">
     <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8M15 7h6v6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    Yolculuğa başla</button>
-  <div id="cetvel" role="slider" tabindex="0" aria-label="Gün seç" aria-valuemin="0" aria-valuemax="1627" aria-valuenow="0"><svg id="cetvel-svg" aria-hidden="true"></svg></div>
+    <span data-m="yolculuga-basla">Yolculuğa başla</span></button>
+  <div id="cetvel" role="slider" tabindex="0" aria-label="Gün seç" data-m-aria="gun-sec" aria-valuemin="0" aria-valuemax="1627" aria-valuenow="0"><svg id="cetvel-svg" aria-hidden="true"></svg></div>
 </section>
 <div id="sahne" hidden aria-label="Üç boyutlu yolculuk"></div>
 <div id="uc" hidden>
@@ -279,62 +305,72 @@
     <div class="uc-lejant" id="uc-lejant" aria-label="Yol renkleri"></div>
     <span style="flex:1"></span>
     <button class="yuvarlak kucuk" id="u-ses" type="button" aria-label="Sesi kapat" hidden></button>
-    <button class="yuvarlak kucuk" id="u-yakin" type="button" aria-label="Yakınlaştır"><svg viewBox="0 0 24 24"><path d="M12 6v12M6 12h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
-    <button class="yuvarlak kucuk" id="u-uzak" type="button" aria-label="Uzaklaştır"><svg viewBox="0 0 24 24"><path d="M6 12h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    <button class="yuvarlak kucuk" id="u-yakin" type="button" aria-label="Yakınlaştır" data-m-aria="yakinlastir"><svg viewBox="0 0 24 24"><path d="M12 6v12M6 12h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    <button class="yuvarlak kucuk" id="u-uzak" type="button" aria-label="Uzaklaştır" data-m-aria="uzaklastir"><svg viewBox="0 0 24 24"><path d="M6 12h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     <button class="dugme" id="u-cik" type="button">
       <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.2"/></svg>
-      2B haritaya dön</button>
+      <span data-m="ikiye-don">2B haritaya dön</span></button>
   </div>
   <div id="altyazi" aria-live="polite"><div id="a-tarih"></div><div id="a-olay"></div><div id="a-soz"></div></div>
   <div class="alt">
-    <button class="yuvarlak" id="u-onceki" type="button" aria-label="Önceki durak"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+    <button class="yuvarlak" id="u-onceki" type="button" aria-label="Önceki durak" data-m-aria="onceki-durak"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
     <button class="yuvarlak" id="u-oynat" type="button" aria-label="Durdur"></button>
-    <button class="yuvarlak" id="u-sonraki" type="button" aria-label="Sonraki durak"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+    <button class="yuvarlak" id="u-sonraki" type="button" aria-label="Sonraki durak" data-m-aria="sonraki-durak"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
     <div id="u-cizelge"><svg id="u-cizelge-svg" aria-hidden="true"></svg></div>
   </div>
 </div>
 <div id="acilis" hidden>
-  <div class="kart" role="dialog" aria-modal="true" aria-labelledby="acilis-soz">
-    <blockquote id="acilis-soz">1919 senesi Mayısının 19 uncu günü Samsun'a çıktım.</blockquote>
-    <p class="kimden">Mustafa Kemal Atatürk, Nutuk (1927)</p>
-    <p class="bilgi">Nutuk, Mustafa Kemal Atatürk'ün 15-20 Ekim 1927'de Cumhuriyet Halk Fırkası'nın İkinci Kurultayı'nda 36 buçuk saatte okuduğu konuşmadır. Millî Mücadele'yi ve Cumhuriyet'in kuruluşunu belgeleriyle anlatır ve bu cümleyle başlar. Bu harita da o yolculuğu, İstanbul'dan ayrıldığı 16 Mayıs 1919'dan Cumhuriyet'in ilan edildiği 29 Ekim 1923'e kadar izliyor.
+  <div class="kart" id="adim-dil" role="dialog" aria-modal="true" aria-labelledby="dil-baslik">
+    <h2 id="dil-baslik">Kurtuluştan Kuruluşa</h2>
+    <p class="soru"><span lang="tr">Dil seçin</span> · <span lang="en">Choose your language</span></p>
+    <div class="dil-secim">
+      <button type="button" data-dil="tr" lang="tr"><b>Türkçe</b><span>Türkçe devam et</span></button>
+      <button type="button" data-dil="en" lang="en"><b>English</b><span>Continue in English</span></button>
+    </div>
+    <div class="adimlar" aria-hidden="true"><i class="etkin"></i><i></i></div>
+  </div>
+  <div class="kart" id="adim-giris" role="dialog" aria-modal="true" aria-labelledby="acilis-soz" hidden>
+    <blockquote id="acilis-soz" data-m="acilis-soz">1919 senesi Mayısının 19 uncu günü Samsun'a çıktım.</blockquote>
+    <p class="kimden" data-m="acilis-kimden">Mustafa Kemal Atatürk, Nutuk (1927)</p>
+    <p class="bilgi" data-m="acilis-bilgi">Nutuk, Mustafa Kemal Atatürk'ün 15-20 Ekim 1927'de Cumhuriyet Halk Fırkası'nın İkinci Kurultayı'nda 36 buçuk saatte okuduğu konuşmadır. Millî Mücadele'yi ve Cumhuriyet'in kuruluşunu belgeleriyle anlatır ve bu cümleyle başlar. Bu harita da o yolculuğu, İstanbul'dan ayrıldığı 16 Mayıs 1919'dan Cumhuriyet'in ilan edildiği 29 Ekim 1923'e kadar izliyor.
       <small>Kaynak: Nutuk–Söylev, I. Cilt, s. 2, T.C. Kültür ve Turizm Bakanlığı e-kitap (<a href="https://ekitap.ktb.gov.tr/TR-273376/nutuk.html" target="_blank" rel="noopener">ekitap.ktb.gov.tr</a>); A. İlgazi, Atatürk Araştırma Merkezi Dergisi.</small></p>
     <div class="secenekler">
-      <button type="button" id="acilis-basla" class="dugme vurgu">Yolculuğa başla</button>
-      <button type="button" id="acilis-gec" class="dugme">Haritayı kendim gezeyim</button>
+      <button type="button" id="acilis-basla" class="dugme vurgu" data-m="yolculuga-basla">Yolculuğa başla</button>
+      <button type="button" id="acilis-gec" class="dugme" data-m="acilis-gec">Haritayı kendim gezeyim</button>
     </div>
+    <div class="adimlar" aria-hidden="true"><i></i><i class="etkin"></i></div>
   </div>
 </div>
 <dialog id="hakkinda" aria-labelledby="hakkinda-baslik">
   <div class="dialog-ic">
     <div class="dialog-marka"><img src="img/bakircaycbs_logo.png" alt="" width="44" height="44"><h2 id="hakkinda-baslik">Kurtuluştan Kuruluşa</h2></div>
-    <p class="giris">Mustafa Kemal Atatürk'ün 16 Mayıs 1919'da İstanbul'dan ayrılışından 29 Ekim 1923'te Cumhuriyet'in ilanına kadar dönüm noktaları ve yolculukları.</p>
+    <p class="giris" data-m="hk-giris">Mustafa Kemal Atatürk'ün 16 Mayıs 1919'da İstanbul'dan ayrılışından 29 Ekim 1923'te Cumhuriyet'in ilanına kadar dönüm noktaları ve yolculukları.</p>
     <div class="rakamlar">
-      <div class="rakam"><b id="r-gun">1.628</b><span>gün</span></div>
-      <div class="rakam"><b id="r-yer">–</b><span>dönüm noktası</span></div>
-      <div class="rakam"><b id="r-km">–</b><span>km yolculuk</span></div>
+      <div class="rakam"><b id="r-gun">1.628</b><span data-m="hk-gun">gün</span></div>
+      <div class="rakam"><b id="r-yer">–</b><span data-m="hk-nokta">dönüm noktası</span></div>
+      <div class="rakam"><b id="r-km">–</b><span data-m="hk-km">km yolculuk</span></div>
     </div>
-    <h3>Nasıl okunur</h3>
-    <ul>
+    <h3 data-m="hk-nasil">Nasıl okunur</h3>
+    <ul data-m="hk-nasil-liste">
       <li>Haritada dönemin dönüm noktaları ve onları birbirine bağlayan yolculuklar var. Aradaki duraklar nokta olarak gösterilmez, yol onların içinden geçer.</li>
       <li>Alttaki çizelgeyi sürükleyin ya da oynatın; harita o güne gelir. Oynatırken bir şey olmayan günler atlanır.</li>
       <li>Turuncu halka o gün bulunduğu yeri gösterir. Yolculuk sırasında yola çıktığı yerde bekler, varınca bir sonraki noktaya geçer.</li>
       <li>Yolların rengi ulaşım şeklini gösterir; nasıl gidildiği kaynakta geçmiyorsa çizgi gridir. Belirgin olan son yolculuktur. Renkler renk körlüğüne uygun Okabe-Ito paletindendir.</li>
       <li>"Yolculuğa başla" ile üç boyutlu görünüme geçilir: kamera yolu izler, araç yol boyunca ilerler, duraklarda orada olanlar altyazıyla anlatılır. Nasıl gidildiği bilinmeyen yollarda araç yarı saydamdır.</li>
     </ul>
-    <h3>Kaynaklar</h3>
-    <ul>
+    <h3 data-m="hk-kaynaklar">Kaynaklar</h3>
+    <ul data-m="hk-kaynaklar-liste">
       <li>Gazi Mustafa Kemal, Nutuk–Söylev, T.C. Kültür ve Turizm Bakanlığı e-kitap (ekitap.ktb.gov.tr). Alıntılar özgün metinden, cilt ve sayfasıyla.</li>
       <li>Atatürk Ansiklopedisi, Atatürk Araştırma Merkezi (ataturkansiklopedisi.gov.tr).</li>
       <li>Ara durakların tarihleri için ayrıca: Ö. Toraman, Vakanüvis 8 (Özel Sayı), 2023; O. Akandere, Atatürk Araştırma Merkezi Dergisi.</li>
       <li>Nutuk'un okunuşuyla ilgili bilgi: A. İlgazi, Atatürk Araştırma Merkezi Dergisi.</li>
     </ul>
-    <h3>Yollar ve araçlar</h3>
-    <p>O yılların yolları bugün yok; çizgiler aynı güzergâhın bugünkü yol ve demiryolu karşılığını izler. Vapur yolu yaklaşıktır. Üç boyutlu görünümdeki vapur, otomobil ve tren dönemin taşıtlarını anımsatan maketlerdir; aracın yol üzerindeki yeri yolculuğun başlangıç ve bitiş günlerine göre yaklaşık hesaplanır.</p>
-    <h3>Künye</h3>
-    <p>Hazırlayan: Mehmet Ali Yanmaz · <a href="https://georehber.com/" target="_blank" rel="noopener">georehber.com</a> · Harita verisi © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap katkıcıları</a> (ODbL) · Yol hesabı: <a href="https://project-osrm.org/" target="_blank" rel="noopener">OSRM</a> · Altlık: Esri Dark Gray Canvas; üç boyutlu görünümde Esri World Imagery ve arazi yükseltisi · Yazı tipleri: Lora, Inter (SIL Open Font License) · Renkler: Okabe-Ito paletinin parlak tonları, renk körlüğüne uygun · Araç: Claude, Python, ArcGIS Online, ArcGIS Maps SDK for JavaScript</p>
+    <h3 data-m="hk-yollar">Yollar ve araçlar</h3>
+    <p data-m="hk-yollar-metin">O yılların yolları bugün yok; çizgiler aynı güzergâhın bugünkü yol ve demiryolu karşılığını izler. Vapur yolu yaklaşıktır. Üç boyutlu görünümdeki vapur, otomobil ve tren dönemin taşıtlarını anımsatan maketlerdir; aracın yol üzerindeki yeri yolculuğun başlangıç ve bitiş günlerine göre yaklaşık hesaplanır.</p>
+    <h3 data-m="hk-kunye">Künye</h3>
+    <p data-m="hk-kunye-metin">Hazırlayan: Mehmet Ali Yanmaz · <a href="https://georehber.com/" target="_blank" rel="noopener">georehber.com</a> · Harita verisi © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap katkıcıları</a> (ODbL) · Yol hesabı: <a href="https://project-osrm.org/" target="_blank" rel="noopener">OSRM</a> · Altlık: Esri Light Gray Canvas (yeniden renklendirildi) ve World Hillshade; üç boyutlu görünümde Esri World Imagery ve arazi yükseltisi · Yazı tipleri: Lora, Inter (SIL Open Font License) · Renkler: Okabe-Ito paleti, renk körlüğüne uygun · Araç: Claude, Python, ArcGIS Online, ArcGIS Maps SDK for JavaScript</p>
   </div>
-  <div class="dialog-alt"><button type="button" id="hakkinda-kapat" class="dugme vurgu">Haritaya dön</button></div>
+  <div class="dialog-alt"><button type="button" id="hakkinda-kapat" class="dugme vurgu" data-m="haritaya-don">Haritaya dön</button></div>
 </dialog>
 <dialog id="buyuk-foto" aria-label="Fotoğrafın büyük hâli"><img alt=""><p></p></dialog>
 <div id="yukleniyor" role="status"><div class="yukleme-ic"><img src="img/siluet_cizgi.svg" alt="" width="170" height="197"><div>Kurtuluştan Kuruluşa</div></div></div>
@@ -342,7 +378,40 @@
 const BAS = Date.UTC(1919, 4, 16), BIT = Date.UTC(1923, 9, 29);
 const GUN_SAYISI = Math.round((BIT - BAS) / GUN) + 1;
 const AYLAR = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
-const tarihYaz = t => { const d = new Date(t); return d.getUTCDate() + " " + AYLAR[d.getUTCMonth()] + " " + d.getUTCFullYear(); };
+let DIL = "tr", CEVIRI = {};
+try { DIL = localStorage.getItem("dil") === "en" ? "en" : "tr"; } catch (e) {}
+const yaz = (anahtar, tr) => (DIL === "en" && CEVIRI[anahtar]) || tr;
+const alanAl = (nesne, alan) => (DIL === "en" && nesne?.[alan + "_en"]) || nesne?.[alan];
+const ozgunIcerik = new Map(), ozgunAria = new Map();
+function metinleriUygula() {
+  document.documentElement.lang = DIL;
+  document.querySelectorAll("[data-m]").forEach(el => {
+    if (!ozgunIcerik.has(el)) ozgunIcerik.set(el, el.innerHTML);
+    el.innerHTML = yaz(el.dataset.m, ozgunIcerik.get(el));
+  });
+  document.querySelectorAll("[data-m-aria]").forEach(el => {
+    if (!ozgunAria.has(el)) ozgunAria.set(el, el.getAttribute("aria-label"));
+    el.setAttribute("aria-label", yaz(el.dataset.mAria, ozgunAria.get(el)));
+  });
+  document.querySelectorAll(".dil-dugme button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.dil === DIL)));
+}
+const ceviriSozu = fetch("dil/en.json").then(r => r.ok ? r.json() : {}).catch(() => ({})).then(c => {
+  CEVIRI = c || {};
+  metinleriUygula();
+  if (DIL === "en") document.dispatchEvent(new Event("dildegisti"));
+});
+function diliSec(dil) {
+  DIL = dil === "en" ? "en" : "tr";
+  try { localStorage.setItem("dil", DIL); } catch (e) {}
+  metinleriUygula();
+  document.dispatchEvent(new Event("dildegisti"));
+}
+document.querySelectorAll(".dil-dugme button").forEach(b => b.addEventListener("click", () => diliSec(b.dataset.dil)));
+const deger = v => (DIL === "en" && CEVIRI.degerler?.[v]) || v;
+const anlatimMetni = ek => { const a = alanAl(ek, "anlatim"); return Array.isArray(a) ? a.join(" ") : a; };
+const tarihMetni = m => DIL === "en" && CEVIRI.aylar?.length === 12
+  ? String(m || "").replace(new RegExp(AYLAR.join("|"), "g"), ay => CEVIRI.aylar[AYLAR.indexOf(ay)]) : m;
+const tarihYaz = t => { const d = new Date(t), aylar = DIL === "en" && CEVIRI.aylar?.length === 12 ? CEVIRI.aylar : AYLAR; return d.getUTCDate() + " " + aylar[d.getUTCMonth()] + " " + d.getUTCFullYear(); };
 const isoYaz = t => new Date(t).toISOString().slice(0, 10);
 const gunBasi = t => Math.floor(t / GUN) * GUN;
 const kisaAd = s => String(s || "").replace(/ \(.*$/, "");
@@ -360,10 +429,16 @@ const SIMGE_ADI = { gemi: "Vapur yolculuğu", ferman: "Genelge", belge: "İstifa
                     kosk: "Çankaya Köşkü", yildiz: "Cumhuriyet'in ilanı" };
 const simgeAdres = ad => new URL("img/simge/" + (ad || "yildiz") + ".png", location.href).href;
 const AYAR = { kmSaniye: 100, enAzYol: 5, durakSaniye: 7, kameraUzak: 90000, kameraYuksek: 55000, yumusak: 0.04, takip: 1, maket: 6, okumaKelimeSaniye: 3.2 };
-document.getElementById("uc-lejant").innerHTML = ["tren", "otomobil", "vapur", "bilinmiyor"].map(t =>
-  '<span><i style="background:' + hex(TURLER[t].renk) + '"></i>' + (TURLER[t].ad || "Bilinmeyen yol") + "</span>").join("");
-document.getElementById("lejant-simgeler").innerHTML = SIMGELER
-  .map(ad => '<div><img src="' + simgeAdres(ad) + '" alt="">' + SIMGE_ADI[ad] + "</div>").join("");
+const turAdi = t => yaz("tur-" + t, TURLER[t]?.ad || "");
+const simgeAdi = ad => yaz("simge-" + ad, SIMGE_ADI[ad]);
+function lejantYazilari() {
+  document.getElementById("uc-lejant").innerHTML = ["tren", "otomobil", "vapur", "bilinmiyor"].map(t =>
+    '<span><i style="background:' + hex(TURLER[t].renk) + '"></i>' + (turAdi(t) || yaz("bilinmeyen-yol", "Bilinmeyen yol")) + "</span>").join("");
+  document.getElementById("lejant-simgeler").innerHTML = SIMGELER
+    .map(ad => '<div><img src="' + simgeAdres(ad) + '" alt="">' + simgeAdi(ad) + "</div>").join("");
+}
+lejantYazilari();
+document.addEventListener("dildegisti", lejantYazilari);
 document.querySelectorAll(".satir svg[data-tur]").forEach(s => {
   const t = s.dataset.tur, r = hex(TURLER[t].renk);
   s.innerHTML = t === "vapur" ? '<line x1="2" y1="9" x2="32" y2="9" stroke="' + r + '" stroke-width="3" stroke-dasharray="5 4" stroke-linecap="round"/>'
@@ -380,7 +455,7 @@ require([
     UniqueValueRenderer, FeatureFilter, FeatureEffect, TimeExtent, geometryEngine, Point,
     Polyline, Mesh, meshUtils, wmu, TileLayer) => {
   const $ = s => document.querySelector(s);
-  const sayi = n => Number(n).toLocaleString("tr-TR", { maximumFractionDigits: 0 });
+  const sayi = n => Number(n).toLocaleString(DIL === "en" ? "en-GB" : "tr-TR", { maximumFractionDigits: 0 });
   const kacis = s => String(s ?? "").replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\"", "&quot;");
   const darEkran = window.matchMedia("(max-width: 720px)");
   const satir = (ad, deger) => deger ? "<tr><td>" + ad + "</td><td>" + kacis(deger) + "</td></tr>" : "";
@@ -394,26 +469,28 @@ require([
   const TUR_ADI = { kongre: "Kongre", genelge: "Genelge", muharebe: "Muharebe", karar: "Karar", toplanti: "Toplantı",
                    varis: "Varış", yolculuk: "Yolculuk", konaklama: "Konaklama", diger: "Olay" };
   const rozet = (metin, sinif, renk) => metin ? "<span class=\"rozet " + (sinif || "") + "\">" + (renk ? "<i style=\"background:" + renk + "\"></i>" : "") + kacis(metin) + "</span>" : "";
-  const dugmeHtml = t => "<div class=\"dugmeler\"><button type=\"button\" data-gun=\"" + t + "\">Bu güne git</button></div>";
+  const dugmeHtml = t => "<div class=\"dugmeler\"><button type=\"button\" data-gun=\"" + t + "\">" + yaz("pp-bu-gune-git", "Bu güne git") + "</button></div>";
   let DETAY = {};
   window.detaySozu.then(d => { DETAY = d || {}; });
+  const yerAdi = a => alanAl(DETAY[a.id], "yer") || a.yer_adi_bugun;
   const commonsAdres = (dosya, en) => "https://commons.wikimedia.org/wiki/Special:FilePath/" + encodeURIComponent(dosya) + (en ? "?width=" + en : "");
   const commonsSayfa = dosya => "https://commons.wikimedia.org/wiki/File:" + encodeURIComponent(dosya.replaceAll(" ", "_"));
   const fotoHtml = f => "<figure class=\"kutu foto\"><img loading=\"lazy\" src=\"" + commonsAdres(f.dosya, 800) + "\" data-buyuk=\"" + commonsAdres(f.dosya, 1600) +
-    "\" alt=\"" + kacis(f.aciklama) + "\"><figcaption>" + kacis(f.aciklama) + "<small>" + kacis(f.lisans) + " · " + kacis(f.eser_sahibi) +
+    "\" alt=\"" + kacis(alanAl(f, "aciklama")) + "\"><figcaption>" + kacis(alanAl(f, "aciklama")) + "<small>" + kacis(deger(f.lisans)) + " · " + kacis(deger(f.eser_sahibi)) +
     " · <a href=\"" + commonsSayfa(f.dosya) + "\" target=\"_blank\" rel=\"noopener\">Wikimedia Commons</a></small></figcaption></figure>";
   function olayIcerigi({ graphic: g }) {
     const a = g.attributes, ek = DETAY[a.id] || {};
-    const yer = a.yer_adi_donem && kisaAd(a.yer_adi_donem) !== kisaAd(a.yer_adi_bugun) ? a.yer_adi_donem : "";
+    const donem = alanAl(ek, "yer_donem") || a.yer_adi_donem;
+    const yer = donem && kisaAd(a.yer_adi_donem) !== kisaAd(a.yer_adi_bugun) ? donem : "";
     return dugum("<div class=\"pp\">" +
-      "<div class=\"rozetler\">" + rozet(a.tarih_metni, "altin") + rozet(SIMGE_ADI[ek.simge] || TUR_ADI[a.olay_turu]) + "</div>" +
+      "<div class=\"rozetler\">" + rozet(tarihMetni(a.tarih_metni), "altin") + rozet(ek.simge ? simgeAdi(ek.simge) : yaz("olay-" + a.olay_turu, TUR_ADI[a.olay_turu])) + "</div>" +
       ayniYerHtml(a) +
-      "<div class=\"kutu\"><table>" + satir("Yer", a.yer_adi_bugun) + satir("O günkü adı", yer) + satir("İl", a.il) + "</table></div>" +
+      "<div class=\"kutu\"><table>" + satir(yaz("pp-yer", "Yer"), yerAdi(a)) + satir(yaz("pp-donem-adi", "O günkü adı"), yer) + satir(yaz("pp-il", "İl"), a.il) + "</table></div>" +
       (ek.fotograflar || []).slice(0, 1).map(fotoHtml).join("") +
-      (ek.anlatim ? "<div class=\"kutu\"><span class=\"bolum-baslik\">Ne oldu</span><div class=\"metin\">" + kacis(ek.anlatim) + "</div></div>"
+      (ek.anlatim ? "<div class=\"kutu\"><span class=\"bolum-baslik\">" + yaz("pp-ne-oldu", "Ne oldu") + "</span><div class=\"metin\">" + kacis(anlatimMetni(ek)) + "</div></div>"
                   : a.aciklama ? "<div class=\"kutu metin\">" + kacis(a.aciklama) + "</div>" : "") +
       (ek.fotograflar || []).slice(1).map(fotoHtml).join("") +
-      ((ek.nutuk || a.nutuk_soz) ? "<div class=\"nutuk\"><b>Nutuk'tan</b><q>" + kacis(ek.nutuk || a.nutuk_soz) + "</q><span>" + kacis(ek.nutuk_kaynak || a.nutuk_soz_kaynak) + "</span></div>" : "") +
+      ((ek.nutuk || a.nutuk_soz) ? "<div class=\"nutuk\"><b>" + yaz("pp-nutuktan", "Nutuk'tan") + "</b><q>" + kacis(ek.nutuk || a.nutuk_soz) + "</q><span>" + kacis(ek.nutuk_kaynak || a.nutuk_soz_kaynak) + "</span></div>" : "") +
       (ek.video ? videoHtml(ek.video) : "") +
       baglantiHtml(a, ek) +
       dugmeHtml(a.zaman_bas) + "</div>");
@@ -421,30 +498,30 @@ require([
   function ayniYerHtml(a) {
     const liste = (window.ayniYerdekiler?.(a.id) || []);
     if (liste.length < 2) return "";
-    return "<div class=\"kutu ayni-yer\"><b>Bu şehirde " + liste.length + " olay var</b><div>" + liste.map(o =>
+    return "<div class=\"kutu ayni-yer\"><b>" + yaz("pp-ayni-yer", "Bu şehirde {n} olay var").replace("{n}", liste.length) + "</b><div>" + liste.map(o =>
       "<button type=\"button\" data-olay=\"" + o.id + "\"" + (o.id === a.id ? " class=\"secili\"" : "") + "><img src=\"" + simgeAdres((DETAY[o.id] || {}).simge) + "\" alt=\"\">" +
-      kacis(o.tarih_metni) + "</button>").join("") + "</div></div>";
+      kacis(tarihMetni(o.tarih_metni)) + "</button>").join("") + "</div></div>";
   }
   function baglantiHtml(a, ek) {
     const liste = [], gor = new Set();
     const ekle = (ad, url) => { if (url && !gor.has(url)) { gor.add(url); liste.push([ad, url]); } };
     (ek.baglantilar || []).forEach(b => ekle(b.ad, b.url));
     [[a.kaynak_1, a.kaynak_1_url_sayfa], [a.kaynak_2, a.kaynak_2_url_sayfa]].forEach(([ad, url]) => ekle(String(ad || "").replace(/^Atatürk Ansiklopedisi \(ATAM\), /, "Atatürk Ansiklopedisi: "), url));
-    return liste.length ? "<div class=\"kutu\"><span class=\"bolum-baslik\">Kaynaklar ve daha fazlası</span><div class=\"baglantilar\">" +
+    return liste.length ? "<div class=\"kutu\"><span class=\"bolum-baslik\">" + yaz("pp-kaynaklar", "Kaynaklar ve daha fazlası") + "</span><div class=\"baglantilar\">" +
       liste.map(([ad, url]) => "<a href=\"" + kacis(url) + "\" target=\"_blank\" rel=\"noopener\">" + kacis(ad) + "</a>").join("") + "</div></div>" : "";
   }
   const videoHtml = v => "<figure class=\"kutu foto video\"><video controls preload=\"metadata\" playsinline>" +
     (v.kaynaklar || []).map(k => "<source src=\"" + kacis(k.url) + "\" type=\"" + kacis(k.tur) + "\">").join("") +
-    "<a href=\"" + commonsSayfa(v.dosya) + "\" target=\"_blank\" rel=\"noopener\">Videoyu Wikimedia Commons'ta izle</a></video><figcaption>" + kacis(v.aciklama) +
-    "<small>" + kacis(v.lisans) + " · " + kacis(v.eser_sahibi) + " · <a href=\"" + commonsSayfa(v.dosya) + "\" target=\"_blank\" rel=\"noopener\">Wikimedia Commons</a></small></figcaption></figure>";
+    "<a href=\"" + commonsSayfa(v.dosya) + "\" target=\"_blank\" rel=\"noopener\">" + yaz("pp-video", "Videoyu Wikimedia Commons'ta izle") + "</a></video><figcaption>" + kacis(alanAl(v, "aciklama")) +
+    "<small>" + kacis(deger(v.lisans)) + " · " + kacis(deger(v.eser_sahibi)) + " · <a href=\"" + commonsSayfa(v.dosya) + "\" target=\"_blank\" rel=\"noopener\">Wikimedia Commons</a></small></figcaption></figure>";
   function rotaIcerigi({ graphic: g }) {
     const a = g.attributes, km = geometryEngine.geodesicLength(g.geometry, "kilometers"), tur = TURLER[a.ulasim];
     return dugum("<div class=\"pp\">" +
-      "<div class=\"rozetler\">" + rozet(a.tarih_metni, "altin") + (tur && tur.ad ? rozet(tur.ad, "", hex(tur.renk)) : "") + "</div>" +
-      "<div class=\"kutu\"><table>" + satir("Nereden", kisaAd(a.baslangic)) + satir("Nereye", kisaAd(a.bitis)) +
-      satir("Uzunluk", km ? "yaklaşık " + sayi(km) + " km" : "") + "</table></div>" +
-      "<div class=\"kutu kaynak\">Çizgi yolun bugünkü karşılığını izler." + (a.ulasim === "vapur" ? " Deniz yolu yaklaşıktır." : "") +
-      (a.kaynak ? "<br><b>Kaynak:</b> " + kaynakSatiri("kaynağı aç", a.kaynak) : "") + "</div>" +
+      "<div class=\"rozetler\">" + rozet(tarihMetni(a.tarih_metni), "altin") + (tur && tur.ad ? rozet(turAdi(a.ulasim), "", hex(tur.renk)) : "") + "</div>" +
+      "<div class=\"kutu\"><table>" + satir(yaz("pp-nereden", "Nereden"), kisaAd(a.baslangic)) + satir(yaz("pp-nereye", "Nereye"), kisaAd(a.bitis)) +
+      satir(yaz("pp-uzunluk", "Uzunluk"), km ? yaz("pp-yaklasik-km", "yaklaşık {n} km").replace("{n}", sayi(km)) : "") + "</table></div>" +
+      "<div class=\"kutu kaynak\">" + yaz("pp-cizgi", "Çizgi yolun bugünkü karşılığını izler.") + (a.ulasim === "vapur" ? " " + yaz("pp-deniz", "Deniz yolu yaklaşıktır.") : "") +
+      (a.kaynak ? "<br><b>" + yaz("pp-kaynak", "Kaynak:") + "</b> " + kaynakSatiri(yaz("pp-kaynagi-ac", "kaynağı aç"), a.kaynak) : "") + "</div>" +
       dugmeHtml(a.zaman_bas) + "</div>");
   }
   const buyukFoto = $("#buyuk-foto");
@@ -479,7 +556,7 @@ require([
         defaultSymbol: { type: "simple-marker", style: "circle", size: 9, color: [...VURGU, 1], outline: { color: [255, 255, 255], width: 1.5 } },
         uniqueValueInfos: Object.entries(detaylar).filter(([, v]) => v.simge).map(([id, v]) =>
           ({ value: id, symbol: { type: "picture-marker", url: simgeAdres(v.simge), width: 28, height: 28 } })) }),
-      popupTemplate: { title: "{baslik}", content: olayIcerigi, outFields: ["*"] }
+      popupTemplate: { title: ({ graphic: g }) => alanAl(DETAY[g.attributes.id], "baslik") || g.attributes.baslik, content: olayIcerigi, outFields: ["*"] }
     });
     const rota = new FeatureLayer({
       url: config.rota_url, id: "rota", outFields: ["*"], useViewTime: false,
@@ -555,8 +632,12 @@ require([
     };
     const noktaZamanlari = kayitlar.map(f => f.attributes.zaman_bas).sort((a, b) => a - b);
     const ayak = f => noktaZamanlari.filter(t => t <= f.attributes.zaman_bas).length;
-    $("#r-yer").textContent = sayi(kayitlar.length);
-    $("#r-km").textContent = sayi(yollar.reduce((t, f) => t + geometryEngine.geodesicLength(f.geometry, "kilometers"), 0));
+    const toplamKm = yollar.reduce((t, f) => t + geometryEngine.geodesicLength(f.geometry, "kilometers"), 0);
+    const rakamlar = () => {
+      $("#r-gun").textContent = sayi(GUN_SAYISI); $("#r-yer").textContent = sayi(kayitlar.length); $("#r-km").textContent = sayi(toplamKm);
+    };
+    rakamlar();
+    document.addEventListener("dildegisti", rakamlar);
     const kmUzak = (a, b) => { const r = Math.PI / 180, x = (b[0] - a[0]) * Math.cos((a[1] + b[1]) / 2 * r), y = b[1] - a[1]; return Math.hypot(x, y) * 111.2; };
     const kumeler = [];
     kayitlar.forEach(f => {
@@ -615,14 +696,14 @@ require([
       if (oGun.length) {
         simdiki = oGun; belirgin = true;
         const s = oGun.reduce((a, b) => (b.attributes.zaman_bit - b.attributes.zaman_bas) < (a.attributes.zaman_bit - a.attributes.zaman_bas) ? b : a);
-        metin = s.attributes.baslik + " · " + kisaAd(s.attributes.yer_adi_bugun);
+        metin = (alanAl(DETAY[s.attributes.id], "baslik") || s.attributes.baslik) + " · " + kisaAd(yerAdi(s.attributes));
       } else if (onceki) {
         simdiki = [onceki];
         const sonraki = kayitlar.filter(f => f.attributes.zaman_bas > son).sort((a, b) => a.attributes.zaman_bas - b.attributes.zaman_bas)[0];
         const yolculukta = yolda || (sonYol && sonYol.attributes.zaman_bit > onceki.attributes.zaman_bit);
         metin = yolculukta && sonraki
-          ? "Yolda · " + kisaAd(onceki.attributes.yer_adi_bugun) + " → " + kisaAd(sonraki.attributes.yer_adi_bugun)
-          : "Son bilinen yer: " + kisaAd(onceki.attributes.yer_adi_bugun);
+          ? yaz("yolda", "Yolda") + " · " + kisaAd(yerAdi(onceki.attributes)) + " → " + kisaAd(yerAdi(sonraki.attributes))
+          : yaz("son-yer", "Son bilinen yer:") + " " + kisaAd(yerAdi(onceki.attributes));
       }
       olaylar.featureEffect = new FeatureEffect({ filter: kimlikSuzgeci(simdiki), excludedEffect: "opacity(40%)" });
       simdi.graphics = simdiki.map(f => new Graphic({ geometry: f.geometry, symbol: halka2 }));
@@ -659,7 +740,7 @@ require([
     function durdur() {
       if (!zamanlayici) return;
       clearTimeout(zamanlayici); zamanlayici = null;
-      $("#oynat").innerHTML = OYNAT_SVG; $("#oynat").setAttribute("aria-label", "Oynat"); adresiGuncelle();
+      $("#oynat").innerHTML = OYNAT_SVG; $("#oynat").setAttribute("aria-label", yaz("oynat", "Oynat")); adresiGuncelle();
     }
     function adim() {
       const sonraki = siradakiGun(gun);
@@ -670,7 +751,7 @@ require([
     $("#oynat").addEventListener("click", () => {
       if (zamanlayici) { durdur(); return; }
       if (gun >= BIT) gunuGoster(BAS);
-      $("#oynat").innerHTML = DUR_SVG; $("#oynat").setAttribute("aria-label", "Durdur"); view.closePopup();
+      $("#oynat").innerHTML = DUR_SVG; $("#oynat").setAttribute("aria-label", yaz("durdur", "Durdur")); view.closePopup();
       zamanlayici = setTimeout(adim, 300);
     });
     new ResizeObserver(() => { cizelge(csvg, cetvel, gun); paddingGuncelle(); }).observe(cetvel);
@@ -810,19 +891,26 @@ require([
       }
       sahneler.push({ tur: "durak", d, bas: d.zaman_bas });
     });
-    const okumaSuresi = d => String((DETAY[d.id] || {}).anlatim || "").split(/\s+/).length / AYAR.okumaKelimeSaniye;
+    const okumaSuresi = d => String(alanAl(DETAY[d.id], "anlatim") || "").split(/\s+/).length / AYAR.okumaKelimeSaniye;
     sahneler.forEach(s => { s.sure = s.tur === "durak" ? Math.max(AYAR.durakSaniye, okumaSuresi(s.d)) : Math.max(AYAR.enAzYol, s.uzunluk / AYAR.kmSaniye); });
     const SES_ARA = 0.8;
     const sesler = new Map();
     let sessiz = false;
+    const ingilizceSes = id => DIL === "en" && !!(DETAY[id] || {}).ses_en;
+    const sesAdresi = id => ingilizceSes(id) ? DETAY[id].ses_en : (DETAY[id] || {}).ses;
+    const sesZamanlari = id => (DETAY[id] || {})[ingilizceSes(id) ? "ses_zamanlar_en" : "ses_zamanlar"];
     sahneler.forEach(s => {
-      const src = s.tur === "durak" && (DETAY[s.d.id] || {}).ses;
+      const src = s.tur === "durak" && sesAdresi(s.d.id);
       if (!src) return;
       const a = new Audio(); a.preload = "metadata"; a.src = src;
       a.addEventListener("loadedmetadata", () => { if (isFinite(a.duration)) s.sure = a.duration + SES_ARA; });
       a.addEventListener("error", () => { a.hata = true; });
       sesler.set(s.d.id, a);
     });
+    document.addEventListener("dildegisti", () => sesler.forEach((a, id) => {
+      const src = new URL(sesAdresi(id), location.href).href;
+      if (a.src !== src) { a.pause(); a.hata = false; a.src = src; }
+    }));
     const durakSesi = s => s && s.tur === "durak" ? sesler.get(s.d.id) : null;
     function sesleriDurdur() { sesler.forEach(a => { if (!a.paused) a.pause(); }); }
     function sesEsle(s) {
@@ -865,9 +953,11 @@ require([
     }
     const cumleler = {};
     function cumleleriAl(d) {
-      if (cumleler[d.id]) return cumleler[d.id];
-      const parca = [];
-      for (const c of String((DETAY[d.id] || {}).anlatim || "").split(/(?<=[.!?])\s+/).filter(Boolean)) {
+      const anahtar = DIL + d.id;
+      if (cumleler[anahtar]) return cumleler[anahtar];
+      const kaynak = alanAl(DETAY[d.id], "anlatim");
+      const parca = Array.isArray(kaynak) ? [...kaynak] : [];
+      if (!Array.isArray(kaynak)) for (const c of String(kaynak || "").split(/(?<=[.!?])\s+/).filter(Boolean)) {
         const son = parca[parca.length - 1];
         const acik = son && (son.split("“").length > son.split("”").length || (son.split("\"").length - 1) % 2 === 1);
         const sira = son && /(^|\D)\d{1,2}\.$/.test(son);
@@ -875,7 +965,7 @@ require([
       }
       const toplam = parca.reduce((a, c) => a + c.length, 0) || 1;
       let birikim = 0;
-      return (cumleler[d.id] = parca.map(c => ({ metin: c, bitis: (birikim += c.length) / toplam })));
+      return (cumleler[anahtar] = parca.map(c => ({ metin: c, bitis: (birikim += c.length) / toplam })));
     }
     let altyaziDurak = null, altyaziCumle = "";
     function cumleYaz(metin) {
@@ -891,15 +981,13 @@ require([
       if (d) {
         if (altyaziDurak !== d) {
           altyaziDurak = d;
-          $("#a-olay").textContent = d.baslik + " · " + kisaAd(d.yer_adi_bugun);
+          $("#a-olay").textContent = (alanAl(DETAY[d.id], "baslik") || d.baslik) + " · " + kisaAd(yerAdi(d));
         }
-        const a = sesler.get(d.id), sesVar = a && !a.hata;
-        const zamanli = (DETAY[d.id] || {}).ses_altyazi;
-        if (sesVar && Array.isArray(zamanli) && zamanli.length) {
-          const z = zamanli.findLast(([bas]) => bas <= gecen) || zamanli[0];
-          cumleYaz(z[1]);
+        const a = sesler.get(d.id), sesVar = a && !a.hata, c = cumleleriAl(d), zamanlar = sesZamanlari(d.id);
+        if (sesVar && Array.isArray(zamanlar) && zamanlar.length === c.length) {
+          cumleYaz(c[Math.max(0, zamanlar.findLastIndex(z => z <= gecen))].metin);
         } else {
-          const c = cumleleriAl(d), o = Math.min(0.999, sesVar && a.duration ? gecen / a.duration : oran || 0);
+          const o = Math.min(0.999, sesVar && a.duration ? gecen / a.duration : oran || 0);
           cumleYaz((c.find(x => x.bitis > o) || c[c.length - 1] || {}).metin || "");
         }
       } else {
@@ -935,7 +1023,7 @@ require([
       if (kismi.length > 1) uc.aktif.add(new Graphic({ geometry: cizgi(kismi), symbol: yolSembolu(renkOf(p), 3, 1) }));
       ucTarih = p.zaman_bas + (p.zaman_bit - p.zaman_bas) * (kalan / (p.h.uzunluk || 1));
       kameraTakip(nokta, yonDer, ani);
-      const arac = TURLER[p.ulasim]?.ad;
+      const arac = turAdi(p.ulasim);
       altyazi(ucTarih, null, (arac ? arac + " · " : "") + kisaAd(p.baslangic) + " → " + kisaAd(p.bitis));
     }
     const ucSvg = $("#u-cizelge-svg"), ucCz = $("#u-cizelge");
@@ -958,8 +1046,8 @@ require([
       cizelge(ucSvg, ucCz, ucTarih);
       requestAnimationFrame(kare);
     }
-    function ucOynat() { oynuyor = true; onceKare = null; $("#u-oynat").innerHTML = DUR_SVG; $("#u-oynat").setAttribute("aria-label", "Durdur"); requestAnimationFrame(kare); }
-    function ucDurdur() { oynuyor = false; sesleriDurdur(); $("#u-oynat").innerHTML = OYNAT_SVG; $("#u-oynat").setAttribute("aria-label", "Oynat"); }
+    function ucOynat() { oynuyor = true; onceKare = null; $("#u-oynat").innerHTML = DUR_SVG; $("#u-oynat").setAttribute("aria-label", yaz("durdur", "Durdur")); requestAnimationFrame(kare); }
+    function ucDurdur() { oynuyor = false; sesleriDurdur(); $("#u-oynat").innerHTML = OYNAT_SVG; $("#u-oynat").setAttribute("aria-label", yaz("oynat", "Oynat")); }
     $("#u-oynat").addEventListener("click", () => {
       if (oynuyor) return ucDurdur();
       if (sira >= sahneler.length - 1 && gecen >= sahneler[sira].sure) sahneyeGit(0);
@@ -1005,7 +1093,7 @@ require([
     const SESSIZ_SVG = '<svg viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16 9l5 6M21 9l-5 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
     function sesDugmesi() {
       $("#u-ses").innerHTML = sessiz ? SESSIZ_SVG : SES_SVG;
-      $("#u-ses").setAttribute("aria-label", sessiz ? "Sesi aç" : "Sesi kapat");
+      $("#u-ses").setAttribute("aria-label", sessiz ? yaz("sesi-ac", "Sesi aç") : yaz("sesi-kapat", "Sesi kapat"));
     }
     $("#u-ses").hidden = !sesler.size; sesDugmesi();
     $("#u-ses").addEventListener("click", () => { sessiz = !sessiz; sesler.forEach(a => { a.muted = sessiz; }); sesDugmesi(); });
@@ -1024,18 +1112,31 @@ require([
       if (e.key === "Escape") ikiyeDon();
       if (e.key === " ") { e.preventDefault(); $("#u-oynat").click(); }
     });
+    document.addEventListener("dildegisti", () => {
+      view.closePopup(); gunuGoster(gun);
+      altyaziDurak = null; altyaziCumle = "";
+      if (uc) sahneyiCiz(sahneler[sira], gecen / sahneler[sira].sure, true);
+    });
     const adres = /^#(\d{4}-\d{2}-\d{2})$/.exec(location.hash);
     gunuGoster(adres ? Date.parse(adres[1] + "T00:00:00Z") : BAS);
-    if (!adres) {
-      const acilis = $("#acilis"), kapat = () => { acilis.hidden = true; };
-      acilis.hidden = false; $("#acilis-basla").focus();
+    let dilKayitli = false;
+    try { dilKayitli = !!localStorage.getItem("dil"); } catch (e) {}
+    const acilis = $("#acilis"), kapat = () => { acilis.hidden = true; };
+    if (!adres || !dilKayitli) {
+      acilis.hidden = false;
+      $("#adim-dil [data-dil=\"" + DIL + "\"]").focus();
+      $("#adim-dil").querySelectorAll("[data-dil]").forEach(b => b.addEventListener("click", () => {
+        diliSec(b.dataset.dil);
+        if (adres) return kapat();
+        $("#adim-dil").hidden = true; $("#adim-giris").hidden = false; $("#acilis-basla").focus();
+      }));
       $("#acilis-basla").addEventListener("click", () => ucaGec(BAS));
       $("#acilis-gec").addEventListener("click", kapat);
-      acilis.addEventListener("click", e => { if (e.target === acilis) kapat(); });
+      acilis.addEventListener("click", e => { if (e.target === acilis && $("#adim-dil").hidden) kapat(); });
     }
     window.sayfaHazir = true;
   }).catch(hata => {
-    $("#gun-olay").textContent = "Harita yüklenemedi. Sayfayı yenileyin.";
+    $("#gun-olay").textContent = yaz("hata", "Harita yüklenemedi. Sayfayı yenileyin.");
     $("#yukleniyor").classList.add("bitti");
     window.sayfaHatasi = String(hata);
   });

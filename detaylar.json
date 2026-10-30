@@ -7,7 +7,8 @@
         "dosya": "Mustafa Kemal'in 9. Ordu Müfettişliği'ne tayin yazısı.JPG",
         "aciklama": "Harbiye Nezareti'nin Mustafa Kemal'i 9. Ordu Müfettişliği'ne atadığı yazı (1919)",
         "lisans": "Kamu malı",
-        "eser_sahibi": "Harbiye Nezareti; Samsun Kent Müzesi"
+        "eser_sahibi": "Harbiye Nezareti; Samsun Kent Müzesi",
+        "aciklama_en": "The War Ministry's letter appointing Mustafa Kemal Inspector of the Ninth Army (1919)"
       }
     ],
     "baglantilar": [
@@ -20,7 +21,12 @@
         "url": "https://ekitap.ktb.gov.tr/TR-273376/nutuk.html"
       }
     ],
-    "simge": "gemi"
+    "simge": "gemi",
+    "baslik_en": "Landing at Samsun",
+    "anlatim_en": [
+      "After a three-day voyage, the Bandırma reached Samsun on 19 May; with Mustafa Kemal Pasha was a party of eighteen from his staff.",
+      "This day later came to be seen as the beginning of the National Struggle. Atatürk also began his great speech, the Nutuk, with this day."
+    ]
   },
   "O021": {
     "anlatim": "Erzurum'dan Sivas'a gelen Heyet-i Temsiliye, Amasya Genelgesi'nde istenen ve bütün yurdun temsilcilerinin katılacağı kongreyi topladı. İstanbul hükümeti ve İtilaf Devletleri kongreyi engellemeye çalıştı. Mustafa Kemal Paşa kongre başkanlığına seçildi. Anadolu'da ve Rumeli'de kurulmuş bütün millî cemiyetler “Anadolu ve Rumeli Müdafaa-i Hukuk Cemiyeti” adıyla birleştirildi; Heyet-i Temsiliye bütün yurdu temsil eder hâle geldi. Amerikan mandası önerisi uzun tartışmalara yol açtı.",
@@ -30,7 +36,8 @@
         "dosya": "Sivas Congress September 1919.jpg",
         "aciklama": "Sivas Kongresi, Eylül 1919",
         "lisans": "Kamu malı",
-        "eser_sahibi": "Bilinmiyor"
+        "eser_sahibi": "Bilinmiyor",
+        "aciklama_en": "The Sivas Congress, September 1919"
       }
     ],
     "baglantilar": [
@@ -41,7 +48,17 @@
     ],
     "simge": "kongre",
     "nutuk": "Sıvas Kongresi, 1919 Eylülünün 4 üncü Perşembe günü zevalden sonra ikide açıldı.",
-    "nutuk_kaynak": "Nutuk–Söylev, I. Cilt, s. 116, T.C. Kültür ve Turizm Bakanlığı e-kitap"
+    "nutuk_kaynak": "Nutuk–Söylev, I. Cilt, s. 116, T.C. Kültür ve Turizm Bakanlığı e-kitap",
+    "baslik_en": "The Sivas Congress",
+    "anlatim_en": [
+      "Coming from Erzurum to Sivas, the Representative Committee convened the congress called for in the Amasya Circular, to be attended by representatives from the whole country.",
+      "The İstanbul government and the Allied Powers tried to prevent the congress.",
+      "Mustafa Kemal Pasha was elected chairman of the congress.",
+      "All the national societies founded in Anatolia and Rumelia were united under the name “Association for the Defence of the Rights of Anatolia and Rumelia”; the Representative Committee now represented the whole country.",
+      "A proposal for an American mandate led to long debates."
+    ],
+    "yer_en": "Sivas Congress Building",
+    "yer_donem_en": "Sivas, Sultani (idadi) school building"
   },
   "O075": {
     "anlatim": "Sakarya'dan sonra ordu on ay boyunca büyük bir taarruza hazırlandı. Mustafa Kemal Paşa Ağustos 1922'de gizlice Ankara'dan ayrıldı; trenle değil, bir gece otomobille Tuz Gölü kıyısından Konya'ya, oradan Akşehir'deki cephe karargâhına gitti. 25 Ağustos'ta Şuhut'tan Kocatepe'nin güneybatısındaki çadırlı ordugâha geçti ve Kocatepe'ye çıkarak cepheyi gözden geçirdi. Büyük Taarruz 26 Ağustos sabahı 05.30'da topçu ateşiyle başladı.",
@@ -51,13 +68,15 @@
         "dosya": "Atatürk at Kocatepe.jpg",
         "aciklama": "Mustafa Kemal Paşa Kocatepe'de, 26 Ağustos 1922",
         "lisans": "Kamu malı",
-        "eser_sahibi": "Türk Silahlı Kuvvetleri"
+        "eser_sahibi": "Türk Silahlı Kuvvetleri",
+        "aciklama_en": "Mustafa Kemal Pasha at Kocatepe, 26 August 1922"
       },
       {
         "dosya": "Kocatepe, Afyonkarahisar, 26 Ağustos 1922.png",
         "aciklama": "Kocatepe'de cephe gözetlemesi, 26 Ağustos 1922",
         "lisans": "Kamu malı",
-        "eser_sahibi": "Bilinmiyor"
+        "eser_sahibi": "Bilinmiyor",
+        "aciklama_en": "Observing the front at Kocatepe, 26 August 1922"
       }
     ],
     "baglantilar": [
@@ -68,7 +87,14 @@
     ],
     "simge": "durbun",
     "nutuk": "26 Ağustos sabahı Kocatepe'de hazır bulunuyorduk. Sabah saat 5.30'da topçu ateşimizle taarruz başladı.",
-    "nutuk_kaynak": "Nutuk–Söylev, II. Cilt, s. 898, T.C. Kültür ve Turizm Bakanlığı e-kitap"
+    "nutuk_kaynak": "Nutuk–Söylev, II. Cilt, s. 898, T.C. Kültür ve Turizm Bakanlığı e-kitap",
+    "baslik_en": "Start of the Great Offensive",
+    "anlatim_en": [
+      "After Sakarya, the army spent ten months preparing for a great offensive.",
+      "In August 1922, Mustafa Kemal Pasha secretly left Ankara; not by train, but by car one night along the shore of Lake Tuz to Konya, and from there to the front headquarters at Akşehir.",
+      "On 25 August he moved from Şuhut to the tented camp southwest of Kocatepe, and climbed Kocatepe to survey the front.",
+      "The Great Offensive began at half past five on the morning of 26 August with an artillery barrage."
+    ]
   },
   "O001": {
     "anlatim": "İzmir'in işgalinden bir gün sonra, 16 Mayıs 1919'da, 9. Ordu Müfettişi Mustafa Kemal Paşa karargâhındaki subaylarla birlikte Bandırma vapuruyla İstanbul'dan ayrıldı. Resmî görevi, İtilaf Devletlerinin isteğiyle Karadeniz bölgesindeki karışıklıklara son vermekti. 1878'de İskoçya'da yapılmış eski ve küçük vapur kıyı boyunca ilerledi ve Sinop'a uğradı.",
@@ -93,11 +119,18 @@
           "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/5/58/Turkey_and_Turkish_people_during_War_of_Independence.ogv/Turkey_and_Turkish_people_during_War_of_Independence.ogv.360p.mpeg4.mov",
           "tur": "video/quicktime"
         }
-      ]
+      ],
+      "aciklama_en": "Turkey and the Turkish people during the National Struggle (film, 1919)"
     },
     "simge": "gemi",
     "nutuk": "Nihayet, mebde-i kelâm kabul ettiğimiz tarihten dört gün evvel, 15 Mayıs 1919'da İtilâf Devletleri'nin muvafakatiyle Yunan ordusu İzmir'e ihraç ediliyor.",
-    "nutuk_kaynak": "Nutuk–Söylev, I. Cilt, s. 2, T.C. Kültür ve Turizm Bakanlığı e-kitap"
+    "nutuk_kaynak": "Nutuk–Söylev, I. Cilt, s. 2, T.C. Kültür ve Turizm Bakanlığı e-kitap",
+    "baslik_en": "Departure from İstanbul aboard the Bandırma",
+    "anlatim_en": [
+      "On 16 May 1919, one day after the occupation of İzmir, Mustafa Kemal Pasha, Inspector of the Ninth Army, left İstanbul aboard the steamer Bandırma with the officers of his staff.",
+      "His official mission, demanded by the Allied Powers, was to put an end to the unrest in the Black Sea region.",
+      "The small, old steamer, built in Scotland in 1878, sailed along the coast and called at Sinop."
+    ]
   },
   "O006": {
     "anlatim": "Samsun'da İngiliz askerlerinden cesaret alan Rum çetelerinin faaliyetleri yüzünden Mustafa Kemal Paşa, 25 Mayıs'ta karargâhını daha güvenli bir yere, Havza'ya taşıdı ve şehrin ileri gelenlerine memleketin durumunu anlattı. 28 Mayıs'ta valilere ve kolordu komutanlarına gönderdiği genelgeyle İzmir'in işgaline karşı her yerde mitingler düzenlenmesini istedi. 29–31 Mayıs'ta ülkenin pek çok yerinde, Havza'da da büyük katılımlı protesto mitingleri yapıldı.",
@@ -110,7 +143,13 @@
     ],
     "simge": "ferman",
     "nutuk": "Verdiğim bu talimat üzerine heryerde mitingler yapılmağa başlandı.",
-    "nutuk_kaynak": "Nutuk–Söylev, I. Cilt, s. 32, T.C. Kültür ve Turizm Bakanlığı e-kitap"
+    "nutuk_kaynak": "Nutuk–Söylev, I. Cilt, s. 32, T.C. Kültür ve Turizm Bakanlığı e-kitap",
+    "baslik_en": "The Havza Circular",
+    "anlatim_en": [
+      "Because of the activities of Greek bands emboldened by British troops in Samsun, Mustafa Kemal Pasha moved his headquarters on 25 May to a safer place, Havza, and explained the state of the country to the town's notables.",
+      "On 28 May, in a circular sent to governors and corps commanders, he called for rallies everywhere against the occupation of İzmir.",
+      "From 29 to 31 May, large protest rallies were held in many parts of the country, Havza among them."
+    ]
   },
   "O010": {
     "anlatim": "Havza'dan Amasya'ya geçen Mustafa Kemal Paşa burada Rauf Bey, Ali Fuat Paşa ve Refet Bey'le ülkenin durumunu değerlendirdi. 21'i 22 Haziran'a bağlayan gece genelgenin metnini yaveri Cevat Abbas Bey'e yazdırdı. Genelge, vatanın bütünlüğünün ve milletin bağımsızlığının tehlikede olduğunu, milletin istiklalini yine milletin azim ve kararının kurtaracağını duyurdu ve yurdun her yerinden temsilcilerin Sivas'ta bir kongrede toplanmasını istedi.",
@@ -125,7 +164,13 @@
         "url": "https://ekitap.ktb.gov.tr/TR-273376/nutuk.html"
       }
     ],
-    "simge": "ferman"
+    "simge": "ferman",
+    "baslik_en": "The Amasya Circular",
+    "anlatim_en": [
+      "Moving on from Havza to Amasya, Mustafa Kemal Pasha assessed the situation of the country there with Rauf Bey, Ali Fuat Pasha and Refet Bey.",
+      "On the night of 21 to 22 June, he dictated the text of the circular to his aide-de-camp, Cevat Abbas Bey.",
+      "The circular declared that the integrity of the homeland and the independence of the nation were in danger, that the nation's own will and resolve would save its independence, and called for representatives from all over the country to meet in a congress in Sivas."
+    ]
   },
   "O017": {
     "anlatim": "Amasya'dan Tokat ve Sivas üzerinden Erzurum'a giden Mustafa Kemal Paşa'yı İstanbul geri çağırıyordu. Harbiye Nezareti \"İstanbul'a gel!\" diyor, o da \"Gelemem!\" diye karşılık veriyordu. Padişah iradesiyle görevine son verilince, 8'i 9 Temmuz 1919'a bağlayan gece askerlikten istifa ettiğini Harbiye Nezareti'ne ve padişaha telgrafla bildirdi.",
@@ -141,12 +186,19 @@
         "dosya": "Mustafa Kemal Paşa, Erzurum, 5 Temmuz 1919.png",
         "aciklama": "Erzurum Kongresi hazırlıkları sırasında Erzurum'da, 5 Temmuz 1919. Soldan: Münir Akkaya, Refik Saydam, Mustafa Kemal, Süreyya Yiğit, Mazhar Müfit Kansu",
         "lisans": "Kamu malı",
-        "eser_sahibi": "Bilinmiyor"
+        "eser_sahibi": "Bilinmiyor",
+        "aciklama_en": "In Erzurum during preparations for the Erzurum Congress, 5 July 1919. From left: Münir Akkaya, Refik Saydam, Mustafa Kemal, Süreyya Yiğit, Mazhar Müfit Kansu"
       }
     ],
     "simge": "belge",
     "nutuk": "Bu tarihten sonra resmî sıfat ve salâhiyetten mücerret olarak, yalnız milletin şefkat ve civanmertliğine güvenerek ve onun bitmez feyiz ve kudret membaından ilham ve kuvvet alarak, vicdanî vazifemize devam ettik...",
-    "nutuk_kaynak": "Nutuk–Söylev, I. Cilt, s. 64, T.C. Kültür ve Turizm Bakanlığı e-kitap"
+    "nutuk_kaynak": "Nutuk–Söylev, I. Cilt, s. 64, T.C. Kültür ve Turizm Bakanlığı e-kitap",
+    "baslik_en": "Resignation from the army",
+    "anlatim_en": [
+      "As Mustafa Kemal Pasha travelled from Amasya to Erzurum by way of Tokat and Sivas, İstanbul kept calling him back.",
+      "The War Ministry was saying \"Come to İstanbul!\", and he was replying \"I cannot come!\"",
+      "When his post was terminated by order of the Sultan, on the night of 8 to 9 July 1919 he informed the War Ministry and the Sultan by telegram that he had resigned from the army."
+    ]
   },
   "O018": {
     "anlatim": "Artık bir sivil olan Mustafa Kemal Paşa'ya Kâzım Karabekir Paşa kolordusuyla birlikte emrinde olduklarını bildirdi. Önce 10 Temmuz'a planlanan, bazı delegeler yetişemeyince ertelenen kongre 23 Temmuz 1919'da mütevazı bir okul salonunda toplandı ve ilk gün Mustafa Kemal Paşa'yı başkan seçti. 7 Ağustos'a kadar süren kongrede vatanın bütünlüğü ilkesi kabul edildi ve bir Heyet-i Temsiliye seçildi.",
@@ -162,12 +214,20 @@
         "dosya": "Kemal Paşa Erzurum Kongresi'nde (1919).jpg",
         "aciklama": "Mustafa Kemal Paşa Erzurum Kongresi'nde, Temmuz–Ağustos 1919",
         "lisans": "Kamu malı",
-        "eser_sahibi": "Bilinmiyor"
+        "eser_sahibi": "Bilinmiyor",
+        "aciklama_en": "Mustafa Kemal Pasha at the Erzurum Congress, July–August 1919"
       }
     ],
     "simge": "kongre",
     "nutuk": "Tarihin, bir milletin varlığını ve hakkını hiçbir zaman inkâr edemeyeceğini, binaenaleyh, vatanımız, milletimiz aleyhinde verilen hükümlerin muhakkak mahkûm-ı iflâs olduğunu söyledim.",
-    "nutuk_kaynak": "Nutuk–Söylev, I. Cilt, s. 86, T.C. Kültür ve Turizm Bakanlığı e-kitap"
+    "nutuk_kaynak": "Nutuk–Söylev, I. Cilt, s. 86, T.C. Kültür ve Turizm Bakanlığı e-kitap",
+    "baslik_en": "The Erzurum Congress",
+    "anlatim_en": [
+      "Kâzım Karabekir Pasha told Mustafa Kemal Pasha, now a civilian, that he and his army corps were at his command.",
+      "First planned for 10 July and postponed when some delegates could not arrive in time, the congress met on 23 July 1919 in a modest school hall and on its first day elected Mustafa Kemal Pasha as its chairman.",
+      "The congress, which lasted until 7 August, adopted the principle of the integrity of the homeland and elected a Representative Committee, the Heyet-i Temsiliye."
+    ],
+    "yer_en": "Erzurum Congress Building"
   },
   "O024": {
     "anlatim": "Kongreye karşı hazırlanan baskın girişiminin ortaya çıkması ve Mustafa Kemal Paşa'nın İstanbul'la ilişkiyi kesmesi üzerine Damat Ferit Paşa hükümeti düştü. Yeni hükümet, Heyet-i Temsiliye ile görüşmek için Bahriye Nazırı Salih Paşa'yı gönderdi. 16 Ekim'de Sivas'tan çıkan heyet 18 Ekim'de Amasya'daydı. 20–22 Ekim'deki görüşmelerin en önemli konusu seçimlerin yapılması ve yeni Meclis'in İstanbul dışında toplanmasıydı; Salih Paşa bunu kişisel olarak kabul etti.",
@@ -183,12 +243,20 @@
         "dosya": "Mustafa Kemal, 5. Kafkas Tümeni Kumandanı Cemil Cahit Bey ile Amasya'da.jpg",
         "aciklama": "Mustafa Kemal, 5. Kafkas Tümeni Komutanı Cemil Cahit Bey ile Amasya'da, Ekim 1919",
         "lisans": "Kamu malı",
-        "eser_sahibi": "Bilinmiyor"
+        "eser_sahibi": "Bilinmiyor",
+        "aciklama_en": "Mustafa Kemal with Cemil Cahit Bey, commander of the 5th Caucasian Division, in Amasya, October 1919"
       }
     ],
     "simge": "gorusme",
     "nutuk": "Salih Paşa ile, Amasya'da, 20 Teşrinievvelde başlayan müzakeratımız, 22 Teşrinievvelde hitam buldu. Üç gün devam eden müzakerat neticesinde, ikişer nüsha olmak üzere beş kıt'a protokol tanzim edildi.",
-    "nutuk_kaynak": "Nutuk–Söylev, I. Cilt, s. 324, T.C. Kültür ve Turizm Bakanlığı e-kitap"
+    "nutuk_kaynak": "Nutuk–Söylev, I. Cilt, s. 324, T.C. Kültür ve Turizm Bakanlığı e-kitap",
+    "baslik_en": "The Amasya Talks (Amasya Protocols)",
+    "anlatim_en": [
+      "After a planned raid against the congress came to light and Mustafa Kemal Pasha cut off relations with İstanbul, the government of Damat Ferit Pasha fell.",
+      "The new government sent the Minister of the Navy, Salih Pasha, to negotiate with the Representative Committee.",
+      "Setting out from Sivas on 16 October, the delegation was in Amasya on 18 October.",
+      "The most important subject of the talks held from 20 to 22 October was holding elections and convening the new parliament outside İstanbul; Salih Pasha agreed to this personally."
+    ]
   },
   "O036": {
     "anlatim": "Amasya'dan Sivas'a dönen Heyet-i Temsiliye bir ay daha orada kaldı. Mustafa Kemal Paşa, Ankara'yı daha Şubat 1919'da millî direnişin merkezi olarak düşünmüştü. Kayseri ve Kırşehir üzerinden otomobillerle süren yolculuğun ardından heyet 27 Aralık 1919'da öğleye doğru Dikmen sırtlarından Ankara'ya girdi. Hacı Bayram ziyaretinden sonra hükümet meydanında halka kısa bir konuşma yapıldı. Ankara bundan sonra Millî Mücadele'nin merkezi oldu.",
@@ -204,7 +272,8 @@
         "dosya": "Mustafa Kemal ve Heyet-i Temsiliye'nin Ankara'ya gelişi (1919).jpg",
         "aciklama": "Mustafa Kemal ve Heyet-i Temsiliye'nin Ankara'ya gelişi, 27 Aralık 1919",
         "lisans": "Kamu malı",
-        "eser_sahibi": "Bilinmiyor"
+        "eser_sahibi": "Bilinmiyor",
+        "aciklama_en": "Arrival of Mustafa Kemal and the Representative Committee in Ankara, 27 December 1919"
       }
     ],
     "video": {
@@ -221,11 +290,20 @@
           "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b7/Mustafa_Kemal_and_Turkish_revolutionaries.ogv/Mustafa_Kemal_and_Turkish_revolutionaries.ogv.360p.mpeg4.mov",
           "tur": "video/quicktime"
         }
-      ]
+      ],
+      "aciklama_en": "Mustafa Kemal and leaders of the National Struggle (film, 1920)"
     },
     "simge": "bayrak",
     "nutuk": "Sıvas'tan Kayseri tarikıyle Ankara'ya hareket eden Heyet-i Temsiliye, bütün güzergâhında ve Ankara'da, büyük milletimizin har ve samimî tezahürat-ı vatanperveranesi içinde, bugün muvasalat eyledi. Şimdilik, Heyet-i Temsiliye Merkezi, Ankara'dadır.",
-    "nutuk_kaynak": "Nutuk–Söylev, I. Cilt, s. 444, T.C. Kültür ve Turizm Bakanlığı e-kitap"
+    "nutuk_kaynak": "Nutuk–Söylev, I. Cilt, s. 444, T.C. Kültür ve Turizm Bakanlığı e-kitap",
+    "baslik_en": "Arrival in Ankara",
+    "anlatim_en": [
+      "Returning from Amasya to Sivas, the Representative Committee stayed there for another month.",
+      "As early as February 1919, Mustafa Kemal Pasha had thought of Ankara as the centre of national resistance.",
+      "After a journey by car through Kayseri and Kırşehir, the committee entered Ankara from the Dikmen heights towards noon on 27 December 1919.",
+      "After a visit to Hacı Bayram, a short speech was made to the people in the government square.",
+      "From then on, Ankara became the centre of the National Struggle."
+    ]
   },
   "O042": {
     "anlatim": "İstanbul'un 16 Mart 1920'de resmen işgal edilmesinin ardından Mustafa Kemal Paşa olağanüstü yetkili bir meclisin Ankara'da toplanmasını istedi. Meclis'in açılacağı 23 Nisan Cuma günü yurdun her yerinde törenler düzenlenmesi istendi. Hacı Bayram Camii'nde kılınan cuma namazından sonra Büyük Millet Meclisi, eski İttihat ve Terakki kulübü binasında 115 üyeyle açıldı. Ertesi gün Mustafa Kemal Paşa Meclis Başkanlığına seçildi.",
@@ -244,9 +322,19 @@
         "dosya": "Atatürk TBMM’nin balkonundan halkı selamlarken, Ankara, 28 Mayıs 1922.png",
         "aciklama": "Mustafa Kemal Paşa Meclis'in balkonundan halkı selamlarken, Ankara, 28 Mayıs 1922",
         "lisans": "Kamu malı",
-        "eser_sahibi": "Bilinmiyor"
+        "eser_sahibi": "Bilinmiyor",
+        "aciklama_en": "Mustafa Kemal Pasha greeting the people from the balcony of the Assembly, Ankara, 28 May 1922"
       }
-    ]
+    ],
+    "baslik_en": "Opening of the Grand National Assembly",
+    "anlatim_en": [
+      "After İstanbul was officially occupied on 16 March 1920, Mustafa Kemal Pasha called for an assembly with extraordinary powers to meet in Ankara.",
+      "Ceremonies were requested all over the country for Friday, 23 April, the day the assembly was to open.",
+      "After the Friday prayer at the Hacı Bayram Mosque, the Grand National Assembly opened with 115 members in the former club building of the Committee of Union and Progress.",
+      "The next day, Mustafa Kemal Pasha was elected President of the Assembly."
+    ],
+    "yer_en": "First Grand National Assembly Building",
+    "yer_donem_en": "Ankara, Committee of Union and Progress club building"
   },
   "O060": {
     "anlatim": "Türk ordusu 1921 yazında Kütahya–Eskişehir muharebelerinden sonra geri çekilmek zorunda kaldı; Meclis 5 Ağustos'ta Mustafa Kemal Paşa'yı Başkomutan yaptı. Başkomutan 12 Ağustos'ta cepheye gitti, Polatlı yakınında araziyi incelerken atından düşüp kaburga kemiğini kırdı. Batı Cephesi karargâhı Alagöz'deydi. 23 Ağustos'ta başlayan muharebe aralıksız 22 gün sürdü ve 13 Eylül'de Yunan ordusunun Sakarya Nehri'nin batısına atılmasıyla bitti. Meclis 19 Eylül 1921'de Mustafa Kemal Paşa'ya Gazi unvanını ve Mareşal rütbesini verdi.",
@@ -266,7 +354,8 @@
         "dosya": "Atatürk Sakarya Muharebesi öncesinde cepheye hareket ederken, Ankara, 12 Ağustos 1921.png",
         "aciklama": "Sakarya Muharebesi öncesinde cepheye hareket ederken, Ankara, 12 Ağustos 1921",
         "lisans": "Kamu malı",
-        "eser_sahibi": "Bilinmiyor"
+        "eser_sahibi": "Bilinmiyor",
+        "aciklama_en": "Setting off for the front before the Battle of Sakarya, Ankara, 12 August 1921"
       }
     ],
     "video": {
@@ -283,9 +372,19 @@
           "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/d/dd/Turkish_revolutionaries-Kuvva-i_Milliye.ogv/Turkish_revolutionaries-Kuvva-i_Milliye.ogv.360p.mpeg4.mov",
           "tur": "video/quicktime"
         }
-      ]
+      ],
+      "aciklama_en": "The national forces (Kuvâ-yı Milliye) preparing for war (film, 1921)"
     },
-    "simge": "kilic"
+    "simge": "kilic",
+    "baslik_en": "The Battle of Sakarya",
+    "anlatim_en": [
+      "In the summer of 1921, after the battles of Kütahya and Eskişehir, the Turkish army was forced to retreat; on 5 August the Assembly made Mustafa Kemal Pasha Commander-in-Chief.",
+      "The Commander-in-Chief went to the front on 12 August; while surveying the terrain near Polatlı, he fell from his horse and broke a rib. The Western Front headquarters was at Alagöz.",
+      "The battle, which began on 23 August, lasted twenty-two days without pause and ended on 13 September when the Greek army was driven back west of the Sakarya River.",
+      "On 19 September 1921, the Assembly gave Mustafa Kemal Pasha the title of Gazi and the rank of Marshal."
+    ],
+    "yer_en": "Alagöz Headquarters House",
+    "yer_donem_en": "Alagöz, between Ankara and Polatlı"
   },
   "O078": {
     "anlatim": "İki gün içinde Afyonkarahisar'ın güneyindeki düşman cepheleri düşürüldü. 29'u 30 Ağustos'a bağlayan gece Mustafa Kemal Paşa, Fevzi ve İsmet Paşalarla durumu harita üzerinde değerlendirdi. 30 Ağustos'ta Yunan ana kuvvetleri Aslıhanlar çevresinde kuşatıldı. Düşman mevzilerinin hemen yakınındaki Çalköy'e karargâh kuran Başkomutan, topçuların olabildiğince yakından ateş etmesini istedi. Dumlupınar'da düşman kuvvetlerinin yok edilmesiyle sonuçlanan bu savaşa “Başkomutan Meydan Muharebesi” adı verildi.",
@@ -300,7 +399,15 @@
         "url": "https://ekitap.ktb.gov.tr/TR-273376/nutuk.html"
       }
     ],
-    "simge": "kilic"
+    "simge": "kilic",
+    "baslik_en": "The Battle of the Commander-in-Chief",
+    "anlatim_en": [
+      "Within two days, the enemy lines south of Afyonkarahisar had fallen.",
+      "On the night of 29 to 30 August, Mustafa Kemal Pasha assessed the situation on the map with Fevzi Pasha and İsmet Pasha.",
+      "On 30 August, the main Greek forces were encircled around Aslıhanlar.",
+      "Setting up his headquarters at Çalköy, right next to the enemy positions, the Commander-in-Chief wanted the artillery to fire from as close as possible.",
+      "This battle, which ended with the destruction of the enemy forces at Dumlupınar, was named “the Battle of the Commander-in-Chief”."
+    ]
   },
   "O079": {
     "anlatim": "Zaferin ardından Mustafa Kemal Paşa, dağılan Yunan birliklerine toparlanma fırsatı vermemek için 1 Eylül 1922'de ordulara “Ordular! İlk hedefiniz Akdeniz'dir. İleri!” emrini verdi. Türk süvarileri Afyon–İzmir yolunu kesmişti; ordular ana kuvvetleriyle İzmir'e doğru ilerledi. Uşak ve Kütahya aynı gün kurtarıldı.",
@@ -319,9 +426,16 @@
         "dosya": "Burnt Locomotive, Uşak.jpg",
         "aciklama": "Uşak'ta yanmış lokomotif: çekilen Yunan ordusunun bıraktığı yıkım, Ocak 1923",
         "lisans": "Kamu malı",
-        "eser_sahibi": "Frédéric Gadmer, Albert-Kahn Müzesi"
+        "eser_sahibi": "Frédéric Gadmer, Albert-Kahn Müzesi",
+        "aciklama_en": "A burnt locomotive in Uşak: destruction left by the retreating Greek army, January 1923"
       }
-    ]
+    ],
+    "baslik_en": "“Armies! Your first goal is the Mediterranean”",
+    "anlatim_en": [
+      "After the victory, so as not to give the scattered Greek units a chance to regroup, on 1 September 1922 Mustafa Kemal Pasha gave the armies the order: “Armies! Your first goal is the Mediterranean. Forward!”",
+      "Turkish cavalry had cut the Afyon–İzmir road; the armies advanced towards İzmir with their main forces. Uşak and Kütahya were liberated on the same day."
+    ],
+    "yer_donem_en": "Western Anatolia"
   },
   "O083": {
     "anlatim": "Akdeniz'e yönelen Türk birlikleri 9 Eylül 1922'de İzmir'e girdi ve hükümet konağına yeniden Türk bayrağını çekti. Mustafa Kemal Paşa ertesi gün zeytin dallarıyla süslü otomobillerle şehre geldi ve Karşıyaka'da İplikçizade İsmail Bey'in köşküne yerleşti. Böylece 15 Mayıs 1919'da başlayan Yunan işgali sona erdi.",
@@ -341,10 +455,17 @@
         "dosya": "Mustafa Kemal Pasha in Izmir (September 10, 1922).jpg",
         "aciklama": "Mustafa Kemal Paşa Karşıyaka'da İplikçizade Köşkü'nde, 10 Eylül 1922",
         "lisans": "Kamu malı",
-        "eser_sahibi": "Genelkurmay ATASE Başkanlığı"
+        "eser_sahibi": "Genelkurmay ATASE Başkanlığı",
+        "aciklama_en": "Mustafa Kemal Pasha at the İplikçizade Mansion in Karşıyaka, 10 September 1922"
       }
     ],
-    "simge": "bayrak"
+    "simge": "bayrak",
+    "baslik_en": "Entry into İzmir",
+    "anlatim_en": [
+      "Heading for the Mediterranean, Turkish units entered İzmir on 9 September 1922 and raised the Turkish flag over the government house once again.",
+      "The next day, Mustafa Kemal Pasha came to the city in cars decorated with olive branches and settled in the mansion of İplikçizade İsmail Bey in Karşıyaka.",
+      "Thus the Greek occupation that had begun on 15 May 1919 came to an end."
+    ]
   },
   "O088": {
     "anlatim": "Zaferin ardından Mudanya'da ateşkes imzalandı ve İtilaf Devletleri Lozan'daki barış konferansına hem Ankara'yı hem İstanbul hükümetini çağırdı. Barış masasında ikiliği önlemek isteyen Mustafa Kemal Paşa saltanatın hemen kaldırılmasına karar verdi. Meclis'in ortak komisyonunda hilafetle saltanatın birbirinden ayrılabileceğini anlattı. 1 Kasım 1922'de oybirliğiyle kabul edilen kararla saltanat kaldırıldı, halifelik ise Osmanlı hanedanında bırakıldı.",
@@ -363,9 +484,18 @@
         "dosya": "Türkiye Büyük Millet Meclisi.jpg",
         "aciklama": "Saltanatın kaldırıldığı Birinci Büyük Millet Meclisi binası, Ankara, 1922",
         "lisans": "Kamu malı",
-        "eser_sahibi": "Bilinmiyor"
+        "eser_sahibi": "Bilinmiyor",
+        "aciklama_en": "The First Grand National Assembly building, where the sultanate was abolished, Ankara, 1922"
       }
-    ]
+    ],
+    "baslik_en": "Abolition of the sultanate",
+    "anlatim_en": [
+      "After the victory, an armistice was signed at Mudanya, and the Allied Powers invited both Ankara and the İstanbul government to the peace conference at Lausanne.",
+      "Wishing to prevent a divided representation at the peace table, Mustafa Kemal Pasha decided that the sultanate should be abolished at once.",
+      "In a joint committee of the Assembly, he explained that the caliphate and the sultanate could be separated from each other.",
+      "With a decision adopted unanimously on 1 November 1922, the sultanate was abolished, while the caliphate was left with the Ottoman dynasty."
+    ],
+    "yer_en": "First Grand National Assembly Building"
   },
   "O107": {
     "anlatim": "Lozan Antlaşması imzalandıktan ve Ankara başkent olduktan sonra, Ekim 1923'te yeni hükümet kurulamıyor, kabine bunalımı sürüyordu. 28 Ekim akşamı Mustafa Kemal Paşa, Çankaya'daki yemeğe İsmet Paşa, Kâzım Paşa, Fethi Bey ve bazı milletvekillerini çağırdı. Yemekte “Yarın cumhuriyet ilân edeceğiz!” dedi; arkadaşları hemen katıldı. Konuklar ayrıldıktan sonra İsmet Paşa ile birlikte anayasada yapılacak değişikliği hazırladılar.",
@@ -385,16 +515,27 @@
         "dosya": "La résidence de Mustafa Kemal Cankaya (près d'Ankara) - A37099.jpg",
         "aciklama": "Mustafa Kemal'in Çankaya'daki evi, 29 Aralık 1922",
         "lisans": "CC BY-SA 4.0",
-        "eser_sahibi": "Frédéric Gadmer, Albert-Kahn Müzesi"
+        "eser_sahibi": "Frédéric Gadmer, Albert-Kahn Müzesi",
+        "aciklama_en": "Mustafa Kemal's house at Çankaya, 29 December 1922"
       },
       {
         "dosya": "Mustafa Kemal Atatürk.png",
         "aciklama": "Mustafa Kemal Paşa, 1923",
         "lisans": "Kamu malı",
-        "eser_sahibi": "T.C. Başbakanlık"
+        "eser_sahibi": "T.C. Başbakanlık",
+        "aciklama_en": "Mustafa Kemal Pasha, 1923"
       }
     ],
-    "simge": "kosk"
+    "simge": "kosk",
+    "baslik_en": "At Çankaya: “Tomorrow we will proclaim the republic”",
+    "anlatim_en": [
+      "After the Treaty of Lausanne was signed and Ankara became the capital, in October 1923 a new government could not be formed and the cabinet crisis dragged on.",
+      "On the evening of 28 October, Mustafa Kemal Pasha invited İsmet Pasha, Kâzım Pasha, Fethi Bey and some deputies to dinner at Çankaya.",
+      "At dinner he said, “Tomorrow we will proclaim the republic!”; his companions agreed at once.",
+      "After the guests had left, he and İsmet Pasha prepared the amendment to the constitution."
+    ],
+    "yer_en": "Çankaya Atatürk Museum Mansion",
+    "yer_donem_en": "Ankara, Çankaya Mansion"
   },
   "O108": {
     "anlatim": "Ertesi gün, 29 Ekim 1923'te Halk Fırkası grubu Fethi Bey'in başkanlığında toplandı ve Mustafa Kemal Paşa'nın önerisini görüştü. Aynı akşam Meclis'te anayasanın birinci maddesine “Türkiye Devletinin hükümet şekli cumhuriyettir” cümlesi eklendi; kanun “Yaşasın Cumhuriyet!” sesleri arasında kabul edildi. Ardından oylamaya katılan 158 milletvekilinin tamamının oyuyla Gazi Mustafa Kemal Paşa ilk Cumhurbaşkanı seçildi. Samsun'da başlayan yolculuk, Cumhuriyet'le tamamlandı.",
@@ -414,9 +555,18 @@
         "dosya": "1923 11 03 Resimli Gazete Cumhuriyetin Ilani.jpg",
         "aciklama": "Cumhuriyet'in ilanını duyuran Resimli Gazete, 3 Kasım 1923",
         "lisans": "Kamu malı",
-        "eser_sahibi": "Resimli Gazete"
+        "eser_sahibi": "Resimli Gazete",
+        "aciklama_en": "Resimli Gazete announcing the proclamation of the Republic, 3 November 1923"
       }
     ],
-    "simge": "yildiz"
+    "simge": "yildiz",
+    "baslik_en": "Proclamation of the Republic",
+    "anlatim_en": [
+      "The next day, 29 October 1923, the People's Party group met under the chairmanship of Fethi Bey and discussed Mustafa Kemal Pasha's proposal.",
+      "That same evening, the sentence “The form of government of the State of Turkey is a republic” was added to the first article of the constitution in the Assembly; the law was passed amid cries of “Long live the Republic!”",
+      "Then, with the votes of all 158 deputies taking part in the ballot, Gazi Mustafa Kemal Pasha was elected the first President.",
+      "The journey that began in Samsun was completed with the Republic."
+    ],
+    "yer_en": "First Grand National Assembly Building"
   }
 }
