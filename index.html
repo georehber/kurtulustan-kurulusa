@@ -112,15 +112,10 @@
              text-align: center; transition: opacity .6s; }
   #a-tarih { font-family: var(--serif); font-size: clamp(30px, 5vw, 50px); font-weight: 600; text-shadow: 0 2px 18px rgba(0, 0, 0, .9); }
   #a-olay { margin-top: 2px; font-size: clamp(15px, 2.2vw, 19px); font-weight: 500; color: var(--altin); text-shadow: 0 1px 10px #000; }
-  #a-soz { margin: 12px auto 0; max-width: 720px; font-family: var(--serif); font-style: italic; font-size: clamp(18px, 2.6vw, 25px);
-           line-height: 1.3; text-shadow: 0 1px 14px #000; }
+  #a-soz { margin: 12px auto 0; max-width: 720px; min-height: 2.6em; font-family: var(--serif); font-size: clamp(17px, 2.3vw, 23px);
+           line-height: 1.3; text-shadow: 0 1px 14px #000, 0 0 4px #000; transition: opacity .35s; }
+  #a-soz.degisiyor { opacity: 0; }
   #a-soz:empty { display: none; }
-  #anlati { position: absolute; left: var(--kenar); top: calc(64px + env(safe-area-inset-top)); width: min(380px, 36vw); max-height: calc(100% - 360px); overflow-y: auto;
-            padding: 14px 16px; background: var(--panel); border: 1px solid var(--cizgi); border-radius: var(--yaricap);
-            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); pointer-events: auto; transition: opacity .5s; }
-  #anlati.gizli { opacity: 0; pointer-events: none; }
-  #anlati b { display: block; margin-bottom: 6px; font-size: 11px; font-weight: 600; letter-spacing: .7px; text-transform: uppercase; color: var(--altin); }
-  #anlati p { margin: 0; font-size: 14.5px; line-height: 1.55; }
   .yuvarlak.kucuk { width: 36px; height: 36px; background: rgba(7, 11, 22, .55); }
   #uc .alt { position: absolute; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: auto auto auto 1fr; align-items: center;
              gap: 10px; padding: 14px var(--kenar) calc(16px + env(safe-area-inset-bottom)); pointer-events: auto;
@@ -234,8 +229,6 @@
     #gun-olay { max-width: calc(100vw - 110px); font-size: 13px; }
     #yolculuga-basla { top: 10px; right: 10px; padding: 6px 11px; font-size: 12.5px; }
     #altyazi { bottom: 128px; }
-    #anlati { left: var(--kenar); right: var(--kenar); top: calc(64px + env(safe-area-inset-top)); bottom: auto; width: auto; max-height: 30vh; }
-    #anlati p { font-size: 13.5px; }
     #uc .alt { gap: 6px; }
     .yuvarlak { width: 36px; height: 36px; }
     #u-oynat { width: 46px; height: 46px; }
@@ -288,7 +281,6 @@
       <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.2"/></svg>
       2B haritaya dön</button>
   </div>
-  <aside id="anlati" class="gizli" aria-live="polite"><b>Ne oldu</b><p></p></aside>
   <div id="altyazi" aria-live="polite"><div id="a-tarih"></div><div id="a-olay"></div><div id="a-soz"></div></div>
   <div class="alt">
     <button class="yuvarlak" id="u-onceki" type="button" aria-label="Önceki durak"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
@@ -844,22 +836,41 @@ require([
       uc.sView.camera = new Camera({ position: { longitude: geri[0], latitude: geri[1], z: AYAR.kameraYuksek * yakinlik },
                                      heading: kamYon, tilt: der(Math.atan2(AYAR.kameraUzak, AYAR.kameraYuksek)) });
     }
-    let altyaziDurak = null;
-    function altyazi(t, d, yolMetni) {
+    const cumleler = {};
+    function cumleleriAl(d) {
+      if (cumleler[d.id]) return cumleler[d.id];
+      const parca = [];
+      for (const c of String((DETAY[d.id] || {}).anlatim || "").split(/(?<=[.!?])\s+/).filter(Boolean)) {
+        const son = parca[parca.length - 1];
+        const acik = son && (son.split("“").length > son.split("”").length || (son.split("\"").length - 1) % 2 === 1);
+        if (son && (acik || c.length < 40)) parca[parca.length - 1] = son + " " + c; else parca.push(c);
+      }
+      const toplam = parca.reduce((a, c) => a + c.length, 0) || 1;
+      let birikim = 0;
+      return (cumleler[d.id] = parca.map(c => ({ metin: c, bitis: (birikim += c.length) / toplam })));
+    }
+    let altyaziDurak = null, altyaziCumle = "";
+    function cumleYaz(metin) {
+      if (metin === altyaziCumle) return;
+      altyaziCumle = metin;
+      const el = $("#a-soz");
+      if (!metin || !el.textContent) { el.classList.remove("degisiyor"); el.textContent = metin; return; }
+      el.classList.add("degisiyor");
+      setTimeout(() => { if (altyaziCumle === metin) { el.textContent = metin; el.classList.remove("degisiyor"); } }, 350);
+    }
+    function altyazi(t, d, yolMetni, oran) {
       $("#a-tarih").textContent = tarihYaz(t);
       if (d) {
-        if (altyaziDurak === d) return;
-        altyaziDurak = d;
-        $("#a-olay").textContent = d.baslik + " · " + kisaAd(d.yer_adi_bugun);
-        const soz = (DETAY[d.id] || {}).nutuk || d.nutuk_soz;
-        $("#a-soz").textContent = soz ? "“" + soz + "”" : "";
-        const anlatim = (DETAY[d.id] || {}).anlatim;
-        $("#anlati p").textContent = anlatim || "";
-        $("#anlati").classList.toggle("gizli", !anlatim);
+        if (altyaziDurak !== d) {
+          altyaziDurak = d;
+          $("#a-olay").textContent = d.baslik + " · " + kisaAd(d.yer_adi_bugun);
+        }
+        const c = cumleleriAl(d), o = Math.min(0.999, oran || 0);
+        cumleYaz((c.find(x => x.bitis > o) || c[c.length - 1] || {}).metin || "");
       } else {
         altyaziDurak = null;
-        $("#a-olay").textContent = yolMetni || ""; $("#a-soz").textContent = "";
-        $("#anlati").classList.add("gizli");
+        $("#a-olay").textContent = yolMetni || "";
+        cumleYaz("");
       }
     }
     let sira = 0, gecen = 0, oynuyor = false, onceKare = null, ucTarih = BAS;
@@ -870,7 +881,7 @@ require([
         uc.halka3.geometry = new Point({ longitude: d.k[0], latitude: d.k[1] });
         ucTarih = d.zaman_bas + (d.zaman_bit - d.zaman_bas) * Math.min(1, oran);
         kameraTakip(d.k, kamYon + (ani ? 0 : 0.05), ani);
-        altyazi(ucTarih, d);
+        altyazi(ucTarih, d, "", oran);
         uc.aktif.removeAll();
         return;
       }
