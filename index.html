@@ -66,18 +66,27 @@
   .dugme.vurgu { background: var(--vurgu); border-color: var(--vurgu); color: #fff; font-weight: 600; }
   .dugme.vurgu:hover { filter: brightness(1.08); }
   .dil-dugme { display: inline-flex; padding: 2px; border: 1px solid var(--cizgi); border-radius: 999px; background: rgba(31, 29, 26, .04); }
-  .dil-dugme button { border: 0; background: none; padding: 5px 10px; border-radius: 999px; font-size: 12.5px; font-weight: 600;
+  .dil-dugme button { display: inline-flex; align-items: center; gap: 6px; border: 0; background: none; padding: 4px 10px 4px 4px; border-radius: 999px; font-size: 12.5px; font-weight: 600;
                       letter-spacing: .5px; color: var(--soluk); cursor: pointer; }
   .dil-dugme button[aria-pressed="true"] { background: var(--vurgu); color: #fff; }
+  .bayrak { width: 20px; height: 20px; flex: none; border-radius: 50%; background: center / cover no-repeat; box-shadow: 0 0 0 1px rgba(31, 29, 26, .18); }
+  [data-dil="tr"] .bayrak { background-image: url(img/bayrak/tr.svg); }
+  [data-dil="en"] .bayrak { background-image: url(img/bayrak/en.svg); }
+  [aria-pressed="true"] .bayrak { box-shadow: 0 0 0 1.5px #fff; }
+  #dil-baslik small { display: block; margin-top: 4px; font-size: 15px; font-weight: 500; font-style: italic; color: var(--soluk); }
   #adim-dil { width: min(480px, 100%); padding: 34px 30px 24px; text-align: center; }
   #adim-dil h2 { margin: 0; font-family: var(--serif); font-size: 26px; font-weight: 600; }
   #adim-dil .soru { margin: 8px 0 22px; color: var(--soluk); font-size: 14.5px; }
   .dil-secim { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .dil-secim button { display: grid; gap: 4px; padding: 18px 12px; border: 1px solid var(--cizgi); border-radius: 14px;
-                      background: #fff; color: var(--metin); cursor: pointer; transition: border-color .15s, box-shadow .15s; }
+  .dil-secim button { display: grid; align-content: end; justify-items: end; text-align: right; gap: 2px; min-height: 128px; padding: 14px 12px; border: 1px solid var(--cizgi); border-radius: 14px;
+                      background: #888 center / cover no-repeat; color: #fff; text-shadow: 0 1px 6px rgba(0, 0, 0, .6); cursor: pointer;
+                      transition: border-color .15s, box-shadow .15s, transform .15s; }
+  .dil-secim button[data-dil="tr"] { background-image: linear-gradient(to left, rgba(0, 0, 0, .5), rgba(0, 0, 0, 0) 50%), url(img/bayrak/tr.svg); }
+  .dil-secim button[data-dil="en"] { background-image: linear-gradient(to left, rgba(0, 0, 0, .5), rgba(0, 0, 0, 0) 50%), url(img/bayrak/en.svg); }
+  .dil-secim button:hover { transform: translateY(-2px); }
   .dil-secim button:hover, .dil-secim button:focus-visible { border-color: var(--vurgu); box-shadow: 0 0 0 3px rgba(0, 114, 178, .15); }
   .dil-secim b { font-family: var(--serif); font-size: 22px; font-weight: 600; }
-  .dil-secim span { font-size: 12.5px; color: var(--soluk); }
+  .dil-secim span { font-size: 12.5px; color: rgba(255, 255, 255, .92); }
   .adimlar { display: flex; justify-content: center; gap: 6px; margin-top: 20px; }
   .adimlar i { width: 22px; height: 4px; border-radius: 2px; background: var(--cizgi); }
   .adimlar i.etkin { background: var(--vurgu); }
@@ -244,7 +253,10 @@
     .dil-dugme button { font-size: 11.5px; }
     #hakkinda-ac { padding: 7px 9px; }
     #hakkinda-ac span { display: none; }
-    .dil-dugme button { padding: 5px 8px; }
+    .dil-dugme button { padding: 3px; gap: 0; font-size: 0; }
+    .dil-dugme .bayrak { width: 22px; height: 22px; }
+    html[lang="en"] .marka h1 { white-space: normal; font-size: 16px; line-height: 1.1; }
+    html[lang="en"] .marka .alt { display: none; }
     #lejant { right: calc(var(--kenar) + 44px); width: auto; }
     #harita { bottom: calc(var(--zaman) + env(safe-area-inset-bottom)); }
     #zaman { left: 0; right: 0; transform: none; bottom: 0; width: 100%; border-radius: 0; border-width: 1px 0 0;
@@ -265,10 +277,10 @@
 <header>
   <a class="marka" href="https://sdanacioglu.github.io/30daymapchallenge-2026/" target="_blank" rel="noopener" aria-label="BakırçayCBS #30DayMapChallenge 2026">
     <img src="img/bakircaycbs_logo.png" alt="BakırçayCBS logosu" width="38" height="38">
-    <span><h1>Kurtuluştan Kuruluşa</h1><span class="alt" data-m="altbaslik">Atatürk'ün izinde · 16 Mayıs 1919 – 29 Ekim 1923</span></span>
+    <span><h1 data-m="baslik">Kurtuluştan Kuruluşa</h1><span class="alt" data-m="altbaslik">Atatürk'ün izinde · 16 Mayıs 1919 – 29 Ekim 1923</span></span>
   </a>
   <div class="dil-dugme" role="group" aria-label="Dil / Language">
-    <button type="button" data-dil="tr" aria-pressed="true" lang="tr">TR</button><button type="button" data-dil="en" aria-pressed="false" lang="en">EN</button>
+    <button type="button" data-dil="tr" aria-pressed="true" lang="tr" aria-label="Türkçe"><i class="bayrak" aria-hidden="true"></i>TR</button><button type="button" data-dil="en" aria-pressed="false" lang="en" aria-label="English"><i class="bayrak" aria-hidden="true"></i>EN</button>
   </div>
   <button class="dugme" type="button" id="hakkinda-ac" aria-haspopup="dialog" aria-label="Hakkında" data-m-aria="hakkinda">
     <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6M12 7.2v.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
@@ -321,7 +333,7 @@
 </div>
 <div id="acilis" hidden>
   <div class="kart" id="adim-dil" role="dialog" aria-modal="true" aria-labelledby="dil-baslik">
-    <h2 id="dil-baslik">Kurtuluştan Kuruluşa</h2>
+    <h2 id="dil-baslik"><span lang="tr">Kurtuluştan Kuruluşa</span><small lang="en">From Liberation to Foundation</small></h2>
     <p class="soru"><span lang="tr">Dil seçin</span> · <span lang="en">Choose your language</span></p>
     <div class="dil-secim">
       <button type="button" data-dil="tr" lang="tr"><b>Türkçe</b><span>Türkçe devam et</span></button>
@@ -343,7 +355,7 @@
 </div>
 <dialog id="hakkinda" aria-labelledby="hakkinda-baslik">
   <div class="dialog-ic">
-    <div class="dialog-marka"><img src="img/bakircaycbs_logo.png" alt="" width="44" height="44"><h2 id="hakkinda-baslik">Kurtuluştan Kuruluşa</h2></div>
+    <div class="dialog-marka"><img src="img/bakircaycbs_logo.png" alt="" width="44" height="44"><h2 id="hakkinda-baslik" data-m="baslik">Kurtuluştan Kuruluşa</h2></div>
     <p class="giris" data-m="hk-giris">Mustafa Kemal Atatürk'ün 16 Mayıs 1919'da İstanbul'dan ayrılışından 29 Ekim 1923'te Cumhuriyet'in ilanına kadar dönüm noktaları ve yolculukları.</p>
     <div class="rakamlar">
       <div class="rakam"><b id="r-gun">1.628</b><span data-m="hk-gun">gün</span></div>
@@ -373,7 +385,7 @@
   <div class="dialog-alt"><button type="button" id="hakkinda-kapat" class="dugme vurgu" data-m="haritaya-don">Haritaya dön</button></div>
 </dialog>
 <dialog id="buyuk-foto" aria-label="Fotoğrafın büyük hâli"><img alt=""><p></p></dialog>
-<div id="yukleniyor" role="status"><div class="yukleme-ic"><img src="img/siluet_cizgi.svg" alt="" width="170" height="197"><div>Kurtuluştan Kuruluşa</div></div></div>
+<div id="yukleniyor" role="status"><div class="yukleme-ic"><img src="img/siluet_cizgi.svg" alt="" width="170" height="197"><div data-m="baslik">Kurtuluştan Kuruluşa</div></div></div>
 <script>const GUN = 86400000;
 const BAS = Date.UTC(1919, 4, 16), BIT = Date.UTC(1923, 9, 29);
 const GUN_SAYISI = Math.round((BIT - BAS) / GUN) + 1;
@@ -385,6 +397,7 @@ const alanAl = (nesne, alan) => (DIL === "en" && nesne?.[alan + "_en"]) || nesne
 const ozgunIcerik = new Map(), ozgunAria = new Map();
 function metinleriUygula() {
   document.documentElement.lang = DIL;
+  document.title = yaz("baslik", "Kurtuluştan Kuruluşa");
   document.querySelectorAll("[data-m]").forEach(el => {
     if (!ozgunIcerik.has(el)) ozgunIcerik.set(el, el.innerHTML);
     el.innerHTML = yaz(el.dataset.m, ozgunIcerik.get(el));
