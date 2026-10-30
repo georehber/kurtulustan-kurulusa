@@ -275,6 +275,7 @@
   <div class="ust">
     <div class="uc-lejant" id="uc-lejant" aria-label="Yol renkleri"></div>
     <span style="flex:1"></span>
+    <button class="yuvarlak kucuk" id="u-ses" type="button" aria-label="Sesi kapat" hidden></button>
     <button class="yuvarlak kucuk" id="u-yakin" type="button" aria-label="Yakınlaştır"><svg viewBox="0 0 24 24"><path d="M12 6v12M6 12h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     <button class="yuvarlak kucuk" id="u-uzak" type="button" aria-label="Uzaklaştır"><svg viewBox="0 0 24 24"><path d="M6 12h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     <button class="dugme" id="u-cik" type="button">
@@ -809,6 +810,30 @@ require([
     });
     const okumaSuresi = d => String((DETAY[d.id] || {}).anlatim || "").split(/\s+/).length / AYAR.okumaKelimeSaniye;
     sahneler.forEach(s => { s.sure = s.tur === "durak" ? Math.max(AYAR.durakSaniye, okumaSuresi(s.d)) : Math.max(AYAR.enAzYol, s.uzunluk / AYAR.kmSaniye); });
+    const SES_ARA = 0.8;
+    const sesler = new Map();
+    let sessiz = false;
+    sahneler.forEach(s => {
+      const src = s.tur === "durak" && (DETAY[s.d.id] || {}).ses;
+      if (!src) return;
+      const a = new Audio(); a.preload = "metadata"; a.src = src;
+      a.addEventListener("loadedmetadata", () => { if (isFinite(a.duration)) s.sure = a.duration + SES_ARA; });
+      a.addEventListener("error", () => { a.hata = true; });
+      sesler.set(s.d.id, a);
+    });
+    const durakSesi = s => s && s.tur === "durak" ? sesler.get(s.d.id) : null;
+    function sesleriDurdur() { sesler.forEach(a => { if (!a.paused) a.pause(); }); }
+    function sesEsle(s) {
+      const a = durakSesi(s);
+      sesler.forEach(b => { if (b !== a && !b.paused) b.pause(); });
+      if (!a || a.hata) return;
+      if (!oynuyor) { if (!a.paused) a.pause(); return; }
+      a.muted = sessiz;
+      if (a.paused) {
+        if (a.ended && gecen >= a.currentTime - 0.3) return;
+        if (gecen < (a.duration || Infinity) - 0.05) { a.currentTime = gecen; a.play().catch(() => { a.hata = true; }); }
+      } else if (!a.seeking) gecen = a.currentTime;
+    }
     const yolSembolu = (renk, en, saydam) => ({ type: "line-3d", symbolLayers: [
       { type: "line", size: en * 3.4, material: { color: [...renk, saydam * 0.25] }, cap: "round", join: "round" },
       { type: "line", size: en, material: { color: [...renk, saydam] }, cap: "round", join: "round" }] });
@@ -865,8 +890,15 @@ require([
           altyaziDurak = d;
           $("#a-olay").textContent = d.baslik + " · " + kisaAd(d.yer_adi_bugun);
         }
-        const c = cumleleriAl(d), o = Math.min(0.999, oran || 0);
-        cumleYaz((c.find(x => x.bitis > o) || c[c.length - 1] || {}).metin || "");
+        const a = sesler.get(d.id), sesVar = a && !a.hata;
+        const zamanli = (DETAY[d.id] || {}).ses_altyazi;
+        if (sesVar && Array.isArray(zamanli) && zamanli.length) {
+          const z = zamanli.findLast(([bas]) => bas <= gecen) || zamanli[0];
+          cumleYaz(z[1]);
+        } else {
+          const c = cumleleriAl(d), o = Math.min(0.999, sesVar && a.duration ? gecen / a.duration : oran || 0);
+          cumleYaz((c.find(x => x.bitis > o) || c[c.length - 1] || {}).metin || "");
+        }
       } else {
         altyaziDurak = null;
         $("#a-olay").textContent = yolMetni || "";
@@ -906,22 +938,25 @@ require([
     const ucSvg = $("#u-cizelge-svg"), ucCz = $("#u-cizelge");
     function sahneyeGit(n, oran = 0) {
       sira = Math.max(0, Math.min(sahneler.length - 1, n)); gecen = sahneler[sira].sure * oran;
+      sesleriDurdur(); const a = durakSesi(sahneler[sira]); if (a && a.ended) a.currentTime = 0;
       izleriCiz(sira); sahneyiCiz(sahneler[sira], oran, true); cizelge(ucSvg, ucCz, ucTarih);
     }
     function kare(zaman) {
       if (!oynuyor || !uc) return;
       const dt = onceKare ? Math.min(0.1, (zaman - onceKare) / 1000) : 0; onceKare = zaman;
       gecen += dt;
+      sesEsle(sahneler[sira]);
       if (gecen >= sahneler[sira].sure) {
         if (sira >= sahneler.length - 1) { ucDurdur(); return; }
         sira++; gecen = 0; izleriCiz(sira);
+        sesEsle(sahneler[sira]);
       }
       sahneyiCiz(sahneler[sira], gecen / sahneler[sira].sure, false);
       cizelge(ucSvg, ucCz, ucTarih);
       requestAnimationFrame(kare);
     }
     function ucOynat() { oynuyor = true; onceKare = null; $("#u-oynat").innerHTML = DUR_SVG; $("#u-oynat").setAttribute("aria-label", "Durdur"); requestAnimationFrame(kare); }
-    function ucDurdur() { oynuyor = false; $("#u-oynat").innerHTML = OYNAT_SVG; $("#u-oynat").setAttribute("aria-label", "Oynat"); }
+    function ucDurdur() { oynuyor = false; sesleriDurdur(); $("#u-oynat").innerHTML = OYNAT_SVG; $("#u-oynat").setAttribute("aria-label", "Oynat"); }
     $("#u-oynat").addEventListener("click", () => {
       if (oynuyor) return ucDurdur();
       if (sira >= sahneler.length - 1 && gecen >= sahneler[sira].sure) sahneyeGit(0);
@@ -929,9 +964,12 @@ require([
     });
     const durakSahnesi = i => sahneler.findIndex(s => s.tur === "durak" && s.d === duraklar[i]);
     const simdikiDurak = () => sahneler.slice(0, sira + 1).filter(s => s.tur === "durak").length - 1;
-    $("#u-onceki").addEventListener("click", () => { ucDurdur(); sahneyeGit(durakSahnesi(Math.max(0, simdikiDurak() - (sahneler[sira].tur === "durak" ? 1 : 0)))); });
-    $("#u-sonraki").addEventListener("click", () => { ucDurdur(); sahneyeGit(durakSahnesi(Math.min(duraklar.length - 1, simdikiDurak() + 1))); });
-    const tariheSahne = t => { let n = 0; sahneler.forEach((s, i) => { if (s.bas <= t) n = i; }); return n; };
+    $("#u-onceki").addEventListener("click", () => { sahneyeGit(durakSahnesi(Math.max(0, simdikiDurak() - (sahneler[sira].tur === "durak" ? 1 : 0)))); });
+    $("#u-sonraki").addEventListener("click", () => {
+      const n = sahneler[sira].tur === "durak" ? sira + 1 : durakSahnesi(Math.min(duraklar.length - 1, simdikiDurak() + 1));
+      if (n < sahneler.length) sahneyeGit(n);
+    });
+    const tariheSahne = t => { let n = 0; sahneler.forEach((s, i) => { if (s.bas <= t && s.bas > sahneler[n].bas) n = i; }); return n; };
     ucCz.addEventListener("pointerdown", e => {
       ucDurdur();
       const tas = e.target.closest?.(".tas");
@@ -960,6 +998,14 @@ require([
       yakinlik = Math.min(3, Math.max(0.12, yakinlik * kat));
       if (!oynuyor && uc) sahneyiCiz(sahneler[sira], gecen / sahneler[sira].sure, true);
     }
+    const SES_SVG = '<svg viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+    const SESSIZ_SVG = '<svg viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16 9l5 6M21 9l-5 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+    function sesDugmesi() {
+      $("#u-ses").innerHTML = sessiz ? SESSIZ_SVG : SES_SVG;
+      $("#u-ses").setAttribute("aria-label", sessiz ? "Sesi aç" : "Sesi kapat");
+    }
+    $("#u-ses").hidden = !sesler.size; sesDugmesi();
+    $("#u-ses").addEventListener("click", () => { sessiz = !sessiz; sesler.forEach(a => { a.muted = sessiz; }); sesDugmesi(); });
     $("#u-yakin").addEventListener("click", () => yakinlastir(1 / 1.4));
     $("#u-uzak").addEventListener("click", () => yakinlastir(1.4));
     function ikiyeDon() {
