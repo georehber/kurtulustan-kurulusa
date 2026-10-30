@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Kurtuluştan Kuruluşa</title>
 <meta name="description" content="Mustafa Kemal Atatürk'ün 16 Mayıs 1919'dan 29 Ekim 1923'e kadar bulunduğu yerler ve yolculukları, gün gün haritada.">
-<meta name="theme-color" content="#070b16">
+<meta name="theme-color" content="#f3efe6">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Kurtuluştan Kuruluşa">
 <meta property="og:description" content="Atatürk'ün izinde, Samsun'dan Cumhuriyet'e gün gün.">
@@ -26,18 +26,18 @@
 <link rel="preload" href="config.json" as="fetch" crossorigin>
 <link rel="preload" href="img/siluet_cizgi.svg" as="image">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,500&family=Inter:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="https://js.arcgis.com/4.32/esri/themes/dark/main.css">
+<link rel="stylesheet" href="https://js.arcgis.com/4.32/esri/themes/light/main.css">
 <script>  window.configSozu = fetch("config.json").then(r => r.json());
   window.detaySozu = fetch("detaylar.json").then(r => r.ok ? r.json() : {}).catch(() => ({}));</script>
 <script src="https://js.arcgis.com/4.32/"></script>
 <style>  :root {
-    --zemin: #070b16;
-    --panel: rgba(10, 15, 30, .86);
-    --cizgi: rgba(255, 255, 255, .13);
-    --metin: #eef1f7;
-    --soluk: #9aa3b5;
-    --altin: #f2b84b;
-    --kor: #ff7a45;
+    --zemin: #f3efe6;
+    --panel: rgba(255, 253, 248, .93);
+    --cizgi: rgba(31, 29, 26, .15);
+    --metin: #1f1d1a;
+    --soluk: #6b665c;
+    --vurgu: #0072b2;
+    --kor: #d55e00;
     --serif: "Cormorant Garamond", Georgia, serif;
     --sans: Inter, -apple-system, "Segoe UI", Roboto, sans-serif;
     --kenar: 16px;
@@ -45,25 +45,25 @@
     --zaman: 104px;
     --yaricap: 14px;
     --calcite-font-family: var(--sans);
-    --calcite-color-brand: var(--altin);
+    --calcite-color-brand: var(--vurgu);
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: var(--zemin); color: var(--metin);
                font-family: var(--sans); -webkit-font-smoothing: antialiased; }
   button { font: inherit; color: inherit; }
-  :focus-visible { outline: 2px solid var(--altin); outline-offset: 2px; }
+  :focus-visible { outline: 2px solid var(--vurgu); outline-offset: 2px; }
   [hidden] { display: none !important; }
   header { position: fixed; inset: 0 0 auto 0; z-index: 30; height: calc(var(--baslik) + env(safe-area-inset-top));
            padding: env(safe-area-inset-top) var(--kenar) 0; display: flex; align-items: center; gap: 12px;
-           background: linear-gradient(rgba(7, 11, 22, .96), rgba(7, 11, 22, .82)); border-bottom: 1px solid var(--cizgi); }
+           background: rgba(255, 253, 248, .95); border-bottom: 1px solid var(--cizgi); }
   .marka { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; color: inherit; text-decoration: none; }
   .marka img { width: 38px; height: 38px; flex: none; object-fit: contain; }
   .marka h1 { margin: 0; font-family: var(--serif); font-weight: 600; font-size: 27px; line-height: 1; white-space: nowrap; }
   .marka .alt { display: block; margin-top: 3px; font-size: 12.5px; color: var(--soluk); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .dugme { border: 1px solid var(--cizgi); background: rgba(255, 255, 255, .05); border-radius: 999px; padding: 7px 14px;
+  .dugme { border: 1px solid var(--cizgi); background: rgba(31, 29, 26, .04); border-radius: 999px; padding: 7px 14px;
            font-size: 13.5px; cursor: pointer; color: var(--metin); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
-  .dugme:hover { border-color: var(--altin); }
-  .dugme.vurgu { background: var(--altin); border-color: var(--altin); color: #1a1205; font-weight: 600; }
+  .dugme:hover { border-color: var(--vurgu); }
+  .dugme.vurgu { background: var(--vurgu); border-color: var(--vurgu); color: #fff; font-weight: 600; }
   .dugme.vurgu:hover { filter: brightness(1.08); }
   #harita, #sahne { position: fixed; top: calc(var(--baslik) + env(safe-area-inset-top)); left: 0; right: 0; bottom: 0; }
   #sahne { top: 0; z-index: 40; background: var(--zemin); }
@@ -90,11 +90,11 @@
            background: var(--panel); border: 1px solid var(--cizgi); border-radius: var(--yaricap);
            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
   #oynat { grid-row: 1 / 3; align-self: center; width: 52px; height: 52px; border-radius: 50%; border: 0; cursor: pointer;
-           background: var(--altin); color: #1a1205; display: grid; place-items: center; }
+           background: var(--vurgu); color: #fff; display: grid; place-items: center; }
   #oynat svg { width: 22px; height: 22px; }
   .gun-bilgi { display: flex; align-items: baseline; gap: 12px; min-width: 0; padding-right: 150px; }
   #gun-tarih { font-family: var(--serif); font-size: 28px; font-weight: 600; line-height: 1; white-space: nowrap; }
-  #gun-olay { font-size: 14.5px; color: var(--altin); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+  #gun-olay { font-size: 14.5px; color: var(--vurgu); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
   #gun-olay.soluk { color: var(--soluk); }
   #yolculuga-basla { position: absolute; top: 10px; right: 12px; }
   #cetvel { position: relative; width: 100%; height: 100%; min-height: 44px; cursor: pointer; touch-action: none; }
@@ -103,63 +103,66 @@
   #cetvel .tas { cursor: pointer; }
   #uc { position: fixed; inset: 0; z-index: 45; pointer-events: none; }
   #uc .ust { position: absolute; top: 0; left: 0; right: 0; display: flex; align-items: center; gap: 12px;
-             padding: calc(14px + env(safe-area-inset-top)) var(--kenar) 30px; background: linear-gradient(rgba(7, 11, 22, .85), rgba(7, 11, 22, 0)); }
+             padding: calc(14px + env(safe-area-inset-top)) var(--kenar) 0; }
   #uc .ust > * { pointer-events: auto; }
-  .uc-lejant { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12px; color: var(--soluk); }
+  #uc .ust .dugme { background: var(--panel); }
+  #sahne .esri-attribution { bottom: var(--uc-alt, 0px); }
+  .uc-lejant { display: flex; flex-wrap: wrap; gap: 6px 14px; padding: 7px 12px; font-size: 12px; color: var(--metin);
+                background: var(--panel); border: 1px solid var(--cizgi); border-radius: 999px; }
   .uc-lejant span { display: inline-flex; align-items: center; gap: 6px; }
   .uc-lejant i { display: inline-block; width: 18px; height: 3px; border-radius: 2px; }
   #altyazi { position: absolute; left: 50%; transform: translateX(-50%); bottom: 150px; width: min(820px, calc(100% - 2 * var(--kenar)));
-             text-align: center; transition: opacity .6s; }
+             text-align: center; color: #fff; transition: opacity .6s; }
   #a-tarih { font-family: var(--serif); font-size: clamp(30px, 5vw, 50px); font-weight: 600; text-shadow: 0 2px 18px rgba(0, 0, 0, .9); }
-  #a-olay { margin-top: 2px; font-size: clamp(15px, 2.2vw, 19px); font-weight: 500; color: var(--altin); text-shadow: 0 1px 10px #000; }
+  #a-olay { margin-top: 2px; font-size: clamp(15px, 2.2vw, 19px); font-weight: 600; color: #f0e442; text-shadow: 0 1px 10px #000; }
   #a-soz { margin: 12px auto 0; max-width: 720px; min-height: 2.6em; font-family: var(--serif); font-size: clamp(17px, 2.3vw, 23px);
            line-height: 1.3; text-shadow: 0 1px 14px #000, 0 0 4px #000; transition: opacity .35s; }
   #a-soz.degisiyor { opacity: 0; }
   #a-soz:empty { display: none; }
-  .yuvarlak.kucuk { width: 36px; height: 36px; background: rgba(7, 11, 22, .55); }
+  .yuvarlak.kucuk { width: 36px; height: 36px; background: var(--panel); }
   #uc .alt { position: absolute; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: auto auto auto 1fr; align-items: center;
              gap: 10px; padding: 14px var(--kenar) calc(16px + env(safe-area-inset-bottom)); pointer-events: auto;
-             background: linear-gradient(rgba(7, 11, 22, 0), rgba(7, 11, 22, .92) 40%); }
-  .yuvarlak { width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--cizgi); background: rgba(255, 255, 255, .06);
+             background: var(--panel); border-top: 1px solid var(--cizgi); }
+  .yuvarlak { width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--cizgi); background: var(--panel);
               display: grid; place-items: center; cursor: pointer; }
-  .yuvarlak:hover { border-color: var(--altin); }
+  .yuvarlak:hover { border-color: var(--vurgu); }
   .yuvarlak svg { width: 20px; height: 20px; }
-  #u-oynat { width: 54px; height: 54px; background: var(--altin); color: #1a1205; border: 0; }
+  #u-oynat { width: 54px; height: 54px; background: var(--vurgu); color: #fff; border: 0; }
   #u-cizelge { position: relative; height: 46px; cursor: pointer; }
   #u-cizelge svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
   #u-cizelge text { font-size: 11px; fill: var(--soluk); }
-  #acilis { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: var(--kenar); background: rgba(4, 7, 15, .7); }
-  .kart, dialog { background: #0c1222; color: var(--metin); border: 1px solid var(--cizgi); border-radius: 18px;
-                  box-shadow: 0 30px 80px rgba(0, 0, 0, .55); }
+  #acilis { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: var(--kenar); background: rgba(31, 29, 26, .45); }
+  .kart, dialog { background: #fffdf8; color: var(--metin); border: 1px solid var(--cizgi); border-radius: 18px;
+                  box-shadow: 0 24px 60px rgba(31, 29, 26, .25); }
   #acilis .kart { width: min(600px, 100%); padding: 34px 34px 26px; text-align: center; }
-  #acilis blockquote { margin: 0; font-family: var(--serif); font-style: italic; font-size: clamp(28px, 5.4vw, 40px); line-height: 1.12; color: var(--altin); }
+  #acilis blockquote { margin: 0; font-family: var(--serif); font-style: italic; font-size: clamp(28px, 5.4vw, 40px); line-height: 1.12; color: var(--vurgu); }
   #acilis blockquote::before { content: "“"; } #acilis blockquote::after { content: "”"; }
   #acilis .kimden { margin: 12px 0 18px; font-size: 14.5px; color: var(--metin); letter-spacing: .3px; }
   #acilis .bilgi { margin: 0 0 22px; font-size: 14.5px; line-height: 1.5; color: var(--soluk); text-align: left; }
   #acilis .bilgi small { display: block; margin-top: 8px; font-size: 12px; }
-  #acilis a, dialog a { color: var(--altin); }
+  #acilis a, dialog a { color: var(--vurgu); }
   .secenekler { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
   .secenekler .dugme { padding: 10px 18px; font-size: 14.5px; }
   dialog { width: min(600px, calc(100% - 2 * var(--kenar))); max-height: calc(100% - 64px); padding: 0; }
   dialog[open] { display: flex; flex-direction: column; }
-  dialog::backdrop { background: rgba(4, 7, 15, .7); }
+  dialog::backdrop { background: rgba(31, 29, 26, .45); }
   .dialog-ic { padding: 26px 26px 8px; overflow-y: auto; }
   .dialog-marka { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
   .dialog-marka img { width: 44px; height: 44px; object-fit: contain; }
   dialog h2 { margin: 0; font-family: var(--serif); font-size: 32px; font-weight: 600; }
   dialog .giris { margin: 0 0 16px; color: var(--soluk); font-size: 15.5px; line-height: 1.45; }
-  dialog h3 { margin: 18px 0 6px; font-size: 12px; font-weight: 600; letter-spacing: .7px; text-transform: uppercase; color: var(--altin); }
+  dialog h3 { margin: 18px 0 6px; font-size: 12px; font-weight: 600; letter-spacing: .7px; text-transform: uppercase; color: var(--vurgu); }
   dialog p, dialog li { font-size: 14px; line-height: 1.5; margin: 0; }
   dialog ul { margin: 0; padding-left: 18px; }
   .rakamlar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
   .rakam { padding: 10px 12px; border: 1px solid var(--cizgi); border-radius: 12px; }
-  .rakam b { display: block; font-family: var(--serif); font-size: 30px; font-weight: 600; line-height: 1; color: var(--altin); }
+  .rakam b { display: block; font-family: var(--serif); font-size: 30px; font-weight: 600; line-height: 1; color: var(--vurgu); }
   .rakam span { font-size: 12.5px; color: var(--soluk); }
   .dialog-alt { display: flex; justify-content: flex-end; padding: 12px 26px 20px; }
   #yukleniyor { position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; background: var(--zemin); transition: opacity .5s; }
   #yukleniyor.bitti { opacity: 0; pointer-events: none; }
   .yukleme-ic { display: grid; justify-items: center; gap: 22px; transform: translateY(4vh); }
-  .yukleme-ic img { width: 170px; height: auto; filter: invert(1) sepia(.55) saturate(1.8) brightness(.95); }
+  .yukleme-ic img { width: 170px; height: auto; }
   .yukleme-ic div { font-family: var(--serif); font-size: 28px; color: var(--metin); letter-spacing: .4px; }
   .esri-view .esri-ui-corner .esri-widget--button { background: var(--panel); border: 1px solid var(--cizgi); color: var(--metin); }
   .esri-attribution { font-size: 10.5px; }
@@ -170,48 +173,48 @@
   .pp { display: grid; gap: 10px; font-size: 14px; }
   .pp .rozetler { display: flex; flex-wrap: wrap; gap: 6px; }
   .pp .rozet { display: inline-flex; align-items: center; gap: 6px; padding: 3px 11px; border-radius: 999px; font-size: 12.5px; font-weight: 600;
-               border: 1px solid var(--cizgi); background: rgba(255, 255, 255, .05); color: var(--metin); }
-  .pp .rozet.altin { border-color: rgba(242, 184, 75, .55); background: rgba(242, 184, 75, .12); color: var(--altin); }
+               border: 1px solid var(--cizgi); background: rgba(31, 29, 26, .04); color: var(--metin); }
+  .pp .rozet.altin { border-color: rgba(0, 114, 178, .55); background: rgba(0, 114, 178, .12); color: var(--vurgu); }
   .pp .rozet i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
-  .pp .kutu { border: 1px solid var(--cizgi); border-radius: 12px; background: rgba(255, 255, 255, .035); overflow: hidden; }
+  .pp .kutu { border: 1px solid var(--cizgi); border-radius: 12px; background: rgba(31, 29, 26, .03); overflow: hidden; }
   .pp table { width: 100%; border-collapse: collapse; }
   .pp td { padding: 8px 12px; border-bottom: 1px dashed var(--cizgi); vertical-align: top; line-height: 1.35; }
   .pp tr:last-child td { border-bottom: 0; }
-  .pp td:first-child { width: 1%; white-space: nowrap; color: var(--altin); font-weight: 500; border-right: 1px dashed var(--cizgi); }
+  .pp td:first-child { width: 1%; white-space: nowrap; color: var(--vurgu); font-weight: 500; border-right: 1px dashed var(--cizgi); }
   .pp .metin { padding: 10px 12px; line-height: 1.5; }
-  .pp .nutuk { padding: 12px 14px; border-left: 3px solid var(--altin); border-radius: 12px; background: rgba(242, 184, 75, .07); }
-  .pp .nutuk b { display: block; margin-bottom: 4px; font-size: 11px; font-weight: 600; letter-spacing: .7px; text-transform: uppercase; color: var(--altin); }
+  .pp .nutuk { padding: 12px 14px; border-left: 3px solid var(--vurgu); border-radius: 12px; background: rgba(0, 114, 178, .07); }
+  .pp .nutuk b { display: block; margin-bottom: 4px; font-size: 11px; font-weight: 600; letter-spacing: .7px; text-transform: uppercase; color: var(--vurgu); }
   .pp .nutuk q { display: block; font-family: var(--serif); font-style: italic; font-size: 20px; line-height: 1.25; color: var(--metin); quotes: "“" "”"; }
   .pp .nutuk span { display: block; margin-top: 6px; font-size: 11.5px; color: var(--soluk); }
   .pp .kaynak { padding: 9px 12px; font-size: 12.5px; line-height: 1.45; color: var(--soluk); }
   .pp .kaynak b { color: var(--metin); font-weight: 600; }
-  .pp .kaynak a { color: var(--altin); }
+  .pp .kaynak a { color: var(--vurgu); }
   .pp .foto { margin: 0; }
-  .pp .foto img { display: block; width: 100%; max-height: 260px; object-fit: cover; object-position: center 25%; cursor: zoom-in; background: #111827; }
+  .pp .foto img { display: block; width: 100%; max-height: 260px; object-fit: cover; object-position: center 25%; cursor: zoom-in; background: #e8e3d8; }
   .pp .foto figcaption { padding: 8px 12px 10px; font-size: 12.5px; line-height: 1.4; }
   .pp .foto figcaption small { display: block; margin-top: 3px; color: var(--soluk); font-size: 11px; }
   .pp .foto figcaption a { color: var(--soluk); }
-  .pp .bolum-baslik { display: block; padding: 9px 12px 0; font-size: 11px; font-weight: 600; letter-spacing: .7px; text-transform: uppercase; color: var(--altin); }
+  .pp .bolum-baslik { display: block; padding: 9px 12px 0; font-size: 11px; font-weight: 600; letter-spacing: .7px; text-transform: uppercase; color: var(--vurgu); }
   #buyuk-foto { padding: 0; background: #000; border: 1px solid var(--cizgi); max-width: calc(100vw - 24px); max-height: calc(100dvh - 24px); }
   #buyuk-foto[open] { display: block; }
   #buyuk-foto img { display: block; max-width: calc(100vw - 26px); max-height: calc(100dvh - 90px); width: auto; height: auto; cursor: zoom-out; }
-  #buyuk-foto p { margin: 0; padding: 10px 14px; font-size: 13px; color: var(--soluk); background: #0c1222; }
+  #buyuk-foto p { margin: 0; padding: 10px 14px; font-size: 13px; color: var(--soluk); background: #fffdf8; }
   .pp .video video { display: block; width: 100%; max-height: 240px; background: #000; }
   .pp .baglantilar { padding: 4px 12px 10px; }
   .pp .baglantilar a { display: flex; align-items: center; gap: 8px; padding: 7px 0; border-bottom: 1px dashed var(--cizgi);
                        color: var(--metin); text-decoration: none; font-size: 13px; line-height: 1.35; }
   .pp .baglantilar a:last-child { border-bottom: 0; }
-  .pp .baglantilar a::after { content: "↗"; margin-left: auto; color: var(--altin); }
-  .pp .baglantilar a:hover { color: var(--altin); }
+  .pp .baglantilar a::after { content: "↗"; margin-left: auto; color: var(--vurgu); }
+  .pp .baglantilar a:hover { color: var(--vurgu); }
   .pp .ayni-yer { padding: 9px 12px 10px; }
-  .pp .ayni-yer b { display: block; margin-bottom: 7px; font-size: 11px; font-weight: 600; letter-spacing: .7px; text-transform: uppercase; color: var(--altin); }
+  .pp .ayni-yer b { display: block; margin-bottom: 7px; font-size: 11px; font-weight: 600; letter-spacing: .7px; text-transform: uppercase; color: var(--vurgu); }
   .pp .ayni-yer div { display: flex; flex-wrap: wrap; gap: 6px; }
-  .pp .ayni-yer button { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--cizgi); background: rgba(255, 255, 255, .05);
+  .pp .ayni-yer button { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--cizgi); background: rgba(31, 29, 26, .04);
                          color: var(--metin); border-radius: 999px; padding: 4px 10px 4px 5px; font-size: 12.5px; cursor: pointer; }
   .pp .ayni-yer button img { width: 18px; height: 18px; }
-  .pp .ayni-yer button.secili { border-color: var(--altin); background: rgba(242, 184, 75, .15); color: var(--altin); }
+  .pp .ayni-yer button.secili { border-color: var(--vurgu); background: rgba(0, 114, 178, .15); color: var(--vurgu); }
   .pp .dugmeler { display: flex; gap: 8px; }
-  .pp .dugmeler button { border: 0; border-radius: 999px; padding: 8px 18px; background: var(--altin); color: #1a1205; font-weight: 600; cursor: pointer; }
+  .pp .dugmeler button { border: 0; border-radius: 999px; padding: 8px 18px; background: var(--vurgu); color: #fff; font-weight: 600; cursor: pointer; }
   .pp .dugmeler button:hover { filter: brightness(1.08); }
   .esri-features__heading, .esri-popup__header-title { font-family: var(--serif) !important; font-size: 22px !important; font-weight: 600 !important; }
   @media (max-width: 720px) {
@@ -252,14 +255,14 @@
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
   <div class="lejant-govde">
     <h4>Yerler</h4>
-    <div class="satir"><svg viewBox="0 0 34 18"><circle cx="17" cy="9" r="7.5" fill="none" stroke="#ff7a45" stroke-width="2.2"/><circle cx="17" cy="9" r="3.5" fill="#f2b84b"/></svg>O gün ya da en son bulunduğu yer</div>
+    <div class="satir"><svg viewBox="0 0 34 18"><circle cx="17" cy="9" r="7.5" fill="none" stroke="#d55e00" stroke-width="2.2"/><circle cx="17" cy="9" r="3.5" fill="#0072b2"/></svg>O gün ya da en son bulunduğu yer</div>
     <div class="simgeler" id="lejant-simgeler"></div>
     <h4>Yolculuklar</h4>
     <div class="satir"><svg viewBox="0 0 34 18" data-tur="tren"></svg>Trenle</div>
     <div class="satir"><svg viewBox="0 0 34 18" data-tur="otomobil"></svg>Otomobille</div>
     <div class="satir"><svg viewBox="0 0 34 18" data-tur="vapur"></svg>Vapurla</div>
     <div class="satir"><svg viewBox="0 0 34 18" data-tur="bilinmiyor"></svg>Nasıl gittiği bilinmiyor</div>
-    <p class="lejant-not">Çizgiler yolun bugünkü karşılığını izler. Parlak olan son yolculuk, soluklar geride kalan yollar.</p>
+    <p class="lejant-not">Çizgiler yolun bugünkü karşılığını izler. Belirgin olan son yolculuk, soluklar geride kalan yollar.</p>
   </div>
 </section>
 <section id="zaman" aria-label="Zaman çizelgesi">
@@ -316,7 +319,7 @@
       <li>Haritada dönemin dönüm noktaları ve onları birbirine bağlayan yolculuklar var. Aradaki duraklar nokta olarak gösterilmez, yol onların içinden geçer.</li>
       <li>Alttaki çizelgeyi sürükleyin ya da oynatın; harita o güne gelir. Oynatırken bir şey olmayan günler atlanır.</li>
       <li>Turuncu halka o gün bulunduğu yeri gösterir. Yolculuk sırasında yola çıktığı yerde bekler, varınca bir sonraki noktaya geçer.</li>
-      <li>Yolların rengi ulaşım şeklini gösterir; nasıl gidildiği kaynakta geçmiyorsa çizgi gridir. Parlak olan son yolculuktur.</li>
+      <li>Yolların rengi ulaşım şeklini gösterir; nasıl gidildiği kaynakta geçmiyorsa çizgi gridir. Belirgin olan son yolculuktur. Renkler renk körlüğüne uygun Okabe-Ito paletindendir.</li>
       <li>"Yolculuğa başla" ile üç boyutlu görünüme geçilir: kamera yolu izler, araç yol boyunca ilerler, duraklarda orada olanlar altyazıyla anlatılır. Nasıl gidildiği bilinmeyen yollarda araç yarı saydamdır.</li>
     </ul>
     <h3>Kaynaklar</h3>
@@ -343,12 +346,12 @@ const tarihYaz = t => { const d = new Date(t); return d.getUTCDate() + " " + AYL
 const isoYaz = t => new Date(t).toISOString().slice(0, 10);
 const gunBasi = t => Math.floor(t / GUN) * GUN;
 const kisaAd = s => String(s || "").replace(/ \(.*$/, "");
-const ALTIN = [242, 184, 75], KOR = [255, 122, 69];
+const VURGU = [0, 114, 178], KOR = [213, 94, 0];
 const TURLER = {
-  tren: { ad: "Trenle", renk: [240, 166, 30] },
-  otomobil: { ad: "Otomobille", renk: [32, 205, 150] },
-  vapur: { ad: "Vapurla", renk: [96, 190, 245] },
-  bilinmiyor: { ad: "", renk: [196, 202, 214] }
+  tren: { ad: "Trenle", renk: [230, 159, 0] },
+  otomobil: { ad: "Otomobille", renk: [0, 158, 115] },
+  vapur: { ad: "Vapurla", renk: [0, 114, 178] },
+  bilinmiyor: { ad: "", renk: [140, 140, 140] }
 };
 const hex = r => "#" + r.slice(0, 3).map(v => v.toString(16).padStart(2, "0")).join("");
 const SIMGELER = ["gemi", "ferman", "belge", "kongre", "gorusme", "bayrak", "meclis", "kilic", "durbun", "ileri", "kosk", "yildiz"];
@@ -371,11 +374,11 @@ require([
   "esri/Graphic", "esri/Camera", "esri/widgets/Home", "esri/widgets/Zoom", "esri/core/reactiveUtils",
   "esri/renderers/UniqueValueRenderer", "esri/layers/support/FeatureFilter",
   "esri/layers/support/FeatureEffect", "esri/TimeExtent", "esri/geometry/geometryEngine", "esri/geometry/Point",
-  "esri/geometry/Polyline", "esri/geometry/Polygon", "esri/geometry/Mesh", "esri/geometry/support/meshUtils",
-  "esri/geometry/support/webMercatorUtils"
+  "esri/geometry/Polyline", "esri/geometry/Mesh", "esri/geometry/support/meshUtils",
+  "esri/geometry/support/webMercatorUtils", "esri/layers/TileLayer"
 ], (EsriMap, MapView, SceneView, FeatureLayer, GraphicsLayer, Graphic, Camera, Home, Zoom, reactiveUtils,
     UniqueValueRenderer, FeatureFilter, FeatureEffect, TimeExtent, geometryEngine, Point,
-    Polyline, Polygon, Mesh, meshUtils, wmu) => {
+    Polyline, Mesh, meshUtils, wmu, TileLayer) => {
   const $ = s => document.querySelector(s);
   const sayi = n => Number(n).toLocaleString("tr-TR", { maximumFractionDigits: 0 });
   const kacis = s => String(s ?? "").replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\"", "&quot;");
@@ -473,7 +476,7 @@ require([
     const olaylar = new FeatureLayer({
       url: config.olaylar_url, id: "olaylar", outFields: ["*"], useViewTime: false,
       renderer: new UniqueValueRenderer({ field: "id",
-        defaultSymbol: { type: "simple-marker", style: "circle", size: 9, color: [...ALTIN, 1], outline: { color: [7, 11, 22], width: 1.5 } },
+        defaultSymbol: { type: "simple-marker", style: "circle", size: 9, color: [...VURGU, 1], outline: { color: [255, 255, 255], width: 1.5 } },
         uniqueValueInfos: Object.entries(detaylar).filter(([, v]) => v.simge).map(([id, v]) =>
           ({ value: id, symbol: { type: "picture-marker", url: simgeAdres(v.simge), width: 28, height: 28 } })) }),
       popupTemplate: { title: "{baslik}", content: olayIcerigi, outFields: ["*"] }
@@ -486,14 +489,35 @@ require([
     });
     const adKatmani = new GraphicsLayer({ id: "adlar" });
     const simdi = new GraphicsLayer({ id: "simdi" });
-    const harita = new EsriMap({ basemap: "dark-gray-vector", layers: [rota, olaylar, adKatmani, simdi] });
+    const harita = new EsriMap({ basemap: "gray-vector", layers: [rota, olaylar, adKatmani, simdi] });
+    const ALTLIK = { kara: "#f4efe3", yesil: "#e5e9d6", kent: "#ece4d4", su: "#cfe5f2", suCizgi: "#9ccbe8", ulke: "#9b907c", il: "#cdc3b0", yol: "#e4dccb" };
+    function altligiBoya(vt, l) {
+      const boya = (ozellik, renk) => vt.setPaintProperties(l.id, { ...(vt.getPaintProperties(l.id) || {}), [ozellik]: renk });
+      const id = l.id;
+      if (l.type === "background") boya("background-color", ALTLIK.kara);
+      else if (l.type === "fill") {
+        if (/water|marine/i.test(id)) boya("fill-color", ALTLIK.su);
+        else if (/forest|park|green|grass|groundcover|farming/i.test(id)) boya("fill-color", ALTLIK.yesil);
+        else if (/urban|building/i.test(id)) boya("fill-color", ALTLIK.kent);
+        else if (id === "Land") boya("fill-color", ALTLIK.kara);
+      } else if (l.type === "line") {
+        if (/^Water line/.test(id)) boya("line-color", ALTLIK.suCizgi);
+        else if (/Admin0/.test(id)) boya("line-color", ALTLIK.ulke);
+        else if (/Boundary/.test(id)) boya("line-color", ALTLIK.il);
+        else if (/Road|Railroad|Trail|Ferry/.test(id)) boya("line-color", ALTLIK.yol);
+      }
+    }
     harita.basemap.load().then(async b => {
       b.referenceLayers.removeAll();
       for (const vt of b.baseLayers.toArray()) {
         await vt.load();
-        vt.currentStyleInfo?.style?.layers.filter(l => l.type === "symbol")
-          .forEach(l => vt.setLayoutProperties(l.id, { ...(vt.getLayoutProperties(l.id) || {}), visibility: "none" }));
+        for (const l of vt.currentStyleInfo?.style?.layers || []) {
+          if (l.type === "symbol") vt.setLayoutProperties(l.id, { ...(vt.getLayoutProperties(l.id) || {}), visibility: "none" });
+          else altligiBoya(vt, l);
+        }
       }
+      b.baseLayers.add(new TileLayer({ url: "https://services.arcgisonline.com/arcgis/rest/services/Elevation/World_Hillshade/MapServer",
+                                       blendMode: "multiply", opacity: 0.32 }));
     }).catch(() => {});
     const TURKIYE = { type: "extent", xmin: 26, ymin: 36.3, xmax: 42.5, ymax: 42.3, spatialReference: { wkid: 4326 } };
     const view = new MapView({
@@ -502,7 +526,7 @@ require([
       popup: { dockEnabled: true, dockOptions: { buttonEnabled: false, breakpoint: false, position: darEkran.matches ? "bottom-center" : "top-right" } }
     });
     window.view = view;
-    view.highlightOptions = { color: [...ALTIN, 1], haloOpacity: 0.9, fillOpacity: 0 };
+    view.highlightOptions = { color: [...VURGU, 1], haloOpacity: 0.9, fillOpacity: 0 };
     view.ui.add(new Zoom({ view }), "top-right");
     view.ui.add(new Home({ view, viewpoint: { targetGeometry: TURKIYE } }), "top-right");
     paddingGuncelle = () => {
@@ -549,7 +573,7 @@ require([
                bas: Math.min(...c.uyeler.map(a => a.zaman_bas)) };
     });
     yerAdlari.forEach(y => adKatmani.add(new Graphic({ geometry: { type: "point", longitude: y.k[0], latitude: y.k[1] }, attributes: { bas: y.bas },
-      symbol: { type: "text", text: y.ad, color: [238, 241, 247], haloColor: [7, 11, 22, 0.9], haloSize: 1.4, yoffset: 18,
+      symbol: { type: "text", text: y.ad, color: [31, 29, 26], haloColor: [255, 253, 248, 0.95], haloSize: 1.5, yoffset: 18,
                 font: { family: "Inter", size: 10.5, weight: "bold" } } })));
     const cetvel = $("#cetvel"), csvg = $("#cetvel-svg"), NS = "http://www.w3.org/2000/svg";
     const P = 10;
@@ -558,11 +582,11 @@ require([
     function cizelge(svg, el, t, tikla) {
       const w = el.clientWidth, y = Math.min(el.clientHeight - 18, 20);
       svg.replaceChildren();
-      yeni(svg, "line", { x1: P, y1: y, x2: w - P, y2: y, stroke: "rgba(255,255,255,.2)", "stroke-width": 2, "stroke-linecap": "round" });
-      yeni(svg, "line", { x1: P, y1: y, x2: xKonum(t, el), y2: y, stroke: "#f2b84b", "stroke-width": 3, "stroke-linecap": "round" });
+      yeni(svg, "line", { x1: P, y1: y, x2: w - P, y2: y, stroke: "rgba(31,29,26,.2)", "stroke-width": 2, "stroke-linecap": "round" });
+      yeni(svg, "line", { x1: P, y1: y, x2: xKonum(t, el), y2: y, stroke: "#0072b2", "stroke-width": 3, "stroke-linecap": "round" });
       for (let yil = 1919; yil <= 1923; yil++) {
         const x = xKonum(yil === 1919 ? BAS : Date.UTC(yil, 0, 1), el);
-        yeni(svg, "line", { x1: x, y1: y - 5, x2: x, y2: y + 5, stroke: "rgba(255,255,255,.35)" });
+        yeni(svg, "line", { x1: x, y1: y - 5, x2: x, y2: y + 5, stroke: "rgba(31,29,26,.35)" });
         yeni(svg, "text", { x, y: y + 19, "text-anchor": yil === 1919 ? "start" : "middle" }).textContent = yil;
       }
       kayitlar.slice().sort((a, b) => a.attributes.zaman_bas - b.attributes.zaman_bas).forEach(f => {
@@ -572,8 +596,8 @@ require([
         g.dataset.gun = a.zaman_bas;
         const b = document.createElementNS(NS, "title"); b.textContent = tarihYaz(a.zaman_bas) + " · " + a.baslik; g.appendChild(b);
       });
-      yeni(svg, "line", { x1: xKonum(t, el), y1: y - 12, x2: xKonum(t, el), y2: y + 12, stroke: "#ff7a45", "stroke-width": 2.5, "stroke-linecap": "round" });
-      yeni(svg, "circle", { cx: xKonum(t, el), cy: y - 13, r: 4, fill: "#ff7a45" });
+      yeni(svg, "line", { x1: xKonum(t, el), y1: y - 12, x2: xKonum(t, el), y2: y + 12, stroke: "#d55e00", "stroke-width": 2.5, "stroke-linecap": "round" });
+      yeni(svg, "circle", { cx: xKonum(t, el), cy: y - 13, r: 4, fill: "#d55e00" });
     }
     let gun = BAS;
     const halka2 = { type: "simple-marker", style: "circle", size: 36, color: [0, 0, 0, 0], outline: { color: [...KOR, 1], width: 2.5 } };
@@ -586,7 +610,7 @@ require([
       const basladi = yollar.filter(f => f.attributes.zaman_bas <= son);
       const sonAyak = basladi.length ? Math.max(...basladi.map(ayak)) : -1;
       rota.featureEffect = new FeatureEffect({ filter: kimlikSuzgeci(basladi.filter(f => ayak(f) === sonAyak)),
-                                               includedEffect: "bloom(1.2, 0.4px, 0)", excludedEffect: "opacity(28%)" });
+                                               excludedEffect: "opacity(28%)" });
       const oGun = kayitlar.filter(f => f.attributes.zaman_bas <= son && f.attributes.zaman_bit >= gun);
       const onceki = kayitlar.filter(f => f.attributes.zaman_bit < gun).sort((a, b) => b.attributes.zaman_bit - a.attributes.zaman_bit)[0];
       const yolda = basladi.filter(f => f.attributes.zaman_bit >= gun).sort((a, b) => b.attributes.zaman_bas - a.attributes.zaman_bas)[0];
@@ -604,7 +628,7 @@ require([
           ? "Yolda · " + kisaAd(onceki.attributes.yer_adi_bugun) + " → " + kisaAd(sonraki.attributes.yer_adi_bugun)
           : "Son bilinen yer: " + kisaAd(onceki.attributes.yer_adi_bugun);
       }
-      olaylar.featureEffect = new FeatureEffect({ filter: kimlikSuzgeci(simdiki), includedEffect: "bloom(1.4, 0.4px, 0)", excludedEffect: "opacity(40%)" });
+      olaylar.featureEffect = new FeatureEffect({ filter: kimlikSuzgeci(simdiki), excludedEffect: "opacity(40%)" });
       simdi.graphics = simdiki.map(f => new Graphic({ geometry: f.geometry, symbol: halka2 }));
       adKatmani.graphics.forEach(g => { g.visible = g.attributes.bas <= son; });
       $("#gun-olay").textContent = metin; $("#gun-olay").classList.toggle("soluk", !belirgin);
@@ -730,20 +754,17 @@ require([
     };
     let uc = null;
     function ucKur() {
-      const perde = new GraphicsLayer({ elevationInfo: { mode: "on-the-ground" } });
-      perde.add(new Graphic({ geometry: new Polygon({ rings: [[[10, 25], [60, 25], [60, 52], [10, 52], [10, 25]]], spatialReference: { wkid: 4326 } }),
-        symbol: { type: "polygon-3d", symbolLayers: [{ type: "fill", material: { color: [6, 12, 28, 0.5] }, outline: { size: 0 } }] } }));
       const izler = new GraphicsLayer({ elevationInfo: { mode: "on-the-ground" } });
       const aktif = new GraphicsLayer({ elevationInfo: { mode: "on-the-ground" } });
       const yerler = new GraphicsLayer({ elevationInfo: { mode: "relative-to-ground" } });
       const arac = new GraphicsLayer({ elevationInfo: { mode: "relative-to-ground" } });
       const sView = new SceneView({
-        container: "sahne", map: new EsriMap({ basemap: "satellite", ground: "world-elevation", layers: [perde, izler, aktif, yerler, arac] }),
+        container: "sahne", map: new EsriMap({ basemap: "satellite", ground: "world-elevation", layers: [izler, aktif, yerler, arac] }),
         qualityProfile: darEkran.matches ? "medium" : "high", ui: { components: ["attribution"] }, popupEnabled: false,
         environment: { lighting: { type: "virtual" }, atmosphereEnabled: true, starsEnabled: true },
         camera: { position: { longitude: 34.5, latitude: 31.5, z: 1300000 }, heading: 0, tilt: 35 }
       });
-      sView.map.ground.surfaceColor = [10, 14, 26];
+      document.documentElement.style.setProperty("--uc-alt", $("#uc .alt").offsetHeight + "px");
       kayitlar.forEach(f => yerler.add(new Graphic({ geometry: new Point({ longitude: f.geometry.x, latitude: f.geometry.y }),
         symbol: { type: "point-3d", symbolLayers: [{ type: "icon", resource: { href: simgeAdres((DETAY[f.attributes.id] || {}).simge) }, size: 28 }] } })));
       yerAdlari.forEach(y => yerler.add(new Graphic({ geometry: new Point({ longitude: y.k[0], latitude: y.k[1] }),
@@ -820,7 +841,7 @@ require([
       } else if (!a.seeking) gecen = a.currentTime;
     }
     const yolSembolu = (renk, en, saydam) => ({ type: "line-3d", symbolLayers: [
-      { type: "line", size: en * 3.4, material: { color: [...renk, saydam * 0.25] }, cap: "round", join: "round" },
+      { type: "line", size: en + 2, material: { color: [20, 20, 20, saydam * 0.6] }, cap: "round", join: "round" },
       { type: "line", size: en, material: { color: [...renk, saydam] }, cap: "round", join: "round" }] });
     const cizgi = k => new Polyline({ paths: [k], spatialReference: { wkid: 4326 } });
     const renkOf = p => TURLER[p.ulasim]?.renk || TURLER.bilinmiyor.renk;
