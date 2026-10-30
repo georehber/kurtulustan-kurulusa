@@ -25,7 +25,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" href="config.json" as="fetch" crossorigin>
 <link rel="preload" href="img/siluet_cizgi.svg" as="image">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,500&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="https://js.arcgis.com/4.32/esri/themes/light/main.css">
 <script>  window.configSozu = fetch("config.json").then(r => r.json());
   window.detaySozu = fetch("detaylar.json").then(r => r.ok ? r.json() : {}).catch(() => ({}));</script>
@@ -38,7 +38,7 @@
     --soluk: #6b665c;
     --vurgu: #0072b2;
     --kor: #d55e00;
-    --serif: "Cormorant Garamond", Georgia, serif;
+    --serif: Lora, Georgia, serif;
     --sans: Inter, -apple-system, "Segoe UI", Roboto, sans-serif;
     --kenar: 16px;
     --baslik: 60px;
@@ -58,7 +58,7 @@
            background: rgba(255, 253, 248, .95); border-bottom: 1px solid var(--cizgi); }
   .marka { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; color: inherit; text-decoration: none; }
   .marka img { width: 38px; height: 38px; flex: none; object-fit: contain; }
-  .marka h1 { margin: 0; font-family: var(--serif); font-weight: 600; font-size: 27px; line-height: 1; white-space: nowrap; }
+  .marka h1 { margin: 0; font-family: var(--serif); font-weight: 600; font-size: 23px; line-height: 1.1; white-space: nowrap; }
   .marka .alt { display: block; margin-top: 3px; font-size: 12.5px; color: var(--soluk); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .dugme { border: 1px solid var(--cizgi); background: rgba(31, 29, 26, .04); border-radius: 999px; padding: 7px 14px;
            font-size: 13.5px; cursor: pointer; color: var(--metin); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
@@ -72,7 +72,7 @@
             backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
   #lejant-ac { width: 100%; display: flex; align-items: center; gap: 8px; padding: 11px 14px; border: 0; background: none;
                cursor: pointer; text-align: left; }
-  #lejant-ac strong { flex: 1; font-family: var(--serif); font-size: 20px; font-weight: 600; }
+  #lejant-ac strong { flex: 1; font-family: var(--serif); font-size: 17px; font-weight: 600; }
   #lejant-ac svg { width: 16px; height: 16px; color: var(--soluk); transition: transform .2s; }
   #lejant[data-acik="false"] #lejant-ac svg { transform: rotate(-90deg); }
   #lejant[data-acik="false"] .lejant-govde { display: none; }
@@ -93,7 +93,7 @@
            background: var(--vurgu); color: #fff; display: grid; place-items: center; }
   #oynat svg { width: 22px; height: 22px; }
   .gun-bilgi { display: flex; align-items: baseline; gap: 12px; min-width: 0; padding-right: 150px; }
-  #gun-tarih { font-family: var(--serif); font-size: 28px; font-weight: 600; line-height: 1; white-space: nowrap; }
+  #gun-tarih { font-family: var(--serif); font-size: 24px; font-weight: 600; line-height: 1; white-space: nowrap; }
   #gun-olay { font-size: 14.5px; color: var(--vurgu); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
   #gun-olay.soluk { color: var(--soluk); }
   #yolculuga-basla { position: absolute; top: 10px; right: 12px; }
@@ -113,10 +113,10 @@
   .uc-lejant i { display: inline-block; width: 18px; height: 3px; border-radius: 2px; }
   #altyazi { position: absolute; left: 50%; transform: translateX(-50%); bottom: 150px; width: min(820px, calc(100% - 2 * var(--kenar)));
              text-align: center; color: #fff; transition: opacity .6s; }
-  #a-tarih { font-family: var(--serif); font-size: clamp(30px, 5vw, 50px); font-weight: 600; text-shadow: 0 2px 18px rgba(0, 0, 0, .9); }
+  #a-tarih { font-family: var(--serif); font-size: clamp(26px, 4.2vw, 42px); font-weight: 600; text-shadow: 0 2px 18px rgba(0, 0, 0, .9); }
   #a-olay { margin-top: 2px; font-size: clamp(15px, 2.2vw, 19px); font-weight: 600; color: #f0e442; text-shadow: 0 1px 10px #000; }
-  #a-soz { margin: 12px auto 0; max-width: 720px; min-height: 2.6em; font-family: var(--serif); font-size: clamp(17px, 2.3vw, 23px);
-           line-height: 1.3; text-shadow: 0 1px 14px #000, 0 0 4px #000; transition: opacity .35s; }
+  #a-soz { margin: 12px auto 0; max-width: 720px; min-height: 2.6em; font-family: var(--serif); font-size: clamp(15px, 2vw, 20px);
+           line-height: 1.4; text-shadow: 0 1px 14px #000, 0 0 4px #000; transition: opacity .35s; }
   #a-soz.degisiyor { opacity: 0; }
   #a-soz:empty { display: none; }
   .yuvarlak.kucuk { width: 36px; height: 36px; background: var(--panel); }
@@ -135,7 +135,7 @@
   .kart, dialog { background: #fffdf8; color: var(--metin); border: 1px solid var(--cizgi); border-radius: 18px;
                   box-shadow: 0 24px 60px rgba(31, 29, 26, .25); }
   #acilis .kart { width: min(600px, 100%); padding: 34px 34px 26px; text-align: center; }
-  #acilis blockquote { margin: 0; font-family: var(--serif); font-style: italic; font-size: clamp(28px, 5.4vw, 40px); line-height: 1.12; color: var(--vurgu); }
+  #acilis blockquote { margin: 0; font-family: var(--serif); font-style: italic; font-size: clamp(22px, 4.2vw, 32px); line-height: 1.25; color: var(--vurgu); }
   #acilis blockquote::before { content: "“"; } #acilis blockquote::after { content: "”"; }
   #acilis .kimden { margin: 12px 0 18px; font-size: 14.5px; color: var(--metin); letter-spacing: .3px; }
   #acilis .bilgi { margin: 0 0 22px; font-size: 14.5px; line-height: 1.5; color: var(--soluk); text-align: left; }
@@ -149,21 +149,21 @@
   .dialog-ic { padding: 26px 26px 8px; overflow-y: auto; }
   .dialog-marka { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
   .dialog-marka img { width: 44px; height: 44px; object-fit: contain; }
-  dialog h2 { margin: 0; font-family: var(--serif); font-size: 32px; font-weight: 600; }
+  dialog h2 { margin: 0; font-family: var(--serif); font-size: 26px; font-weight: 600; }
   dialog .giris { margin: 0 0 16px; color: var(--soluk); font-size: 15.5px; line-height: 1.45; }
   dialog h3 { margin: 18px 0 6px; font-size: 12px; font-weight: 600; letter-spacing: .7px; text-transform: uppercase; color: var(--vurgu); }
   dialog p, dialog li { font-size: 14px; line-height: 1.5; margin: 0; }
   dialog ul { margin: 0; padding-left: 18px; }
   .rakamlar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
   .rakam { padding: 10px 12px; border: 1px solid var(--cizgi); border-radius: 12px; }
-  .rakam b { display: block; font-family: var(--serif); font-size: 30px; font-weight: 600; line-height: 1; color: var(--vurgu); }
+  .rakam b { display: block; font-family: var(--serif); font-size: 26px; font-weight: 600; line-height: 1; color: var(--vurgu); }
   .rakam span { font-size: 12.5px; color: var(--soluk); }
   .dialog-alt { display: flex; justify-content: flex-end; padding: 12px 26px 20px; }
   #yukleniyor { position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; background: var(--zemin); transition: opacity .5s; }
   #yukleniyor.bitti { opacity: 0; pointer-events: none; }
   .yukleme-ic { display: grid; justify-items: center; gap: 22px; transform: translateY(4vh); }
   .yukleme-ic img { width: 170px; height: auto; }
-  .yukleme-ic div { font-family: var(--serif); font-size: 28px; color: var(--metin); letter-spacing: .4px; }
+  .yukleme-ic div { font-family: var(--serif); font-size: 24px; color: var(--metin); letter-spacing: .4px; }
   .esri-view .esri-ui-corner .esri-widget--button { background: var(--panel); border: 1px solid var(--cizgi); color: var(--metin); }
   .esri-attribution { font-size: 10.5px; }
   .esri-popup__main-container { border: 1px solid var(--cizgi); border-radius: var(--yaricap); }
@@ -184,7 +184,7 @@
   .pp .metin { padding: 10px 12px; line-height: 1.5; }
   .pp .nutuk { padding: 12px 14px; border-left: 3px solid var(--vurgu); border-radius: 12px; background: rgba(0, 114, 178, .07); }
   .pp .nutuk b { display: block; margin-bottom: 4px; font-size: 11px; font-weight: 600; letter-spacing: .7px; text-transform: uppercase; color: var(--vurgu); }
-  .pp .nutuk q { display: block; font-family: var(--serif); font-style: italic; font-size: 20px; line-height: 1.25; color: var(--metin); quotes: "“" "”"; }
+  .pp .nutuk q { display: block; font-family: var(--serif); font-style: italic; font-size: 17px; line-height: 1.4; color: var(--metin); quotes: "“" "”"; }
   .pp .nutuk span { display: block; margin-top: 6px; font-size: 11.5px; color: var(--soluk); }
   .pp .kaynak { padding: 9px 12px; font-size: 12.5px; line-height: 1.45; color: var(--soluk); }
   .pp .kaynak b { color: var(--metin); font-weight: 600; }
@@ -216,10 +216,10 @@
   .pp .dugmeler { display: flex; gap: 8px; }
   .pp .dugmeler button { border: 0; border-radius: 999px; padding: 8px 18px; background: var(--vurgu); color: #fff; font-weight: 600; cursor: pointer; }
   .pp .dugmeler button:hover { filter: brightness(1.08); }
-  .esri-features__heading, .esri-popup__header-title { font-family: var(--serif) !important; font-size: 22px !important; font-weight: 600 !important; }
+  .esri-features__heading, .esri-popup__header-title { font-family: var(--serif) !important; font-size: 19px !important; font-weight: 600 !important; }
   @media (max-width: 720px) {
     :root { --zaman: 116px; }
-    .marka h1 { font-size: 23px; }
+    .marka h1 { font-size: 20px; }
     .marka .alt { font-size: 11.5px; }
     #hakkinda-ac span { display: none; }
     #lejant { right: calc(var(--kenar) + 44px); width: auto; }
@@ -228,7 +228,7 @@
              height: calc(var(--zaman) + env(safe-area-inset-bottom)); padding-bottom: calc(6px + env(safe-area-inset-bottom)); }
     #oynat { width: 46px; height: 46px; }
     .gun-bilgi { flex-direction: column; align-items: flex-start; gap: 2px; padding-right: 0; }
-    #gun-tarih { font-size: 23px; }
+    #gun-tarih { font-size: 20px; }
     #gun-olay { max-width: calc(100vw - 110px); font-size: 13px; }
     #yolculuga-basla { top: 10px; right: 10px; padding: 6px 11px; font-size: 12.5px; }
     #altyazi { bottom: 128px; }
@@ -332,7 +332,7 @@
     <h3>Yollar ve araçlar</h3>
     <p>O yılların yolları bugün yok; çizgiler aynı güzergâhın bugünkü yol ve demiryolu karşılığını izler. Vapur yolu yaklaşıktır. Üç boyutlu görünümdeki vapur, otomobil ve tren dönemin taşıtlarını anımsatan maketlerdir; aracın yol üzerindeki yeri yolculuğun başlangıç ve bitiş günlerine göre yaklaşık hesaplanır.</p>
     <h3>Künye</h3>
-    <p>Hazırlayan: Mehmet Ali Yanmaz · <a href="https://georehber.com/" target="_blank" rel="noopener">georehber.com</a> · Harita verisi © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap katkıcıları</a> (ODbL) · Yol hesabı: <a href="https://project-osrm.org/" target="_blank" rel="noopener">OSRM</a> · Altlık: Esri Dark Gray Canvas; üç boyutlu görünümde Esri World Imagery ve arazi yükseltisi · Yazı tipleri: Cormorant Garamond, Inter (SIL Open Font License) · Renkler: Okabe-Ito paletinin parlak tonları, renk körlüğüne uygun · Araç: Claude, Python, ArcGIS Online, ArcGIS Maps SDK for JavaScript</p>
+    <p>Hazırlayan: Mehmet Ali Yanmaz · <a href="https://georehber.com/" target="_blank" rel="noopener">georehber.com</a> · Harita verisi © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap katkıcıları</a> (ODbL) · Yol hesabı: <a href="https://project-osrm.org/" target="_blank" rel="noopener">OSRM</a> · Altlık: Esri Dark Gray Canvas; üç boyutlu görünümde Esri World Imagery ve arazi yükseltisi · Yazı tipleri: Lora, Inter (SIL Open Font License) · Renkler: Okabe-Ito paletinin parlak tonları, renk körlüğüne uygun · Araç: Claude, Python, ArcGIS Online, ArcGIS Maps SDK for JavaScript</p>
   </div>
   <div class="dialog-alt"><button type="button" id="hakkinda-kapat" class="dugme vurgu">Haritaya dön</button></div>
 </dialog>
