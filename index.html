@@ -490,10 +490,12 @@ require([
     const adKatmani = new GraphicsLayer({ id: "adlar" });
     const simdi = new GraphicsLayer({ id: "simdi" });
     const harita = new EsriMap({ basemap: "gray-vector", layers: [rota, olaylar, adKatmani, simdi] });
-    const ALTLIK = { kara: "#f4efe3", yesil: "#e5e9d6", kent: "#ece4d4", su: "#cfe5f2", suCizgi: "#9ccbe8", ulke: "#9b907c", il: "#cdc3b0", yol: "#e4dccb" };
+    const ALTLIK = { kara: "#f4efe3", yesil: "#e5e9d6", kent: "#ece4d4", su: "#cfe5f2", suCizgi: "#9ccbe8", ulke: "#9b907c" };
+    const gizle = (vt, l) => vt.setLayoutProperties(l.id, { ...(vt.getLayoutProperties(l.id) || {}), visibility: "none" });
     function altligiBoya(vt, l) {
       const boya = (ozellik, renk) => vt.setPaintProperties(l.id, { ...(vt.getPaintProperties(l.id) || {}), [ozellik]: renk });
       const id = l.id;
+      if (l.type === "symbol" || (l.type === "line" && !/^Water line|Admin0/.test(id))) return gizle(vt, l);
       if (l.type === "background") boya("background-color", ALTLIK.kara);
       else if (l.type === "fill") {
         if (/water|marine/i.test(id)) boya("fill-color", ALTLIK.su);
@@ -501,20 +503,14 @@ require([
         else if (/urban|building/i.test(id)) boya("fill-color", ALTLIK.kent);
         else if (id === "Land") boya("fill-color", ALTLIK.kara);
       } else if (l.type === "line") {
-        if (/^Water line/.test(id)) boya("line-color", ALTLIK.suCizgi);
-        else if (/Admin0/.test(id)) boya("line-color", ALTLIK.ulke);
-        else if (/Boundary/.test(id)) boya("line-color", ALTLIK.il);
-        else if (/Road|Railroad|Trail|Ferry/.test(id)) boya("line-color", ALTLIK.yol);
+        boya("line-color", /^Water line/.test(id) ? ALTLIK.suCizgi : ALTLIK.ulke);
       }
     }
     harita.basemap.load().then(async b => {
       b.referenceLayers.removeAll();
       for (const vt of b.baseLayers.toArray()) {
         await vt.load();
-        for (const l of vt.currentStyleInfo?.style?.layers || []) {
-          if (l.type === "symbol") vt.setLayoutProperties(l.id, { ...(vt.getLayoutProperties(l.id) || {}), visibility: "none" });
-          else altligiBoya(vt, l);
-        }
+        for (const l of vt.currentStyleInfo?.style?.layers || []) altligiBoya(vt, l);
       }
       b.baseLayers.add(new TileLayer({ url: "https://services.arcgisonline.com/arcgis/rest/services/Elevation/World_Hillshade/MapServer",
                                        blendMode: "multiply", opacity: 0.32 }));
