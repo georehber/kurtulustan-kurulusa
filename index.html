@@ -73,7 +73,8 @@
   [data-dil="tr"] .bayrak { background-image: url(img/bayrak/tr.svg); }
   [data-dil="en"] .bayrak { background-image: url(img/bayrak/en.svg); }
   [aria-pressed="true"] .bayrak { box-shadow: 0 0 0 1.5px #fff; }
-  #dil-baslik small { display: block; margin-top: 4px; font-size: 15px; font-weight: 500; font-style: italic; color: var(--soluk); }
+  #dil-baslik span { display: block; }
+  #dil-baslik span + span { margin-top: 2px; color: var(--soluk); }
   #adim-dil { width: min(480px, 100%); padding: 34px 30px 24px; text-align: center; }
   #adim-dil h2 { margin: 0; font-family: var(--serif); font-size: 26px; font-weight: 600; }
   #adim-dil .soru { margin: 8px 0 22px; color: var(--soluk); font-size: 14.5px; }
@@ -210,6 +211,7 @@
   .pp .nutuk { padding: 12px 14px; border-left: 3px solid var(--vurgu); border-radius: 12px; background: rgba(0, 114, 178, .07); }
   .pp .nutuk b { display: block; margin-bottom: 4px; font-size: 11px; font-weight: 600; letter-spacing: .7px; text-transform: uppercase; color: var(--vurgu); }
   .pp .nutuk q { display: block; font-family: var(--serif); font-style: italic; font-size: 17px; line-height: 1.4; color: var(--metin); quotes: "“" "”"; }
+  .pp .nutuk q.ozgun { margin-top: 6px; font-size: 13.5px; color: var(--soluk); }
   .pp .nutuk span { display: block; margin-top: 6px; font-size: 11.5px; color: var(--soluk); }
   .pp .kaynak { padding: 9px 12px; font-size: 12.5px; line-height: 1.45; color: var(--soluk); }
   .pp .kaynak b { color: var(--metin); font-weight: 600; }
@@ -287,7 +289,7 @@
     <span data-m="hakkinda">Hakkında</span>
   </button>
 </header>
-<div id="harita" role="application" aria-label="Kurtuluştan Kuruluşa haritası"></div>
+<div id="harita" role="application" aria-label="Kurtuluştan Kuruluşa haritası" data-m-aria="aria-harita"></div>
 <section id="lejant" data-acik="true" aria-label="Lejant" data-m-aria="lejant">
   <button id="lejant-ac" type="button" aria-expanded="true"><strong data-m="lejant">Lejant</strong>
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
@@ -333,7 +335,7 @@
 </div>
 <div id="acilis" hidden>
   <div class="kart" id="adim-dil" role="dialog" aria-modal="true" aria-labelledby="dil-baslik">
-    <h2 id="dil-baslik"><span lang="tr">Kurtuluştan Kuruluşa</span><small lang="en">From Liberation to Foundation</small></h2>
+    <h2 id="dil-baslik"><span lang="tr">Kurtuluştan Kuruluşa</span><span lang="en">From Liberation to Foundation</span></h2>
     <p class="soru"><span lang="tr">Dil seçin</span> · <span lang="en">Choose your language</span></p>
     <div class="dil-secim">
       <button type="button" data-dil="tr" lang="tr"><b>Türkçe</b><span>Türkçe devam et</span></button>
@@ -421,6 +423,8 @@ function diliSec(dil) {
 }
 document.querySelectorAll(".dil-dugme button").forEach(b => b.addEventListener("click", () => diliSec(b.dataset.dil)));
 const deger = v => (DIL === "en" && CEVIRI.degerler?.[v]) || v;
+const nutukKaynagi = m => DIL !== "en" ? m : String(m || "").replace(/([IV]+)\. Cilt, s\. /, "Vol. $1, p. ")
+  .replace("T.C. Kültür ve Turizm Bakanlığı e-kitap", "e-book of the Ministry of Culture and Tourism of Türkiye");
 const anlatimMetni = ek => { const a = alanAl(ek, "anlatim"); return Array.isArray(a) ? a.join(" ") : a; };
 const tarihMetni = m => DIL === "en" && CEVIRI.aylar?.length === 12
   ? String(m || "").replace(new RegExp(AYLAR.join("|"), "g"), ay => CEVIRI.aylar[AYLAR.indexOf(ay)]) : m;
@@ -503,7 +507,7 @@ require([
       (ek.anlatim ? "<div class=\"kutu\"><span class=\"bolum-baslik\">" + yaz("pp-ne-oldu", "Ne oldu") + "</span><div class=\"metin\">" + kacis(anlatimMetni(ek)) + "</div></div>"
                   : a.aciklama ? "<div class=\"kutu metin\">" + kacis(a.aciklama) + "</div>" : "") +
       (ek.fotograflar || []).slice(1).map(fotoHtml).join("") +
-      ((ek.nutuk || a.nutuk_soz) ? "<div class=\"nutuk\"><b>" + yaz("pp-nutuktan", "Nutuk'tan") + "</b><q>" + kacis(ek.nutuk || a.nutuk_soz) + "</q><span>" + kacis(ek.nutuk_kaynak || a.nutuk_soz_kaynak) + "</span></div>" : "") +
+      ((ek.nutuk || a.nutuk_soz) ? "<div class=\"nutuk\"><b>" + yaz("pp-nutuktan", "Nutuk'tan") + "</b><q>" + kacis(alanAl(ek, "nutuk") || a.nutuk_soz) + "</q>" + (DIL === "en" && ek.nutuk_en ? "<q class=\"ozgun\" lang=\"tr\">" + kacis(ek.nutuk) + "</q>" : "") + "<span>" + kacis(nutukKaynagi(ek.nutuk_kaynak || a.nutuk_soz_kaynak)) + "</span></div>" : "") +
       (ek.video ? videoHtml(ek.video) : "") +
       baglantiHtml(a, ek) +
       dugmeHtml(a.zaman_bas) + "</div>");

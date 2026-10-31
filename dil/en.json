@@ -24,10 +24,10 @@
     "November",
     "December"
   ],
-  "acilis-bilgi": "These are the opening words of the Nutuk; in English they mean “On the 19th day of May 1919, I landed at Samsun.” The Nutuk is the speech Mustafa Kemal Atatürk delivered over 36 and a half hours at the Second Congress of the Republican People's Party on 15–20 October 1927. It tells the story of the National Struggle and the founding of the Republic through its documents. This map follows that journey, from his departure from İstanbul on 16 May 1919 to the proclamation of the Republic on 29 October 1923.\n      <small>Source: Nutuk–Söylev, Vol. I, p. 2, e-book of the Ministry of Culture and Tourism of Türkiye (<a href=\"https://ekitap.ktb.gov.tr/TR-273376/nutuk.html\" target=\"_blank\" rel=\"noopener\">ekitap.ktb.gov.tr</a>); A. İlgazi, Journal of the Atatürk Research Center. The quotation is given in the original Turkish.</small>",
+  "acilis-bilgi": "These are the opening words of the Nutuk, the speech Mustafa Kemal Atatürk delivered over 36 and a half hours at the Second Congress of the Republican People's Party on 15–20 October 1927. It tells the story of the National Struggle and the founding of the Republic through its documents. This map follows that journey, from his departure from İstanbul on 16 May 1919 to the proclamation of the Republic on 29 October 1923.\n      <small>Source: Nutuk–Söylev, Vol. I, p. 2, e-book of the Ministry of Culture and Tourism of Türkiye (<a href=\"https://ekitap.ktb.gov.tr/TR-273376/nutuk.html\" target=\"_blank\" rel=\"noopener\">ekitap.ktb.gov.tr</a>); A. İlgazi, Journal of the Atatürk Research Center. Quotations from the Nutuk are translated for this site; the original Turkish is shown with each.</small>",
   "acilis-gec": "Explore the map myself",
-  "acilis-kimden": "Mustafa Kemal Atatürk, Nutuk (The Great Speech, 1927)",
-  "acilis-soz": "",
+  "acilis-kimden": "Mustafa Kemal Atatürk, Nutuk (The Great Speech, 1927) · <i lang=\"tr\">“1919 senesi Mayısının 19 uncu günü Samsun'a çıktım.”</i>",
+  "acilis-soz": "On the 19th day of May 1919, I landed at Samsun.",
   "altbaslik": "In Atatürk's footsteps · 16 May 1919 – 29 October 1923",
   "bilinmeyen-yol": "Route unknown",
   "durdur": "Pause",
@@ -39,7 +39,7 @@
   "hk-giris": "The turning points and journeys of Mustafa Kemal Atatürk from his departure from İstanbul on 16 May 1919 to the proclamation of the Republic on 29 October 1923.",
   "hk-gun": "days",
   "hk-kaynaklar": "Sources",
-  "hk-kaynaklar-liste": "<li>Gazi Mustafa Kemal, Nutuk–Söylev, e-book of the Ministry of Culture and Tourism of Türkiye (ekitap.ktb.gov.tr). Quotations are from the original text, with volume and page, in the original Turkish.</li>\n      <li>Atatürk Ansiklopedisi (Atatürk Encyclopedia), Atatürk Research Center (ataturkansiklopedisi.gov.tr).</li>\n      <li>For the dates of intermediate stops also: Ö. Toraman, Vakanüvis 8 (Special Issue), 2023; O. Akandere, Journal of the Atatürk Research Center.</li>\n      <li>On the delivery of the Nutuk: A. İlgazi, Journal of the Atatürk Research Center.</li>",
+  "hk-kaynaklar-liste": "<li>Gazi Mustafa Kemal, Nutuk–Söylev, e-book of the Ministry of Culture and Tourism of Türkiye (ekitap.ktb.gov.tr). Quotations are from the original text, with volume and page; the English translations were made for this site and the original Turkish is shown with each.</li>\n      <li>Atatürk Ansiklopedisi (Atatürk Encyclopedia), Atatürk Research Center (ataturkansiklopedisi.gov.tr).</li>\n      <li>For the dates of intermediate stops also: Ö. Toraman, Vakanüvis 8 (Special Issue), 2023; O. Akandere, Journal of the Atatürk Research Center.</li>\n      <li>On the delivery of the Nutuk: A. İlgazi, Journal of the Atatürk Research Center.</li>",
   "hk-km": "km travelled",
   "hk-kunye": "Credits",
   "hk-kunye-metin": "Prepared by: Mehmet Ali Yanmaz · <a href=\"https://georehber.com/\" target=\"_blank\" rel=\"noopener\">georehber.com</a> · Map data © <a href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\" rel=\"noopener\">OpenStreetMap contributors</a> (ODbL) · Routing: <a href=\"https://project-osrm.org/\" target=\"_blank\" rel=\"noopener\">OSRM</a> · Basemap: Esri Light Gray Canvas (recoloured) and World Hillshade; in the 3D view Esri World Imagery and terrain elevation · Fonts: Lora, Inter (SIL Open Font License) · Colours: Okabe-Ito palette, colour-blind friendly · Tools: Claude, Python, ArcGIS Online, ArcGIS Maps SDK for JavaScript",
@@ -74,7 +74,7 @@
   "pp-ne-oldu": "What happened",
   "pp-nereden": "From",
   "pp-nereye": "To",
-  "pp-nutuktan": "From the Nutuk (original Turkish)",
+  "pp-nutuktan": "From the Nutuk",
   "pp-uzunluk": "Length",
   "pp-video": "Watch the video on Wikimedia Commons",
   "pp-yaklasik-km": "about {n} km",
@@ -109,5 +109,6 @@
   "yolculuga-basla": "Start the journey",
   "yolculuklar": "Journeys",
   "yolda": "On the road",
-  "zaman-cizelgesi": "Timeline"
+  "zaman-cizelgesi": "Timeline",
+  "aria-harita": "From Liberation to Foundation map"
 }
