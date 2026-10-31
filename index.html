@@ -393,7 +393,7 @@
     <h3 data-m="hk-yollar">Yollar ve araçlar</h3>
     <p data-m="hk-yollar-metin">O yılların yolları bugün yok; çizgiler aynı güzergâhın bugünkü yol ve demiryolu karşılığını izler. Vapur yolu yaklaşıktır. Üç boyutlu görünümdeki vapur, otomobil ve tren dönemin taşıtlarını anımsatan maketlerdir; aracın yol üzerindeki yeri yolculuğun başlangıç ve bitiş günlerine göre yaklaşık hesaplanır.</p>
     <h3 data-m="hk-kunye">Künye</h3>
-    <p data-m="hk-kunye-metin">Hazırlayan: Mehmet Ali Yanmaz · <a href="https://georehber.com/" target="_blank" rel="noopener">georehber.com</a> · Harita verisi © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap katkıcıları</a> (ODbL) · Yol hesabı: <a href="https://project-osrm.org/" target="_blank" rel="noopener">OSRM</a> · Altlık: Esri Light Gray Canvas (yeniden renklendirildi) ve World Hillshade; üç boyutlu görünümde Esri World Imagery ve arazi yükseltisi · Yazı tipleri: Lora, Inter (SIL Open Font License) · Renkler: Okabe-Ito paleti, renk körlüğüne uygun · Araç: Claude, Python, ArcGIS Online, ArcGIS Maps SDK for JavaScript</p>
+    <p data-m="hk-kunye-metin">Hazırlayan: Mehmet Ali Yanmaz · <a href="https://georehber.com/" target="_blank" rel="noopener">georehber.com</a> · Harita verisi © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap katkıcıları</a> (ODbL) · Yol hesabı: <a href="https://project-osrm.org/" target="_blank" rel="noopener">OSRM</a> · Altlık: Esri Light Gray Canvas (yeniden renklendirildi) ve World Hillshade; üç boyutlu görünümde Esri World Imagery ve arazi yükseltisi · Seslendirme: ElevenLabs · Yazı tipleri: Lora, Inter (SIL Open Font License) · Renkler: Okabe-Ito paleti, renk körlüğüne uygun · Araç: Claude, Python, ArcGIS Online, ArcGIS Maps SDK for JavaScript</p>
   </div>
   <div class="dialog-alt"><button type="button" id="hakkinda-kapat" class="dugme vurgu" data-m="haritaya-don">Haritaya dön</button></div>
 </dialog>
@@ -936,18 +936,25 @@ require([
     const ingilizceSes = id => DIL === "en" && !!(DETAY[id] || {}).ses_en;
     const sesAdresi = id => ingilizceSes(id) ? DETAY[id].ses_en : (DETAY[id] || {}).ses;
     const sesZamanlari = id => (DETAY[id] || {})[ingilizceSes(id) ? "ses_zamanlar_en" : "ses_zamanlar"];
+    function sesiKur(a) {
+      const src = sesAdresi(a.sahne.d.id);
+      a.pause(); a.hata = !src; a.sahne.sure = Math.max(AYAR.durakSaniye, okumaSuresi(a.sahne.d));
+      if (src) { a.src = src; a.load(); } else a.removeAttribute("src");
+    }
     sahneler.forEach(s => {
-      const src = s.tur === "durak" && sesAdresi(s.d.id);
-      if (!src) return;
-      const a = new Audio(); a.preload = "metadata"; a.src = src;
-      a.addEventListener("loadedmetadata", () => { if (isFinite(a.duration)) s.sure = a.duration + SES_ARA; });
-      a.addEventListener("error", () => { a.hata = true; });
+      const e = s.tur === "durak" && DETAY[s.d.id];
+      if (!e || !(e.ses || e.ses_en)) return;
+      const a = new Audio(); a.preload = "metadata"; a.sahne = s;
+      a.addEventListener("loadedmetadata", () => { if (!a.hata && isFinite(a.duration)) s.sure = a.duration + SES_ARA; });
+      a.addEventListener("error", () => { if (a.getAttribute("src")) a.hata = true; });
       sesler.set(s.d.id, a);
+      sesiKur(a);
     });
-    document.addEventListener("dildegisti", () => sesler.forEach((a, id) => {
-      const src = new URL(sesAdresi(id), location.href).href;
-      if (a.src !== src) { a.pause(); a.hata = false; a.src = src; }
-    }));
+    const sesVarMi = () => [...sesler.values()].some(a => !a.hata);
+    document.addEventListener("dildegisti", () => {
+      sesler.forEach(sesiKur);
+      $("#u-ses").hidden = !sesVarMi();
+    });
     const durakSesi = s => s && s.tur === "durak" ? sesler.get(s.d.id) : null;
     function sesleriDurdur() { sesler.forEach(a => { if (!a.paused) a.pause(); }); }
     function sesEsle(s) {
@@ -1132,7 +1139,7 @@ require([
       $("#u-ses").innerHTML = sessiz ? SESSIZ_SVG : SES_SVG;
       $("#u-ses").setAttribute("aria-label", sessiz ? yaz("sesi-ac", "Sesi aç") : yaz("sesi-kapat", "Sesi kapat"));
     }
-    $("#u-ses").hidden = !sesler.size; sesDugmesi();
+    $("#u-ses").hidden = !sesVarMi(); sesDugmesi();
     $("#u-ses").addEventListener("click", () => { sessiz = !sessiz; sesler.forEach(a => { a.muted = sessiz; }); sesDugmesi(); });
     $("#u-yakin").addEventListener("click", () => yakinlastir(1 / 1.4));
     $("#u-uzak").addEventListener("click", () => yakinlastir(1.4));
