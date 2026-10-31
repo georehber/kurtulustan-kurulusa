@@ -112,5 +112,9 @@
   "zaman-cizelgesi": "Timeline",
   "aria-harita": "From Liberation to Foundation map",
   "tam-ekran": "Full screen",
-  "tam-ekrandan-cik": "Exit full screen"
+  "tam-ekrandan-cik": "Exit full screen",
+  "genis": "Wide view",
+  "genisten-cik": "Exit wide view",
+  "ipucu-yan": "Turn your phone sideways for a wider view.",
+  "ipucu-ana-ekran": "To open without the address bar: Share → Add to Home Screen."
 }

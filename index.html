@@ -18,6 +18,12 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://georehber.com/kurtulustan-kurulusa/img/onizleme.jpg?v=4">
 <link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="img/ikon-180.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Kurtuluş">
 <link rel="preconnect" href="https://js.arcgis.com">
 <link rel="preconnect" href="https://services-eu1.arcgis.com">
 <link rel="preconnect" href="https://basemaps.arcgis.com">
@@ -318,6 +324,11 @@
     #u-oynat { width: 44px; height: 44px; }
     .yuvarlak { width: 36px; height: 36px; }
   }
+  .genis header, .genis #lejant, .genis .uc-lejant { display: none !important; }
+  .genis #harita { top: env(safe-area-inset-top); }
+  #ipucu { position: fixed; z-index: 70; left: 50%; top: calc(14px + env(safe-area-inset-top)); transform: translateX(-50%); width: min(420px, calc(100% - 32px));
+           padding: 12px 16px; border-radius: 12px; background: rgba(31, 29, 26, .88); color: #fff; font-size: 14px; line-height: 1.45; text-align: center;
+           box-shadow: 0 10px 30px rgba(0, 0, 0, .25); pointer-events: none; }
   .tam-ekran-dugme svg { width: 18px; height: 18px; }
   #harita .tam-ekran-dugme { margin-top: 8px; display: flex; align-items: center; justify-content: center; }
   #harita .tam-ekran-dugme[hidden] { display: none; }
@@ -436,6 +447,7 @@
   <div class="dialog-alt"><button type="button" id="hakkinda-kapat" class="dugme vurgu" data-m="haritaya-don">Haritaya dön</button></div>
 </dialog>
 <dialog id="buyuk-foto" aria-label="Fotoğrafın büyük hâli"><img alt=""><p></p></dialog>
+<div id="ipucu" role="status" hidden></div>
 <div id="yukleniyor" role="status"><div class="yukleme-ic"><img src="img/siluet_cizgi.svg" alt="" width="170" height="197"><div data-m="baslik">Kurtuluştan Kuruluşa</div></div></div>
 <script>const GUN = 86400000;
 const BAS = Date.UTC(1919, 4, 16), BIT = Date.UTC(1923, 9, 29);
@@ -474,8 +486,23 @@ document.querySelectorAll(".dil-dugme button").forEach(b => b.addEventListener("
 const TAM_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 const KUCUK_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4v5H4M20 9h-5V4M15 20v-5h5M4 15h5v5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 const tamEkranVar = !!(document.fullscreenEnabled || document.webkitFullscreenEnabled);
-const tamEkranMi = () => !!(document.fullscreenElement || document.webkitFullscreenElement);
+const genisMi = () => document.documentElement.classList.contains("genis");
+const tamEkranMi = () => !!(document.fullscreenElement || document.webkitFullscreenElement) || genisMi();
+const uygulamaMi = () => matchMedia("(display-mode: standalone), (display-mode: fullscreen)").matches || navigator.standalone === true;
+function ipucu(metin) {
+  const el = document.getElementById("ipucu");
+  el.textContent = metin; el.hidden = false;
+  clearTimeout(ipucu.zaman); ipucu.zaman = setTimeout(() => { el.hidden = true; }, 7000);
+}
 async function tamEkran() {
+  if (!tamEkranVar) {
+    document.documentElement.classList.toggle("genis");
+    document.dispatchEvent(new Event("genisdegisti"));
+    tamEkranDugmeleri();
+    if (genisMi() && matchMedia("(orientation: portrait)").matches)
+      ipucu(yaz("ipucu-yan", "Daha geniş görmek için telefonu yan çevirin.") + (uygulamaMi() ? "" : " " + yaz("ipucu-ana-ekran", "Adres çubuğu olmadan açmak için: Paylaş → Ana Ekrana Ekle.")));
+    return;
+  }
   if (tamEkranMi()) { (document.exitFullscreen || document.webkitExitFullscreen).call(document); return; }
   const k = document.documentElement;
   try { await (k.requestFullscreen ? k.requestFullscreen({ navigationUI: "hide" }) : k.webkitRequestFullscreen()); } catch (e) { return; }
@@ -483,9 +510,11 @@ async function tamEkran() {
 }
 function tamEkranDugmeleri() {
   document.querySelectorAll(".tam-ekran-dugme").forEach(b => {
-    b.hidden = !tamEkranVar;
+    b.hidden = false;
     b.innerHTML = tamEkranMi() ? KUCUK_SVG : TAM_SVG;
-    b.setAttribute("aria-label", tamEkranMi() ? yaz("tam-ekrandan-cik", "Tam ekrandan çık") : yaz("tam-ekran", "Tam ekran"));
+    b.setAttribute("aria-label", tamEkranVar
+      ? (tamEkranMi() ? yaz("tam-ekrandan-cik", "Tam ekrandan çık") : yaz("tam-ekran", "Tam ekran"))
+      : (tamEkranMi() ? yaz("genisten-cik", "Geniş görünümden çık") : yaz("genis", "Geniş görünüm")));
     b.title = b.getAttribute("aria-label");
   });
 }
@@ -691,6 +720,7 @@ require([
     view.ui.add(tamDugme, "top-right");
     document.querySelectorAll(".tam-ekran-dugme").forEach(b => b.addEventListener("click", tamEkran));
     tamEkranDugmeleri();
+    document.addEventListener("genisdegisti", () => setTimeout(paddingGuncelle, 50));
     paddingGuncelle = () => {
       const k = 16, b = lejant.getBoundingClientRect(), ust = $("#harita").getBoundingClientRect().top;
       view.padding = darEkran.matches ? { top: b.bottom - ust + k, left: 0, right: 0, bottom: 0 }
