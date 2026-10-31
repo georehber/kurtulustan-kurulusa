@@ -54,6 +54,7 @@
     --calcite-color-brand: var(--vurgu);
   }
   * { box-sizing: border-box; }
+  html, body { position: fixed; inset: 0; overscroll-behavior: none; }
   html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: var(--zemin); color: var(--metin);
                font-family: var(--sans); -webkit-font-smoothing: antialiased; }
   button { font: inherit; color: inherit; }
@@ -1289,14 +1290,17 @@ require([
     gunuGoster(adres ? Date.parse(adres[1] + "T00:00:00Z") : BAS);
     let dilKayitli = false;
     try { dilKayitli = !!localStorage.getItem("dil"); } catch (e) {}
-    const acilis = $("#acilis"), kapat = () => { acilis.hidden = true; anaEkranKarti(); };
+    const basaDon = () => { if (window.scrollY || document.documentElement.scrollTop) window.scrollTo(0, 0); };
+    ["resize", "orientationchange"].forEach(o => window.addEventListener(o, basaDon));
+    window.visualViewport?.addEventListener("resize", basaDon);
+    const acilis = $("#acilis"), kapat = () => { acilis.hidden = true; basaDon(); anaEkranKarti(); };
     if (!adres || !dilKayitli) {
       acilis.hidden = false;
-      $("#adim-dil [data-dil=\"" + DIL + "\"]").focus();
+      $("#adim-dil [data-dil=\"" + DIL + "\"]").focus({ preventScroll: true });
       $("#adim-dil").querySelectorAll("[data-dil]").forEach(b => b.addEventListener("click", () => {
         diliSec(b.dataset.dil);
         if (adres) return kapat();
-        $("#adim-dil").hidden = true; $("#adim-giris").hidden = false; $("#acilis-basla").focus();
+        $("#adim-dil").hidden = true; $("#adim-giris").hidden = false; $("#acilis-basla").focus({ preventScroll: true });
       }));
       $("#acilis-basla").addEventListener("click", () => ucaGec(BAS));
       $("#acilis-gec").addEventListener("click", kapat);
