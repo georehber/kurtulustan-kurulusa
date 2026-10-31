@@ -324,11 +324,19 @@
     #u-oynat { width: 44px; height: 44px; }
     .yuvarlak { width: 36px; height: 36px; }
   }
-  .genis header, .genis #lejant, .genis .uc-lejant { display: none !important; }
+  .genis header, .genis #lejant, .genis .uc-lejant, .genis #cetvel { display: none !important; }
+  :root.genis { --zaman: 64px; }
+  .genis #zaman { grid-template-rows: auto; align-items: center; }
+  .genis .oynatma { grid-row: 1; }
   .genis #harita { top: env(safe-area-inset-top); }
   #ipucu { position: fixed; z-index: 70; left: 50%; top: calc(14px + env(safe-area-inset-top)); transform: translateX(-50%); width: min(420px, calc(100% - 32px));
            padding: 12px 16px; border-radius: 12px; background: rgba(31, 29, 26, .88); color: #fff; font-size: 14px; line-height: 1.45; text-align: center;
            box-shadow: 0 10px 30px rgba(0, 0, 0, .25); pointer-events: none; }
+  #ana-ekran { position: fixed; z-index: 65; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); max-width: 420px; margin: 0 auto; padding: 16px 18px 14px; }
+  #ana-ekran b { display: block; font-family: var(--serif); font-size: 18px; font-weight: 600; }
+  #ana-ekran ol { margin: 8px 0 12px; padding-left: 20px; font-size: 14px; line-height: 1.6; }
+  #ana-ekran .paylas { width: 18px; height: 18px; vertical-align: -3px; color: var(--vurgu); }
+  #ana-ekran .dugme { width: 100%; justify-content: center; }
   .tam-ekran-dugme svg { width: 18px; height: 18px; }
   #harita .tam-ekran-dugme { margin-top: 8px; display: flex; align-items: center; justify-content: center; }
   #harita .tam-ekran-dugme[hidden] { display: none; }
@@ -448,6 +456,15 @@
 </dialog>
 <dialog id="buyuk-foto" aria-label="Fotoğrafın büyük hâli"><img alt=""><p></p></dialog>
 <div id="ipucu" role="status" hidden></div>
+<div id="ana-ekran" class="kart" role="dialog" aria-labelledby="ae-baslik" hidden>
+  <b id="ae-baslik" data-m="ae-baslik">Tam ekran için ana ekrana ekleyin</b>
+  <ol>
+    <li><span data-m="ae-1">Alttaki Paylaş düğmesine dokunun</span> <svg class="paylas" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M8 7l4-4 4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 10H5v11h14V10h-2" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></li>
+    <li data-m="ae-2">“Ana Ekrana Ekle”yi seçin</li>
+    <li data-m="ae-3">Haritayı ana ekrandaki simgeden açın</li>
+  </ol>
+  <button type="button" class="dugme vurgu" id="ae-tamam" data-m="ae-tamam">Tamam</button>
+</div>
 <div id="yukleniyor" role="status"><div class="yukleme-ic"><img src="img/siluet_cizgi.svg" alt="" width="170" height="197"><div data-m="baslik">Kurtuluştan Kuruluşa</div></div></div>
 <script>const GUN = 86400000;
 const BAS = Date.UTC(1919, 4, 16), BIT = Date.UTC(1923, 9, 29);
@@ -489,6 +506,17 @@ const tamEkranVar = !!(document.fullscreenEnabled || document.webkitFullscreenEn
 const genisMi = () => document.documentElement.classList.contains("genis");
 const tamEkranMi = () => !!(document.fullscreenElement || document.webkitFullscreenElement) || genisMi();
 const uygulamaMi = () => matchMedia("(display-mode: standalone), (display-mode: fullscreen)").matches || navigator.standalone === true;
+const iosMu = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+function anaEkranKarti() {
+  let goruldu = false;
+  try { goruldu = !!localStorage.getItem("anaEkranKarti"); } catch (e) {}
+  if (!iosMu || uygulamaMi() || goruldu) return;
+  document.getElementById("ana-ekran").hidden = false;
+}
+document.getElementById("ae-tamam").addEventListener("click", () => {
+  document.getElementById("ana-ekran").hidden = true;
+  try { localStorage.setItem("anaEkranKarti", "1"); } catch (e) {}
+});
 function ipucu(metin) {
   const el = document.getElementById("ipucu");
   el.textContent = metin; el.hidden = false;
@@ -1261,7 +1289,7 @@ require([
     gunuGoster(adres ? Date.parse(adres[1] + "T00:00:00Z") : BAS);
     let dilKayitli = false;
     try { dilKayitli = !!localStorage.getItem("dil"); } catch (e) {}
-    const acilis = $("#acilis"), kapat = () => { acilis.hidden = true; };
+    const acilis = $("#acilis"), kapat = () => { acilis.hidden = true; anaEkranKarti(); };
     if (!adres || !dilKayitli) {
       acilis.hidden = false;
       $("#adim-dil [data-dil=\"" + DIL + "\"]").focus();
@@ -1273,7 +1301,7 @@ require([
       $("#acilis-basla").addEventListener("click", () => ucaGec(BAS));
       $("#acilis-gec").addEventListener("click", kapat);
       acilis.addEventListener("click", e => { if (e.target === acilis && $("#adim-dil").hidden) kapat(); });
-    }
+    } else anaEkranKarti();
     window.sayfaHazir = true;
   }).catch(hata => {
     $("#gun-olay").textContent = yaz("hata", "Harita yüklenemedi. Sayfayı yenileyin.");

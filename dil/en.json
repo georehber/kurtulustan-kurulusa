@@ -116,5 +116,10 @@
   "genis": "Wide view",
   "genisten-cik": "Exit wide view",
   "ipucu-yan": "Turn your phone sideways for a wider view.",
-  "ipucu-ana-ekran": "To open without the address bar: Share → Add to Home Screen."
+  "ipucu-ana-ekran": "To open without the address bar: Share → Add to Home Screen.",
+  "ae-baslik": "Add to your Home Screen for full screen",
+  "ae-1": "Tap the Share button below",
+  "ae-2": "Choose “Add to Home Screen”",
+  "ae-3": "Open the map from the icon on your Home Screen",
+  "ae-tamam": "OK"
 }
