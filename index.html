@@ -115,7 +115,13 @@
            display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto 1fr; column-gap: 14px;
            background: var(--panel); border: 1px solid var(--cizgi); border-radius: var(--yaricap);
            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
-  #oynat { grid-row: 1 / 3; align-self: center; width: 52px; height: 52px; border-radius: 50%; border: 0; cursor: pointer;
+  .oynatma { grid-row: 1 / 3; align-self: center; display: flex; align-items: center; gap: 6px; }
+  .adim-dugme { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--cizgi); background: rgba(31, 29, 26, .04);
+                color: var(--metin); display: grid; place-items: center; cursor: pointer; }
+  .adim-dugme:hover { border-color: var(--vurgu); color: var(--vurgu); }
+  .adim-dugme:disabled { opacity: .35; cursor: default; }
+  .adim-dugme svg { width: 18px; height: 18px; }
+  #oynat { width: 52px; height: 52px; border-radius: 50%; border: 0; cursor: pointer;
            background: var(--vurgu); color: #fff; display: grid; place-items: center; }
   #oynat svg { width: 22px; height: 22px; }
   .gun-bilgi { display: flex; align-items: baseline; gap: 12px; min-width: 0; padding-right: 150px; }
@@ -265,10 +271,14 @@
     #zaman { left: 0; right: 0; transform: none; bottom: 0; width: 100%; border-radius: 0; border-width: 1px 0 0;
              height: calc(var(--zaman) + env(safe-area-inset-bottom)); padding-bottom: calc(6px + env(safe-area-inset-bottom)); }
     #oynat { width: 46px; height: 46px; }
+    .oynatma { gap: 4px; }
+    .adim-dugme { width: 30px; height: 30px; }
     .gun-bilgi { flex-direction: column; align-items: flex-start; gap: 2px; padding-right: 0; }
     #gun-tarih { font-size: 20px; }
-    #gun-olay { max-width: calc(100vw - 110px); font-size: 13px; }
-    #yolculuga-basla { top: 10px; right: 10px; padding: 6px 11px; font-size: 12.5px; }
+    #gun-olay { max-width: 100%; font-size: 13px; }
+    #yolculuga-basla { top: 8px; right: 8px; width: 36px; height: 36px; padding: 0; justify-content: center; }
+    #yolculuga-basla span { display: none; }
+    .gun-bilgi { padding-right: 40px; }
     #altyazi { bottom: 128px; }
     #uc .alt { gap: 6px; }
     .yuvarlak { width: 36px; height: 36px; }
@@ -307,9 +317,9 @@
   </div>
 </section>
 <section id="zaman" aria-label="Zaman çizelgesi" data-m-aria="zaman-cizelgesi">
-  <button id="oynat" type="button" aria-label="Oynat" data-m-aria="oynat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l11 7-11 7z" fill="currentColor"/></svg></button>
+  <div class="oynatma"><button class="adim-dugme" id="z-onceki" type="button" aria-label="Önceki durak" data-m-aria="onceki-durak"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg></button><button id="oynat" type="button" aria-label="Oynat" data-m-aria="oynat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l11 7-11 7z" fill="currentColor"/></svg></button><button class="adim-dugme" id="z-sonraki" type="button" aria-label="Sonraki durak" data-m-aria="sonraki-durak"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg></button></div>
   <div class="gun-bilgi"><span id="gun-tarih">16 Mayıs 1919</span><span id="gun-olay"></span></div>
-  <button class="dugme vurgu" id="yolculuga-basla" type="button">
+  <button class="dugme vurgu" id="yolculuga-basla" type="button" aria-label="Yolculuğa başla" data-m-aria="yolculuga-basla">
     <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8M15 7h6v6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     <span data-m="yolculuga-basla">Yolculuğa başla</span></button>
   <div id="cetvel" role="slider" tabindex="0" aria-label="Gün seç" data-m-aria="gun-sec" aria-valuemin="0" aria-valuemax="1627" aria-valuenow="0"><svg id="cetvel-svg" aria-hidden="true"></svg></div>
@@ -728,6 +738,8 @@ require([
       $("#gun-tarih").textContent = tarihYaz(gun);
       cetvel.setAttribute("aria-valuenow", Math.round((gun - BAS) / GUN)); cetvel.setAttribute("aria-valuetext", tarihYaz(gun));
       cizelge(csvg, cetvel, gun);
+      const ilk = Math.min(...doluGunler), son_ = Math.max(...doluGunler);
+      $("#z-onceki").disabled = gun <= ilk; $("#z-sonraki").disabled = gun >= son_;
     }
     const adresiGuncelle = () => history.replaceState(null, "", "#" + isoYaz(gun));
     window.guneGit = t => { durdur(); gunuGoster(t); adresiGuncelle(); };
@@ -764,6 +776,15 @@ require([
       gunuGoster(sonraki);
       zamanlayici = setTimeout(adim, 1400);
     }
+    function noktayaGit(yon) {
+      const liste = [...doluGunler].sort((a, b) => a - b);
+      const hedef = yon > 0 ? liste.find(x => x > gun) : liste.findLast(x => x < gun);
+      if (hedef === undefined) return;
+      view.closePopup(); gunuGoster(hedef); adresiGuncelle();
+      if (zamanlayici) { clearTimeout(zamanlayici); zamanlayici = setTimeout(adim, 1400); }
+    }
+    $("#z-onceki").addEventListener("click", () => noktayaGit(-1));
+    $("#z-sonraki").addEventListener("click", () => noktayaGit(1));
     $("#oynat").addEventListener("click", () => {
       if (zamanlayici) { durdur(); return; }
       if (gun >= BIT) gunuGoster(BAS);
