@@ -79,15 +79,15 @@
   #adim-dil h2 { margin: 0; font-family: var(--serif); font-size: 26px; font-weight: 600; }
   #adim-dil .soru { margin: 8px 0 22px; color: var(--soluk); font-size: 14.5px; }
   .dil-secim { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .dil-secim button { display: grid; align-content: end; justify-items: end; text-align: right; gap: 2px; min-height: 128px; padding: 14px 12px; border: 1px solid var(--cizgi); border-radius: 14px;
-                      background: #888 center / cover no-repeat; color: #fff; text-shadow: 0 1px 6px rgba(0, 0, 0, .6); cursor: pointer;
-                      transition: border-color .15s, box-shadow .15s, transform .15s; }
-  .dil-secim button[data-dil="tr"] { background-image: linear-gradient(to left, rgba(0, 0, 0, .5), rgba(0, 0, 0, 0) 50%), url(img/bayrak/tr.svg); }
-  .dil-secim button[data-dil="en"] { background-image: linear-gradient(to left, rgba(0, 0, 0, .5), rgba(0, 0, 0, 0) 50%), url(img/bayrak/en.svg); }
+  .dil-secim button { display: flex; flex-direction: column; padding: 0 0 12px; overflow: hidden; border: 1px solid var(--cizgi); border-radius: 14px;
+                      background: #fff; color: var(--metin); text-align: center; cursor: pointer; transition: border-color .15s, box-shadow .15s, transform .15s; }
+  .dil-secim .bayrak-serit { display: block; aspect-ratio: 2 / 1; margin-bottom: 10px; background: center / cover no-repeat; border-bottom: 1px solid var(--cizgi); }
+  .dil-secim [data-dil="tr"] .bayrak-serit { background-image: url(img/bayrak/tr.svg); }
+  .dil-secim [data-dil="en"] .bayrak-serit { background-image: url(img/bayrak/en.svg); }
   .dil-secim button:hover { transform: translateY(-2px); }
   .dil-secim button:hover, .dil-secim button:focus-visible { border-color: var(--vurgu); box-shadow: 0 0 0 3px rgba(0, 114, 178, .15); }
   .dil-secim b { font-family: var(--serif); font-size: 22px; font-weight: 600; }
-  .dil-secim span { font-size: 12.5px; color: rgba(255, 255, 255, .92); }
+  .dil-secim span { font-size: 12.5px; color: var(--soluk); }
   .adimlar { display: flex; justify-content: center; gap: 6px; margin-top: 20px; }
   .adimlar i { width: 22px; height: 4px; border-radius: 2px; background: var(--cizgi); }
   .adimlar i.etkin { background: var(--vurgu); }
@@ -281,9 +281,46 @@
     .gun-bilgi { padding-right: 40px; }
     #altyazi { bottom: 128px; }
     #uc .alt { gap: 6px; }
+    #u-cik { padding: 0; width: 36px; height: 36px; justify-content: center; }
+    #u-cik span { display: none; }
+    #uc .ust { flex-wrap: wrap; gap: 8px; }
+    .uc-lejant { order: 2; display: grid; grid-template-columns: auto auto; gap: 4px 10px; padding: 6px 10px; border-radius: 12px; font-size: 11px; }
+    .uc-lejant i { width: 14px; }
     .yuvarlak { width: 36px; height: 36px; }
     #u-oynat { width: 46px; height: 46px; }
   }
+  @media (max-height: 520px) and (orientation: landscape) {
+    :root { --baslik: 46px; --zaman: 84px; }
+    .marka img { width: 30px; height: 30px; }
+    .marka h1 { font-size: 19px; }
+    .marka .alt { font-size: 11px; }
+    #zaman { padding: 8px 12px 4px 10px; bottom: calc(8px + env(safe-area-inset-bottom)); }
+    #oynat { width: 42px; height: 42px; }
+    .adim-dugme { width: 30px; height: 30px; }
+    #gun-tarih { font-size: 20px; }
+    #yolculuga-basla { top: 7px; padding: 5px 11px; font-size: 12.5px; }
+    #lejant { max-height: calc(100dvh - var(--baslik) - var(--zaman) - 34px); width: 260px; }
+    #acilis { align-items: start; overflow-y: auto; padding: 12px; }
+    #acilis .kart { max-height: none; padding: 20px 24px 16px; }
+    #acilis blockquote { font-size: 22px; }
+    #acilis .bilgi { font-size: 13px; margin-bottom: 14px; }
+    #adim-dil .soru { margin: 4px 0 12px; }
+    .dil-secim .bayrak-serit { aspect-ratio: 3 / 1; }
+    .adimlar { margin-top: 12px; }
+    dialog { max-height: calc(100% - 24px); }
+    .esri-popup--is-docked-top-right .esri-popup__main-container { width: 360px !important; max-height: calc(100dvh - var(--baslik) - var(--zaman) - 40px) !important; }
+    #altyazi { bottom: 84px; }
+    #a-tarih { font-size: 24px; }
+    #a-olay { font-size: 14px; }
+    #a-soz { font-size: 15px; margin-top: 6px; min-height: 0; }
+    #uc .ust { padding-top: calc(8px + env(safe-area-inset-top)); }
+    #uc .alt { padding-top: 8px; padding-bottom: calc(8px + env(safe-area-inset-bottom)); }
+    #u-oynat { width: 44px; height: 44px; }
+    .yuvarlak { width: 36px; height: 36px; }
+  }
+  .tam-ekran-dugme svg { width: 18px; height: 18px; }
+  #harita .tam-ekran-dugme { margin-top: 8px; display: flex; align-items: center; justify-content: center; }
+  #harita .tam-ekran-dugme[hidden] { display: none; }
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }</style>
 </head>
 <body>
@@ -329,10 +366,11 @@
   <div class="ust">
     <div class="uc-lejant" id="uc-lejant" aria-label="Yol renkleri"></div>
     <span style="flex:1"></span>
+    <button class="yuvarlak kucuk tam-ekran-dugme" id="u-tam" type="button" aria-label="Tam ekran" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <button class="yuvarlak kucuk" id="u-ses" type="button" aria-label="Sesi kapat" hidden></button>
     <button class="yuvarlak kucuk" id="u-yakin" type="button" aria-label="Yakınlaştır" data-m-aria="yakinlastir"><svg viewBox="0 0 24 24"><path d="M12 6v12M6 12h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
     <button class="yuvarlak kucuk" id="u-uzak" type="button" aria-label="Uzaklaştır" data-m-aria="uzaklastir"><svg viewBox="0 0 24 24"><path d="M6 12h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
-    <button class="dugme" id="u-cik" type="button">
+    <button class="dugme" id="u-cik" type="button" aria-label="2B haritaya dön" data-m-aria="ikiye-don">
       <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.2"/></svg>
       <span data-m="ikiye-don">2B haritaya dön</span></button>
   </div>
@@ -349,8 +387,8 @@
     <h2 id="dil-baslik"><span lang="tr">Kurtuluştan Kuruluşa</span><span lang="en">From Liberation to Foundation</span></h2>
     <p class="soru"><span lang="tr">Dil seçin</span> · <span lang="en">Choose your language</span></p>
     <div class="dil-secim">
-      <button type="button" data-dil="tr" lang="tr"><b>Türkçe</b><span>Türkçe devam et</span></button>
-      <button type="button" data-dil="en" lang="en"><b>English</b><span>Continue in English</span></button>
+      <button type="button" data-dil="tr" lang="tr"><i class="bayrak-serit" aria-hidden="true"></i><b>Türkçe</b><span>Türkçe devam et</span></button>
+      <button type="button" data-dil="en" lang="en"><i class="bayrak-serit" aria-hidden="true"></i><b>English</b><span>Continue in English</span></button>
     </div>
     <div class="adimlar" aria-hidden="true"><i class="etkin"></i><i></i></div>
   </div>
@@ -378,7 +416,7 @@
     <h3 data-m="hk-nasil">Nasıl okunur</h3>
     <ul data-m="hk-nasil-liste">
       <li>Haritada dönemin dönüm noktaları ve onları birbirine bağlayan yolculuklar var. Aradaki duraklar nokta olarak gösterilmez, yol onların içinden geçer.</li>
-      <li>Alttaki çizelgeyi sürükleyin ya da oynatın; harita o güne gelir. Oynatırken bir şey olmayan günler atlanır.</li>
+      <li>Alttaki çizelgeyi sürükleyin ya da oynatın; harita o güne gelir. Oynatırken yolda geçen ve olay olmayan günler atlanır. Oynat düğmesinin iki yanındaki oklarla bir önceki ya da sonraki dönüm noktasına geçilir.</li>
       <li>Turuncu halka o gün bulunduğu yeri gösterir. Yolculuk sırasında yola çıktığı yerde bekler, varınca bir sonraki noktaya geçer.</li>
       <li>Yolların rengi ulaşım şeklini gösterir; nasıl gidildiği kaynakta geçmiyorsa çizgi gridir. Belirgin olan son yolculuktur. Renkler renk körlüğüne uygun Okabe-Ito paletindendir.</li>
       <li>"Yolculuğa başla" ile üç boyutlu görünüme geçilir: kamera yolu izler, araç yol boyunca ilerler, duraklarda orada olanlar altyazıyla anlatılır. Nasıl gidildiği bilinmeyen yollarda araç yarı saydamdır.</li>
@@ -393,7 +431,7 @@
     <h3 data-m="hk-yollar">Yollar ve araçlar</h3>
     <p data-m="hk-yollar-metin">O yılların yolları bugün yok; çizgiler aynı güzergâhın bugünkü yol ve demiryolu karşılığını izler. Vapur yolu yaklaşıktır. Üç boyutlu görünümdeki vapur, otomobil ve tren dönemin taşıtlarını anımsatan maketlerdir; aracın yol üzerindeki yeri yolculuğun başlangıç ve bitiş günlerine göre yaklaşık hesaplanır.</p>
     <h3 data-m="hk-kunye">Künye</h3>
-    <p data-m="hk-kunye-metin">Hazırlayan: Mehmet Ali Yanmaz · <a href="https://georehber.com/" target="_blank" rel="noopener">georehber.com</a> · Harita verisi © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap katkıcıları</a> (ODbL) · Yol hesabı: <a href="https://project-osrm.org/" target="_blank" rel="noopener">OSRM</a> · Altlık: Esri Light Gray Canvas (yeniden renklendirildi) ve World Hillshade; üç boyutlu görünümde Esri World Imagery ve arazi yükseltisi · Seslendirme: ElevenLabs · Yazı tipleri: Lora, Inter (SIL Open Font License) · Renkler: Okabe-Ito paleti, renk körlüğüne uygun · Araç: Claude, Python, ArcGIS Online, ArcGIS Maps SDK for JavaScript</p>
+    <p data-m="hk-kunye-metin">Hazırlayan: Mehmet Ali Yanmaz · <a href="https://georehber.com/" target="_blank" rel="noopener">georehber.com</a> · Harita verisi © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap katkıcıları</a> (ODbL) · Yol hesabı: <a href="https://project-osrm.org/" target="_blank" rel="noopener">OSRM</a> · Altlık: Esri Light Gray Canvas (yeniden renklendirildi) ve World Hillshade; üç boyutlu görünümde Esri World Imagery ve arazi yükseltisi · Seslendirme: ElevenLabs · Yazı tipleri: Lora, Inter (SIL Open Font License) · Renkler: Okabe-Ito paleti, renk körlüğüne uygun · Araçlar: Claude, Python, ArcGIS Online, ArcGIS Maps SDK for JavaScript</p>
   </div>
   <div class="dialog-alt"><button type="button" id="hakkinda-kapat" class="dugme vurgu" data-m="haritaya-don">Haritaya dön</button></div>
 </dialog>
@@ -433,6 +471,25 @@ function diliSec(dil) {
   document.dispatchEvent(new Event("dildegisti"));
 }
 document.querySelectorAll(".dil-dugme button").forEach(b => b.addEventListener("click", () => diliSec(b.dataset.dil)));
+const TAM_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const KUCUK_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4v5H4M20 9h-5V4M15 20v-5h5M4 15h5v5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const tamEkranVar = !!(document.fullscreenEnabled || document.webkitFullscreenEnabled);
+const tamEkranMi = () => !!(document.fullscreenElement || document.webkitFullscreenElement);
+async function tamEkran() {
+  if (tamEkranMi()) { (document.exitFullscreen || document.webkitExitFullscreen).call(document); return; }
+  const k = document.documentElement;
+  try { await (k.requestFullscreen ? k.requestFullscreen({ navigationUI: "hide" }) : k.webkitRequestFullscreen()); } catch (e) { return; }
+  if (matchMedia("(pointer: coarse)").matches) screen.orientation?.lock?.("landscape").catch(() => {});
+}
+function tamEkranDugmeleri() {
+  document.querySelectorAll(".tam-ekran-dugme").forEach(b => {
+    b.hidden = !tamEkranVar;
+    b.innerHTML = tamEkranMi() ? KUCUK_SVG : TAM_SVG;
+    b.setAttribute("aria-label", tamEkranMi() ? yaz("tam-ekrandan-cik", "Tam ekrandan çık") : yaz("tam-ekran", "Tam ekran"));
+    b.title = b.getAttribute("aria-label");
+  });
+}
+["fullscreenchange", "webkitfullscreenchange", "dildegisti"].forEach(o => document.addEventListener(o, tamEkranDugmeleri));
 const deger = v => (DIL === "en" && CEVIRI.degerler?.[v]) || v;
 const anlatimMetni = ek => { const a = alanAl(ek, "anlatim"); return Array.isArray(a) ? a.join(" ") : a; };
 const tarihMetni = m => DIL === "en" && CEVIRI.aylar?.length === 12
@@ -561,7 +618,8 @@ require([
   });
   buyukFoto.addEventListener("click", () => buyukFoto.close());
   const lejant = $("#lejant");
-  if (darEkran.matches) { lejant.dataset.acik = "false"; $("#lejant-ac").setAttribute("aria-expanded", "false"); }
+  const kisaEkran = window.matchMedia("(max-height: 520px) and (orientation: landscape)");
+  if (darEkran.matches || kisaEkran.matches) { lejant.dataset.acik = "false"; $("#lejant-ac").setAttribute("aria-expanded", "false"); }
   let paddingGuncelle = () => {};
   $("#lejant-ac").addEventListener("click", () => {
     const acik = lejant.dataset.acik !== "true";
@@ -628,6 +686,11 @@ require([
     view.highlightOptions = { color: [...VURGU, 1], haloOpacity: 0.9, fillOpacity: 0 };
     view.ui.add(new Zoom({ view }), "top-right");
     view.ui.add(new Home({ view, viewpoint: { targetGeometry: TURKIYE } }), "top-right");
+    const tamDugme = document.createElement("button");
+    tamDugme.type = "button"; tamDugme.className = "esri-widget--button esri-widget tam-ekran-dugme";
+    view.ui.add(tamDugme, "top-right");
+    document.querySelectorAll(".tam-ekran-dugme").forEach(b => b.addEventListener("click", tamEkran));
+    tamEkranDugmeleri();
     paddingGuncelle = () => {
       const k = 16, b = lejant.getBoundingClientRect(), ust = $("#harita").getBoundingClientRect().top;
       view.padding = darEkran.matches ? { top: b.bottom - ust + k, left: 0, right: 0, bottom: 0 }
@@ -687,17 +750,20 @@ require([
       svg.replaceChildren();
       yeni(svg, "line", { x1: P, y1: y, x2: w - P, y2: y, stroke: "rgba(31,29,26,.2)", "stroke-width": 2, "stroke-linecap": "round" });
       yeni(svg, "line", { x1: P, y1: y, x2: xKonum(t, el), y2: y, stroke: "#0072b2", "stroke-width": 3, "stroke-linecap": "round" });
+      let sonEtiket = -Infinity;
       for (let yil = 1919; yil <= 1923; yil++) {
         const x = xKonum(yil === 1919 ? BAS : Date.UTC(yil, 0, 1), el);
         yeni(svg, "line", { x1: x, y1: y - 5, x2: x, y2: y + 5, stroke: "rgba(31,29,26,.35)" });
+        if (x - sonEtiket < 46) continue;
         yeni(svg, "text", { x, y: y + 19, "text-anchor": yil === 1919 ? "start" : "middle" }).textContent = yil;
+        sonEtiket = x;
       }
       kayitlar.slice().sort((a, b) => a.attributes.zaman_bas - b.attributes.zaman_bas).forEach(f => {
         const a = f.attributes, B = 15;
         const g = yeni(svg, "image", { href: simgeAdres((DETAY[a.id] || {}).simge), x: xKonum(a.zaman_bas, el) - B / 2, y: y - B / 2, width: B, height: B,
           class: "tas", opacity: a.zaman_bas <= t ? 1 : 0.35 });
         g.dataset.gun = a.zaman_bas;
-        const b = document.createElementNS(NS, "title"); b.textContent = tarihYaz(a.zaman_bas) + " · " + a.baslik; g.appendChild(b);
+        const b = document.createElementNS(NS, "title"); b.textContent = tarihYaz(a.zaman_bas) + " · " + (alanAl(DETAY[a.id], "baslik") || a.baslik); g.appendChild(b);
       });
       yeni(svg, "line", { x1: xKonum(t, el), y1: y - 12, x2: xKonum(t, el), y2: y + 12, stroke: "#d55e00", "stroke-width": 2.5, "stroke-linecap": "round" });
       yeni(svg, "circle", { cx: xKonum(t, el), cy: y - 13, r: 4, fill: "#d55e00" });

@@ -44,7 +44,7 @@
   "hk-kunye": "Credits",
   "hk-kunye-metin": "Prepared by: Mehmet Ali Yanmaz · <a href=\"https://georehber.com/\" target=\"_blank\" rel=\"noopener\">georehber.com</a> · Map data © <a href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\" rel=\"noopener\">OpenStreetMap contributors</a> (ODbL) · Routing: <a href=\"https://project-osrm.org/\" target=\"_blank\" rel=\"noopener\">OSRM</a> · Basemap: Esri Light Gray Canvas (recoloured) and World Hillshade; in the 3D view Esri World Imagery and terrain elevation · Narration: ElevenLabs · Fonts: Lora, Inter (SIL Open Font License) · Colours: Okabe-Ito palette, colour-blind friendly · Tools: Claude, Python, ArcGIS Online, ArcGIS Maps SDK for JavaScript",
   "hk-nasil": "How to read the map",
-  "hk-nasil-liste": "<li>The map shows the turning points of the period and the journeys connecting them. Intermediate stops are not shown as points; the route passes through them.</li>\n      <li>Drag or play the timeline at the bottom and the map moves to that day. Days on the road and days with no events are skipped during playback.</li>\n      <li>The orange ring shows where he was that day. During a journey it stays at the place of departure and moves to the next point on arrival.</li>\n      <li>The colour of a route shows how he travelled; where the sources do not say, the line is grey. The emphasised line is the latest journey. The colours come from the colour-blind friendly Okabe-Ito palette.</li>\n      <li>\"Start the journey\" switches to the 3D view: the camera follows the route, a vehicle moves along it, and at each stop subtitles tell what happened there. Where the means of travel is unknown, the vehicle is semi-transparent.</li>",
+  "hk-nasil-liste": "<li>The map shows the turning points of the period and the journeys connecting them. Intermediate stops are not shown as points; the route passes through them.</li>\n      <li>Drag or play the timeline at the bottom and the map moves to that day. Days on the road and days with no events are skipped during playback. The arrows on either side of the play button jump to the previous or next turning point.</li>\n      <li>The orange ring shows where he was that day. During a journey it stays at the place of departure and moves to the next point on arrival.</li>\n      <li>The colour of a route shows how he travelled; where the sources do not say, the line is grey. The emphasised line is the latest journey. The colours come from the colour-blind friendly Okabe-Ito palette.</li>\n      <li>\"Start the journey\" switches to the 3D view: the camera follows the route, a vehicle moves along it, and at each stop subtitles tell what happened there. Where the means of travel is unknown, the vehicle is semi-transparent.</li>",
   "hk-nokta": "turning points",
   "hk-yollar": "Routes and vehicles",
   "hk-yollar-metin": "The roads of those years no longer exist; the lines follow today's road and railway equivalents of the same route. Sea routes are approximate. The steamer, car and train in the 3D view are models evoking the vehicles of the period; a vehicle's position on the route is estimated from the start and end dates of the journey.",
@@ -110,5 +110,7 @@
   "yolculuklar": "Journeys",
   "yolda": "On the road",
   "zaman-cizelgesi": "Timeline",
-  "aria-harita": "From Liberation to Foundation map"
+  "aria-harita": "From Liberation to Foundation map",
+  "tam-ekran": "Full screen",
+  "tam-ekrandan-cik": "Exit full screen"
 }
