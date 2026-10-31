@@ -192,6 +192,7 @@
   .yukleme-ic div { font-family: var(--serif); font-size: 24px; color: var(--metin); letter-spacing: .4px; }
   .esri-view .esri-ui-corner .esri-widget--button { background: var(--panel); border: 1px solid var(--cizgi); color: var(--metin); }
   .esri-attribution { font-size: 10.5px; }
+  #harita .esri-ui { inset: 0 !important; }
   .esri-popup__main-container { border: 1px solid var(--cizgi); border-radius: var(--yaricap); }
   @media (min-width: 721px) {
     .esri-popup--is-docked-top-right .esri-popup__main-container { width: 410px !important; max-height: calc(100vh - 230px) !important; }
@@ -423,8 +424,6 @@ function diliSec(dil) {
 }
 document.querySelectorAll(".dil-dugme button").forEach(b => b.addEventListener("click", () => diliSec(b.dataset.dil)));
 const deger = v => (DIL === "en" && CEVIRI.degerler?.[v]) || v;
-const nutukKaynagi = m => DIL !== "en" ? m : String(m || "").replace(/([IV]+)\. Cilt, s\. /, "Vol. $1, p. ")
-  .replace("T.C. Kültür ve Turizm Bakanlığı e-kitap", "e-book of the Ministry of Culture and Tourism of Türkiye");
 const anlatimMetni = ek => { const a = alanAl(ek, "anlatim"); return Array.isArray(a) ? a.join(" ") : a; };
 const tarihMetni = m => DIL === "en" && CEVIRI.aylar?.length === 12
   ? String(m || "").replace(new RegExp(AYLAR.join("|"), "g"), ay => CEVIRI.aylar[AYLAR.indexOf(ay)]) : m;
@@ -507,7 +506,7 @@ require([
       (ek.anlatim ? "<div class=\"kutu\"><span class=\"bolum-baslik\">" + yaz("pp-ne-oldu", "Ne oldu") + "</span><div class=\"metin\">" + kacis(anlatimMetni(ek)) + "</div></div>"
                   : a.aciklama ? "<div class=\"kutu metin\">" + kacis(a.aciklama) + "</div>" : "") +
       (ek.fotograflar || []).slice(1).map(fotoHtml).join("") +
-      ((ek.nutuk || a.nutuk_soz) ? "<div class=\"nutuk\"><b>" + yaz("pp-nutuktan", "Nutuk'tan") + "</b><q>" + kacis(alanAl(ek, "nutuk") || a.nutuk_soz) + "</q>" + (DIL === "en" && ek.nutuk_en ? "<q class=\"ozgun\" lang=\"tr\">" + kacis(ek.nutuk) + "</q>" : "") + "<span>" + kacis(nutukKaynagi(ek.nutuk_kaynak || a.nutuk_soz_kaynak)) + "</span></div>" : "") +
+      ((ek.nutuk || a.nutuk_soz) ? "<div class=\"nutuk\"><b>" + yaz("pp-nutuktan", "Nutuk'tan") + "</b><q>" + kacis(alanAl(ek, "nutuk") || a.nutuk_soz) + "</q>" + (DIL === "en" && ek.nutuk_en ? "<q class=\"ozgun\" lang=\"tr\">" + kacis(ek.nutuk) + "</q>" : "") + "<span>" + kacis(ek.nutuk_kaynak || a.nutuk_soz_kaynak) + "</span></div>" : "") +
       (ek.video ? videoHtml(ek.video) : "") +
       baglantiHtml(a, ek) +
       dugmeHtml(a.zaman_bas) + "</div>");
