@@ -76,16 +76,6 @@
   .dil-dugme button { display: inline-flex; align-items: center; gap: 6px; border: 0; background: none; padding: 4px 10px 4px 4px; border-radius: 999px; font-size: 12.5px; font-weight: 600;
                       letter-spacing: .5px; color: var(--soluk); cursor: pointer; }
   .dil-dugme button[aria-pressed="true"] { background: var(--vurgu); color: #fff; }
-  header { background: linear-gradient(135deg, #e30a17, #b80913); border-bottom: 0; color: #fff; box-shadow: 0 2px 10px rgba(120, 6, 12, .22); }
-  header .marka img { background: #fff; border-radius: 50%; padding: 2px; box-shadow: 0 0 0 1px rgba(255, 255, 255, .6); }
-  header .marka .alt { color: rgba(255, 255, 255, .85); }
-  header .dil-dugme { background: rgba(255, 255, 255, .12); border-color: rgba(255, 255, 255, .45); }
-  header .dil-dugme button { color: rgba(255, 255, 255, .85); }
-  header .dil-dugme button[aria-pressed="true"] { background: #fff; color: #c00d18; }
-  header .dugme { background: rgba(255, 255, 255, .12); border-color: rgba(255, 255, 255, .55); color: #fff; }
-  header .dugme:hover { background: #fff; border-color: #fff; color: #c00d18; }
-  header :focus-visible { outline-color: #fff; }
-  header .bayrak { box-shadow: 0 0 0 1.5px rgba(255, 255, 255, .85); }
   .bayrak { width: 20px; height: 20px; flex: none; border-radius: 50%; background: center / cover no-repeat; box-shadow: 0 0 0 1px rgba(31, 29, 26, .18); }
   [data-dil="tr"] .bayrak { background-image: url(img/bayrak/tr.svg); }
   [data-dil="en"] .bayrak { background-image: url(img/bayrak/en.svg); }
@@ -283,11 +273,6 @@
   .pp tr:last-child td { border-bottom: 0; }
   .pp td:first-child { width: 1%; white-space: nowrap; color: var(--vurgu); font-weight: 500; border-right: 1px dashed var(--cizgi); }
   .pp .metin { padding: 10px 12px; line-height: 1.5; }
-  .pp .nutuk { padding: 12px 14px; border-left: 3px solid var(--vurgu); border-radius: 12px; background: rgba(0, 114, 178, .07); }
-  .pp .nutuk b { display: block; margin-bottom: 4px; font-size: 11px; font-weight: 600; letter-spacing: .7px; text-transform: uppercase; color: var(--vurgu); }
-  .pp .nutuk q { display: block; font-family: var(--serif); font-style: italic; font-size: 17px; line-height: 1.4; color: var(--metin); quotes: "“" "”"; }
-  .pp .nutuk q.ozgun { margin-top: 6px; font-size: 13.5px; color: var(--soluk); }
-  .pp .nutuk span { display: block; margin-top: 6px; font-size: 11.5px; color: var(--soluk); }
   .pp .kaynak { padding: 9px 12px; font-size: 12.5px; line-height: 1.45; color: var(--soluk); }
   .pp .kaynak b { color: var(--metin); font-weight: 600; }
   .pp .kaynak a { color: var(--vurgu); }
@@ -431,6 +416,7 @@
   #harita .tam-ekran-dugme { margin-top: 8px; display: flex; align-items: center; justify-content: center; }
   #harita .tam-ekran-dugme[hidden] { display: none; }
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }</style>
+<link rel="stylesheet" href="duzen.css">
 </head>
 <body>
 <header>
@@ -517,7 +503,7 @@
     <h2 id="kilavuz-baslik" data-m="kilavuz-baslik">Haritada neler yapabilirsiniz?</h2>
     <ol class="kilavuz">
       <li><div class="k-ornek k-kart" aria-hidden="true"><i class="k-serit"></i><div class="k-ust"><small data-m="k-ornek-sira">Durak 1 / 18</small><b data-m="k-ornek-baslik">Bandırma vapuruyla İstanbul'dan ayrılış</b></div><span class="kapat-dugme"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span></div>
-        <div class="k-metin"><b data-m="k1-baslik">Durak kartı</b><span data-m="k1-metin">Her durağın hikâyesi, fotoğrafları ve Nutuk'tan alıntısı bu kartta. × ile kapatır, “Durak bilgisi” ile yeniden açarsınız.</span></div></li>
+        <div class="k-metin"><b data-m="k1-baslik">Durak kartı</b><span data-m="k1-metin">Her durağın hikâyesi ve fotoğrafları bu kartta. × ile kapatır, “Durak bilgisi” ile yeniden açarsınız.</span></div></li>
       <li><div class="k-ornek" aria-hidden="true"><span class="gecis ileri"><span class="gecis-ust" data-m="devam">Yolculuğa devam</span><span class="gecis-ad" data-m="k-ornek-sonraki">Samsun'a çıkış</span></span></div>
         <div class="k-metin"><b data-m="k2-baslik">Yolculuğa devam</b><span data-m="k2-metin">Kartın en altındaki bu düğmeyle sonraki durağa geçersiniz; yol haritada çizilerek ilerler. Yanındaki düğme bir önceki durağa döndürür.</span></div></li>
       <li><div class="k-ornek k-lejant" aria-hidden="true"><span class="k-lj-dugme"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="6.5" r="2" fill="currentColor"/><path d="M10 6.5h10M10 12h10M10 17.5h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M3 12h4" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M3 17.5h1.5M6 17.5h1" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span><span class="k-yollar"><span><i style="background:rgb(0,114,178)"></i><em data-m="tur-vapur-uzun">Vapurla</em></span><span><i style="background:rgb(0,158,115)"></i><em data-m="tur-otomobil-uzun">Otomobille</em></span><span><i style="background:rgb(230,159,0)"></i><em data-m="tur-tren-uzun">Trenle</em></span><span><i style="background:rgb(140,140,140)"></i><em data-m="k-ornek-bilinmiyor">Bilinmiyor</em></span></span></div>
@@ -542,7 +528,7 @@
     </div>
     <h3 data-m="hk-nasil">Nasıl okunur</h3>
     <ul data-m="hk-nasil-liste">
-      <li>Haritada dönemin dönüm noktaları ve onları birbirine bağlayan yolculuklar var. Her durağın anlatımı, fotoğrafları ve Nutuk'tan alıntısı durak kartında yer alır.</li>
+      <li>Haritada dönemin dönüm noktaları ve onları birbirine bağlayan yolculuklar var. Her durağın anlatımı ve fotoğrafları durak kartında yer alır.</li>
       <li>Kartın altındaki "Yolculuğa devam" ile bir sonraki durağa geçilir ve yol haritada çizilerek ilerler; "Bir önceki durak" ile geri dönülür. Çizelgedeki simgelere dokunarak da istenen durağa geçilir.</li>
       <li>Bulunulan durağın simgesi ince turuncu bir çizgiyle çevrilidir ve tam renklidir, öncekiler soluk görünür; son çizilen yol da en belirgin olandır. Aynı şehirde birden çok durak varsa haritada yalnız en sonuncusu görünür.</li>
       <li>Yolların rengi ulaşım şeklini gösterir; her kartın "Buraya nasıl gelindi" bölümünde yazar. Nasıl gidildiği kaynakta geçmiyorsa çizgi gridir. Renkler renk körlüğüne uygun Okabe-Ito paletindendir. Simgelerin ve renklerin anlamı sol üstteki lejant düğmesindedir.</li>
@@ -550,7 +536,7 @@
     </ul>
     <h3 data-m="hk-kaynaklar">Kaynaklar</h3>
     <ul data-m="hk-kaynaklar-liste">
-      <li>Gazi Mustafa Kemal, Nutuk–Söylev, T.C. Kültür ve Turizm Bakanlığı e-kitap (ekitap.ktb.gov.tr). Alıntılar özgün metinden, cilt ve sayfasıyla.</li>
+      <li>Gazi Mustafa Kemal, Nutuk–Söylev, T.C. Kültür ve Turizm Bakanlığı e-kitap (ekitap.ktb.gov.tr). Açılıştaki alıntı özgün metinden, cilt ve sayfasıyla.</li>
       <li>Atatürk Ansiklopedisi, Atatürk Araştırma Merkezi (ataturkansiklopedisi.gov.tr).</li>
       <li>Ara durakların tarihleri için ayrıca: Ö. Toraman, Vakanüvis 8 (Özel Sayı), 2023; O. Akandere, Atatürk Araştırma Merkezi Dergisi.</li>
     </ul>
@@ -581,7 +567,8 @@ const GUN_SAYISI = Math.round((BIT - BAS) / GUN) + 1;
 const AYLAR = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
 let DIL = "tr", CEVIRI = {};
 try { DIL = localStorage.getItem("dil") === "en" ? "en" : "tr"; } catch (e) {}
-const yaz = (anahtar, tr) => (DIL === "en" && CEVIRI[anahtar]) || tr;
+let TR_DUZEN = {};
+const yaz = (anahtar, tr) => (DIL === "en" ? CEVIRI[anahtar] : TR_DUZEN[anahtar]) || tr;
 const alanAl = (nesne, alan) => (DIL === "en" && nesne?.[alan + "_en"]) || nesne?.[alan];
 const ozgunIcerik = new Map(), ozgunAria = new Map();
 function metinleriUygula() {
@@ -597,10 +584,11 @@ function metinleriUygula() {
   });
   document.querySelectorAll(".dil-dugme button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.dil === DIL)));
 }
-const ceviriSozu = fetch("dil/en.json").then(r => r.ok ? r.json() : {}).catch(() => ({})).then(c => {
-  CEVIRI = c || {};
+const dilDosyasi = ad => fetch(ad).then(r => r.ok ? r.json() : {}).catch(() => ({}));
+const ceviriSozu = Promise.all([dilDosyasi("dil/en.json"), dilDosyasi("dil/tr.json")]).then(([c, t]) => {
+  CEVIRI = c || {}; TR_DUZEN = t || {};
   metinleriUygula();
-  if (DIL === "en") document.dispatchEvent(new Event("dildegisti"));
+  if (DIL === "en" || Object.keys(TR_DUZEN).length) document.dispatchEvent(new Event("dildegisti"));
 });
 function diliSec(dil) {
   DIL = dil === "en" ? "en" : "tr";
@@ -719,7 +707,7 @@ require([
   const commonsAdres = (dosya, en) => "https://commons.wikimedia.org/wiki/Special:FilePath/" + encodeURIComponent(dosya) + (en ? "?width=" + en : "");
   const commonsSayfa = dosya => "https://commons.wikimedia.org/wiki/File:" + encodeURIComponent(dosya.replaceAll(" ", "_"));
   const fotoHtml = f => "<figure class=\"kutu foto\"><img loading=\"lazy\" src=\"" + commonsAdres(f.dosya, 800) + "\" data-buyuk=\"" + commonsAdres(f.dosya, 1600) +
-    "\" alt=\"" + kacis(alanAl(f, "aciklama")) + "\"><figcaption>" + kacis(alanAl(f, "aciklama")) + "<small>" + kacis(deger(f.lisans)) + " · " + kacis(deger(f.eser_sahibi)) +
+    "\" alt=\"" + kacis(alanAl(f, "aciklama")) + "\"><figcaption><span class=\"foto-yazi\">" + kacis(alanAl(f, "aciklama")) + "</span><small>" + kacis(deger(f.lisans)) + " · " + kacis(deger(f.eser_sahibi)) +
     " · <a href=\"" + commonsSayfa(f.dosya) + "\" target=\"_blank\" rel=\"noopener\">Wikimedia Commons</a></small></figcaption></figure>";
   function durakIcerigi(a, yolculuk, bitis = "") {
     const ek = DETAY[a.id] || {};
@@ -729,12 +717,11 @@ require([
       "<div class=\"rozetler\">" + rozet(tarihMetni(a.tarih_metni), "altin") + rozet(ek.simge ? simgeAdi(ek.simge) : yaz("olay-" + a.olay_turu, TUR_ADI[a.olay_turu])) +
         "</div>" +
       "<div class=\"kutu\"><table>" + satir(yaz("pp-yer", "Yer"), yerAdi(a)) + satir(yaz("pp-donem-adi", "O günkü adı"), yer) + satir(yaz("pp-il", "İl"), a.il) + "</table></div>" +
-      (ek.anlatim ? "<div class=\"kutu\"><span class=\"bolum-baslik\">" + yaz("pp-ne-oldu", "Ne oldu") + "</span><div class=\"metin\">" + kacis(anlatimMetni(ek)) + "</div></div>"
+      (ek.anlatim ? "<div class=\"kutu\"><span class=\"bolum-baslik\" data-m=\"pp-ne-oldu\">" + yaz("pp-ne-oldu", "Ne oldu") + "</span><div class=\"metin\" data-veri=\"" + a.id + "|anlatim\">" + kacis(anlatimMetni(ek)) + "</div></div>"
                   : a.aciklama ? "<div class=\"kutu metin\">" + kacis(a.aciklama) + "</div>" : "") +
-      (ek.fotograflar || []).map(fotoHtml).join("") +
+      (ek.fotograflar || []).map((f, n) => fotoHtml(f).replace("<span class=\"foto-yazi\">", "<span class=\"foto-yazi\" data-veri=\"" + a.id + "|fotograflar." + n + ".aciklama\">")).join("") +
       (ek.video ? videoHtml(ek.video) : "") +
       bitis +
-      ((ek.nutuk || a.nutuk_soz) ? "<div class=\"nutuk\"><b>" + yaz("pp-nutuktan", "Nutuk'tan") + "</b><q>" + kacis(alanAl(ek, "nutuk") || a.nutuk_soz) + "</q>" + (DIL === "en" && ek.nutuk_en ? "<q class=\"ozgun\" lang=\"tr\">" + kacis(ek.nutuk) + "</q>" : "") + "<span>" + kacis(ek.nutuk_kaynak || a.nutuk_soz_kaynak) + "</span></div>" : "") +
       yolculuk +
       baglantiHtml(a, ek) + "</div>";
   }
@@ -1086,6 +1073,7 @@ require([
       durakKart.classList.toggle("son-durak", sonMu);
       $("#d-sira").textContent = (sonMu ? yaz("son-durak", "Son durak") + " · " : "") + yaz("durak-sira", "Durak {i} / {n}").replace("{i}", i + 1).replace("{n}", sirali2.length);
       $("#d-baslik").textContent = durakBasligi(sirali2[i]);
+      $("#d-baslik").dataset.veri = sirali2[i].attributes.id + "|baslik";
       kartGovde.innerHTML = durakIcerigi(a, yolculukHtml(ayakYollari(i)), sonMu ? bitisHtml(GUN_SAYISI, sirali2.length, toplamKm) : "");
       kartGovde.scrollTop = 0;
       $("#d-onceki").hidden = !onceki;
