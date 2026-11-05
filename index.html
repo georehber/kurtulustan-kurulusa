@@ -96,33 +96,6 @@
   .dil-secim b { font-family: var(--serif); font-size: 22px; font-weight: 600; }
   .dil-secim span { font-size: 12.5px; color: var(--soluk); }
   .adimlar { display: flex; justify-content: center; gap: 6px; margin-top: 20px; }
-  #adim-kilavuz { width: min(660px, 100%); }
-  #adim-kilavuz h2 { margin: 0 0 16px; font-family: var(--serif); font-size: 25px; font-weight: 600; }
-  .kilavuz { display: grid; gap: 10px; margin: 0 0 20px; padding: 0; list-style: none; text-align: left; }
-  .kilavuz li { display: grid; grid-template-columns: 250px 1fr; align-items: center; gap: 16px; padding: 10px 14px 10px 10px; border: 1px solid var(--cizgi);
-                border-radius: 14px; background: #fff; counter-increment: adim; }
-  .k-ornek { position: relative; display: flex; align-items: center; justify-content: center; min-height: 72px; padding: 8px; border-radius: 10px;
-             background: #e9eef0; pointer-events: none; }
-  .k-ornek .gecis { width: 100%; }
-  .k-ornek .uc-gec { position: static; box-shadow: 0 6px 16px rgba(31, 29, 26, .16); }
-  .k-kart { justify-content: space-between; gap: 8px; padding: 12px 10px 10px 12px; background: #fffdf8; border: 1px solid var(--cizgi); overflow: hidden; }
-  .k-serit { position: absolute; left: 0; right: 0; top: 0; height: 3px; background: linear-gradient(90deg, #0072b2 0 33.3%, #009e73 33.3% 66.6%, #e69f00 66.6%); }
-  .k-ust { display: grid; gap: 2px; min-width: 0; text-align: left; }
-  .k-ust small { font-size: 10px; font-weight: 600; letter-spacing: .6px; text-transform: uppercase; color: var(--kor); }
-  .k-ust b { font-family: var(--serif); font-size: 14.5px; font-weight: 600; line-height: 1.2; }
-  .k-kart .kapat-dugme { width: 30px; height: 30px; flex: none; }
-  .k-kart .kapat-dugme svg { width: 12px; height: 12px; }
-  .k-metin { display: grid; gap: 3px; }
-  .k-metin b { font-size: 14.5px; }
-  .k-metin b::before { content: counter(adim) ". "; color: var(--vurgu); }
-  .k-metin span { font-size: 13px; line-height: 1.45; color: var(--soluk); }
-  .k-lejant { gap: 14px; background: #f6f2e9; }
-  .k-lj-dugme { flex: none; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: #fff; color: #6e6e6e; box-shadow: 0 1px 2px rgba(0, 0, 0, .3); }
-  .k-lj-dugme svg { width: 18px; height: 18px; }
-  .k-yollar { display: grid; grid-template-columns: auto auto; gap: 4px 14px; font-size: 11.5px; color: var(--metin, #28251f); }
-  .k-yollar span { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
-  .k-yollar i { width: 22px; height: 4px; border-radius: 2px; }
-  .k-yollar em { font-style: normal; }
   .adimlar i { width: 22px; height: 4px; border-radius: 2px; background: var(--cizgi); }
   .adimlar i.etkin { background: var(--vurgu); }
   #harita, #sahne { position: fixed; top: calc(var(--baslik) + env(safe-area-inset-top)); left: 0; right: 0; bottom: 0; }
@@ -314,29 +287,6 @@
     #d-baslik { font-size: 18px; }
     .durak-govde { padding: 12px; }
     #acilis .kart { padding: 24px 16px 18px; }
-    #adim-kilavuz h2 { font-size: 21px; margin-bottom: 12px; }
-    .kilavuz { gap: 6px; margin-bottom: 14px; }
-    .kilavuz li { grid-template-columns: 44% 1fr; gap: 10px; padding: 7px; }
-    .k-ornek { min-height: 54px; padding: 6px; }
-    .k-kart { padding: 9px 6px 7px 8px; gap: 4px; }
-    .k-ust small { font-size: 8.5px; }
-    .k-ust b { font-size: 11.5px; }
-    .k-kart .kapat-dugme { width: 22px; height: 22px; }
-    .k-ornek .gecis { padding: 5px 7px; }
-    .k-ornek .gecis-ust { font-size: 8px; }
-    .k-ornek .gecis-ad { font-size: 11px; }
-    .k-ornek .uc-gec { padding: 3px 9px 3px 3px; gap: 5px; }
-    .k-ornek .uc-gec-simge { width: 26px; height: 26px; }
-    .k-ornek .uc-gec-simge svg { width: 15px; height: 15px; }
-    .k-ornek .uc-gec-yazi small { font-size: 7.5px; }
-    .k-ornek .uc-gec-yazi b { font-size: 11.5px; }
-    .k-lejant { gap: 8px; }
-    .k-lj-dugme { width: 26px; height: 26px; }
-    .k-lj-dugme svg { width: 15px; height: 15px; }
-    .k-yollar { grid-template-columns: auto; font-size: 9.5px; gap: 1px; }
-    .k-yollar i { width: 14px; height: 3px; }
-    .k-metin b { font-size: 13px; }
-    .k-metin span { font-size: 11.5px; line-height: 1.38; }
     .durak-alt { padding: 4px 10px 10px; }
     .gecis { padding: 7px 10px; }
     .gecis-ad { font-size: 12.5px; }
@@ -371,9 +321,6 @@
     #adim-dil .soru { margin: 4px 0 12px; }
     .dil-secim .bayrak-serit { aspect-ratio: 3 / 1; }
     .adimlar { margin-top: 12px; }
-    .kilavuz { grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
-    .kilavuz li { grid-template-columns: 1fr; gap: 6px; }
-    #adim-kilavuz h2 { font-size: 20px; margin-bottom: 10px; }
     dialog { max-height: calc(100% - 24px); }
     #altyazi { bottom: 84px; }
     #a-tarih { font-size: 24px; }
@@ -487,7 +434,7 @@
       <button type="button" data-dil="tr" lang="tr"><i class="bayrak-serit" aria-hidden="true"></i><b>Türkçe</b><span>Türkçe devam et</span></button>
       <button type="button" data-dil="en" lang="en"><i class="bayrak-serit" aria-hidden="true"></i><b>English</b><span>Continue in English</span></button>
     </div>
-    <div class="adimlar" aria-hidden="true"><i class="etkin"></i><i></i><i></i></div>
+    <div class="adimlar" aria-hidden="true"><i class="etkin"></i><i></i></div>
   </div>
   <div class="kart" id="adim-giris" role="dialog" aria-modal="true" aria-labelledby="acilis-soz" hidden>
     <blockquote id="acilis-soz" data-m="acilis-soz">1919 senesi Mayısının 19 uncu günü Samsun'a çıktım.</blockquote>
@@ -495,26 +442,9 @@
     <p class="bilgi" data-m="acilis-bilgi">Nutuk, Mustafa Kemal Atatürk'ün 1927'de okuduğu, Millî Mücadele'yi ve Cumhuriyet'in kuruluşunu anlatan büyük konuşmadır ve bu cümleyle başlar. Bu harita, 16 Mayıs 1919'dan 29 Ekim 1923'e uzanan o yolculuğu dönüm noktalarıyla anlatıyor.
       <small>Kaynak: Nutuk–Söylev, I. Cilt, s. 2, T.C. Kültür ve Turizm Bakanlığı e-kitap (<a href="https://ekitap.ktb.gov.tr/TR-273376/nutuk.html" target="_blank" rel="noopener">ekitap.ktb.gov.tr</a>).</small></p>
     <div class="secenekler">
-      <button type="button" id="acilis-devam" class="dugme vurgu" data-m="devam-et">Devam</button>
+      <button type="button" id="acilis-devam" class="dugme vurgu" data-m="haritaya-basla">Haritaya başla</button>
     </div>
-    <div class="adimlar" aria-hidden="true"><i></i><i class="etkin"></i><i></i></div>
-  </div>
-  <div class="kart" id="adim-kilavuz" role="dialog" aria-modal="true" aria-labelledby="kilavuz-baslik" hidden>
-    <h2 id="kilavuz-baslik" data-m="kilavuz-baslik">Haritada neler yapabilirsiniz?</h2>
-    <ol class="kilavuz">
-      <li><div class="k-ornek k-kart" aria-hidden="true"><i class="k-serit"></i><div class="k-ust"><small data-m="k-ornek-sira">Durak 1 / 18</small><b data-m="k-ornek-baslik">Bandırma vapuruyla İstanbul'dan ayrılış</b></div><span class="kapat-dugme"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span></div>
-        <div class="k-metin"><b data-m="k1-baslik">Durak kartı</b><span data-m="k1-metin">Her durağın hikâyesi ve fotoğrafları bu kartta. × ile kapatır, “Durak bilgisi” ile yeniden açarsınız.</span></div></li>
-      <li><div class="k-ornek" aria-hidden="true"><span class="gecis ileri"><span class="gecis-ust" data-m="devam">Yolculuğa devam</span><span class="gecis-ad" data-m="k-ornek-sonraki">Samsun'a çıkış</span></span></div>
-        <div class="k-metin"><b data-m="k2-baslik">Yolculuğa devam</b><span data-m="k2-metin">Kartın en altındaki bu düğmeyle sonraki durağa geçersiniz; yol haritada çizilerek ilerler. Yanındaki düğme bir önceki durağa döndürür.</span></div></li>
-      <li><div class="k-ornek k-lejant" aria-hidden="true"><span class="k-lj-dugme"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="6.5" r="2" fill="currentColor"/><path d="M10 6.5h10M10 12h10M10 17.5h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M3 12h4" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M3 17.5h1.5M6 17.5h1" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span><span class="k-yollar"><span><i style="background:rgb(0,114,178)"></i><em data-m="tur-vapur-uzun">Vapurla</em></span><span><i style="background:rgb(0,158,115)"></i><em data-m="tur-otomobil-uzun">Otomobille</em></span><span><i style="background:rgb(230,159,0)"></i><em data-m="tur-tren-uzun">Trenle</em></span><span><i style="background:rgb(140,140,140)"></i><em data-m="k-ornek-bilinmiyor">Bilinmiyor</em></span></span></div>
-        <div class="k-metin"><b data-m="k3-baslik">Lejant</b><span data-m="k3-metin">Haritanın sol üstündeki bu düğme simgelerin ve yol renklerinin anlamını gösterir. Yolun rengi o yolculuğun vapurla, otomobille ya da trenle yapıldığını anlatır.</span></div></li>
-      <li><div class="k-ornek" aria-hidden="true"><span class="uc-gec"><span class="uc-gec-simge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 19.5l6-8.5 4 5 3-3.5 6 7z" fill="currentColor" opacity=".9"/><path d="M4 8.5c3-4 9-5 14-2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-dasharray="2 2.4"/><circle cx="19" cy="7.5" r="1.8" fill="currentColor"/></svg></span><span class="uc-gec-yazi"><small data-m="uc-gec-ust">Üç boyutlu anlatım</small><b data-m="uc-gec-ad">Yolculuğu izle</b></span></span></div>
-        <div class="k-metin"><b data-m="k4-baslik">3B yolculuk</b><span data-m="k4-metin">Sol alttaki bu düğmeyle yolculuğun tamamını baştan sona üç boyutlu izlersiniz.</span></div></li>
-    </ol>
-    <div class="secenekler">
-      <button type="button" id="acilis-haritaya" class="dugme vurgu" data-m="haritaya-basla">Haritaya başla</button>
-    </div>
-    <div class="adimlar" aria-hidden="true"><i></i><i></i><i class="etkin"></i></div>
+    <div class="adimlar" aria-hidden="true"><i></i><i class="etkin"></i></div>
   </div>
 </div>
 <dialog id="hakkinda" aria-labelledby="hakkinda-baslik">
@@ -1625,8 +1555,7 @@ require([
       diliSec(b.dataset.dil);
       $("#adim-dil").hidden = true; $("#adim-giris").hidden = false; odakla($("#acilis-devam"));
     }));
-    $("#acilis-devam").addEventListener("click", () => { $("#adim-giris").hidden = true; $("#adim-kilavuz").hidden = false; odakla($("#acilis-haritaya")); });
-    $("#acilis-haritaya").addEventListener("click", kapat);
+    $("#acilis-devam").addEventListener("click", kapat);
     acilis.addEventListener("click", e => { if (e.target === acilis && $("#adim-dil").hidden) kapat(); });
     window.sayfaHazir = true;
   }).catch(hata => {
