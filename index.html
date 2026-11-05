@@ -557,7 +557,7 @@
     <h3 data-m="hk-yollar">Yollar ve araçlar</h3>
     <p data-m="hk-yollar-metin">O yılların yolları bugün yok; çizgiler aynı güzergâhın bugünkü yol ve demiryolu karşılığını izler. Vapur yolu yaklaşıktır. Üç boyutlu görünümdeki vapur, otomobil ve tren dönemin taşıtlarını anımsatan maketlerdir; duraklardaki yapı ve nesneler de temsilidir; aracın yol üzerindeki yeri yolculuğun başlangıç ve bitiş günlerine göre yaklaşık hesaplanır.</p>
     <h3 data-m="hk-kunye">Künye</h3>
-    <p data-m="hk-kunye-metin">Hazırlayan: Mehmet Ali Yanmaz · <a href="https://georehber.com/" target="_blank" rel="noopener">georehber.com</a> · Harita verisi © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap katkıcıları</a> (ODbL) · Yol hesabı: <a href="https://project-osrm.org/" target="_blank" rel="noopener">OSRM</a> · Ülke sınırları: <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth</a> · Altlık: Esri Light Gray Canvas (yeniden renklendirildi) ve World Hillshade; üç boyutlu görünümde Esri World Imagery ve arazi yükseltisi · Seslendirme: Adam Stone (ElevenLabs) · Yazı tipleri: Lora, Inter (SIL Open Font License) · Renkler: Okabe-Ito paleti, renk körlüğüne uygun · Araçlar: Claude, Python, ArcGIS Online, ArcGIS Maps SDK for JavaScript</p>
+    <p data-m="hk-kunye-metin">Hazırlayan: Mehmet Ali Yanmaz · <a href="https://georehber.com/" target="_blank" rel="noopener">georehber.com</a> · Harita verisi © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap katkıcıları</a> (ODbL) · Yol hesabı: <a href="https://project-osrm.org/" target="_blank" rel="noopener">OSRM</a> · Ülke sınırları: <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth</a> · Altlık: Esri Light Gray Canvas ve World Hillshade; üç boyutlu görünümde Esri World Imagery ve arazi yükseltisi · Seslendirme: Adam Stone (ElevenLabs) · Yazı tipleri: Lora, Inter (SIL Open Font License) · Renkler: Okabe-Ito paleti, renk körlüğüne uygun · Araçlar: Claude, Python, ArcGIS Online, ArcGIS Maps SDK for JavaScript</p>
     <h3 data-m="hk-topluluk">Topluluk</h3>
     <p data-m="hk-topluluk-metin">Bu harita, İzmir Bakırçay Üniversitesi Coğrafi Bilgi Sistemleri Topluluğu (BakırçayCBS) bünyesinde düzenlenen #30DayMapChallenge 2026 etkinliğinin 10. günü (“Prompting only”) için hazırlandı. Koordinatör: Dr. Şevki Danacıoğlu · <a href="https://sdanacioglu.github.io/30daymapchallenge-2026/" target="_blank" rel="noopener">BakırçayCBS #30DayMapChallenge 2026</a></p>
   </div>
@@ -837,11 +837,11 @@ require([
     });
     const adKatmani = new GraphicsLayer({ id: "adlar" });
     const simdi = new GraphicsLayer({ id: "simdi" });
-    const ALTLIK = { kara: "#f4efe3", yesil: "#e5e9d6", kent: "#ece4d4", su: "#cfe5f2", suCizgi: "#9ccbe8", ulke: "#9b907c" };
+    const RENK = { arka_plan: "", kara: "", su: "", su_cizgi: "", yesil: "", kent: "", sinir: "#dddedb", dag_golgesi: 0.32, ...(config.altlik_renkleri || {}) };
     const sinirlar = new FeatureLayer({
       source: [], objectIdField: "OBJECTID", geometryType: "polyline", spatialReference: { wkid: 4326 },
       fields: [{ name: "OBJECTID", type: "oid" }, { name: "tr", type: "integer" }], id: "sinirlar", outFields: ["tr"],
-      renderer: { type: "simple", symbol: { type: "simple-line", color: ALTLIK.ulke, width: 1, cap: "round", join: "round" },
+      renderer: { type: "simple", symbol: { type: "simple-line", color: RENK.sinir || "#dddedb", width: 1, cap: "round", join: "round" },
         visualVariables: [{ type: "size",
           valueExpression: "var z = Log(591657527.591555 / $view.scale) / Log(2); var w = (0.65 + 8.65 * (z - 1) / 13) * 0.75; " +
                            "return Max(0.3, IIf($feature.tr == 1, w, w / 2));",
@@ -852,28 +852,27 @@ require([
       .catch(() => {});
     const harita = new EsriMap({ basemap: "gray-vector", layers: [sinirlar, rota, olaylar, simdi, adKatmani] });
     const gizle = (vt, l) => vt.setLayoutProperties(l.id, { ...(vt.getLayoutProperties(l.id) || {}), visibility: "none" });
-    function altligiBoya(vt, l) {
-      const boya = (ozellik, renk) => vt.setPaintProperties(l.id, { ...(vt.getPaintProperties(l.id) || {}), [ozellik]: renk });
+    function altligiHazirla(vt, l) {
+      const boya = (ozellik, renk) => renk && vt.setPaintProperties(l.id, { ...(vt.getPaintProperties(l.id) || {}), [ozellik]: renk });
       const id = l.id;
       if (l.type === "symbol" || (l.type === "line" && !/^Water line/.test(id))) return gizle(vt, l);
-      if (l.type === "background") boya("background-color", ALTLIK.kara);
+      if (l.type === "background") boya("background-color", RENK.arka_plan);
       else if (l.type === "fill") {
-        if (/water|marine/i.test(id)) boya("fill-color", ALTLIK.su);
-        else if (/forest|park|green|grass|groundcover|farming/i.test(id)) boya("fill-color", ALTLIK.yesil);
-        else if (/urban|building/i.test(id)) boya("fill-color", ALTLIK.kent);
-        else if (id === "Land") boya("fill-color", ALTLIK.kara);
-      } else if (l.type === "line") {
-        boya("line-color", ALTLIK.suCizgi);
-      }
+        if (/water|marine/i.test(id)) boya("fill-color", RENK.su);
+        else if (/forest|park|green|grass|groundcover|farming/i.test(id)) boya("fill-color", RENK.yesil);
+        else if (/urban|building/i.test(id)) boya("fill-color", RENK.kent);
+        else if (id === "Land") boya("fill-color", RENK.kara);
+      } else if (l.type === "line") boya("line-color", RENK.su_cizgi);
     }
     harita.basemap.load().then(async b => {
       b.referenceLayers.removeAll();
       for (const vt of b.baseLayers.toArray()) {
         await vt.load();
-        for (const l of vt.currentStyleInfo?.style?.layers || []) altligiBoya(vt, l);
+        for (const l of vt.currentStyleInfo?.style?.layers || []) altligiHazirla(vt, l);
       }
-      b.baseLayers.add(new TileLayer({ url: "https://services.arcgisonline.com/arcgis/rest/services/Elevation/World_Hillshade/MapServer",
-                                       blendMode: "multiply", opacity: 0.32 }));
+      if (RENK.dag_golgesi > 0)
+        b.baseLayers.add(new TileLayer({ url: "https://services.arcgisonline.com/arcgis/rest/services/Elevation/World_Hillshade/MapServer",
+                                         blendMode: "multiply", opacity: RENK.dag_golgesi }));
     }).catch(() => {});
     const TURKIYE = { type: "extent", xmin: 26, ymin: 36.3, xmax: 42.5, ymax: 42.3, spatialReference: { wkid: 4326 } };
     const view = new MapView({
