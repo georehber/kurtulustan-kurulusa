@@ -482,7 +482,7 @@
       <li>Kartın altındaki "Yolculuğa devam" ile bir sonraki durağa geçilir ve yol haritada çizilerek ilerler; "Bir önceki durak" ile geri dönülür.</li>
       <li>Bulunulan durağın simgesi ince turuncu bir çizgiyle çevrilidir ve tam renklidir, öncekiler soluk görünür; son çizilen yol da en belirgin olandır. Aynı şehirde birden çok durak varsa haritada yalnız en sonuncusu görünür.</li>
       <li>Yolların rengi ulaşım şeklini gösterir; her kartın "Buraya nasıl gelindi" bölümünde yazar. Nasıl gidildiği kaynakta geçmiyorsa çizgi gridir. Renkler renk körlüğüne uygun Okabe-Ito paletindendir. Simgelerin ve renklerin anlamı sol üstteki lejant düğmesindedir.</li>
-      <li>Sol üstteki düğmelerin en altındaki dağ simgeli "Yolculuğu izle" düğmesiyle yolculuk baştan sona üç boyutlu izlenir: kamera yolu izler, araç yol boyunca ilerler, duraklarda orada olanlar bir iki cümleyle anlatılır ve seslendirilir, olayı simgeleyen maket belirir. + ve − düğmeleriyle ya da fare tekerleğiyle yaklaşınca araç küçülür ve yavaşlar, uzaklaşınca büyür ve hızlanır. Nasıl gidildiği bilinmeyen yollarda araç yarı saydamdır.</li>
+      <li>Sol üstteki düğmelerin en altındaki dağ simgeli "Yolculuğu izle" düğmesiyle yolculuk baştan sona üç boyutlu izlenir: kamera yolu izler, araç yol boyunca ilerler, duraklarda orada olanlar bir iki cümleyle anlatılır ve seslendirilir, olayı simgeleyen maket belirir. + ve − düğmeleriyle ya da fare tekerleğiyle yaklaşınca araç küçülür ve yavaşlar, uzaklaşınca büyür ve hızlanır. Sağ tıkla (telefonda iki parmakla) sürükleyerek bakış açısı değiştirilir; sol tıkla sürükleyince oynatma durur, oynat düğmesiyle kamera araca döner. Nasıl gidildiği bilinmeyen yollarda araç yarı saydamdır.</li>
     </ul>
     <h3 data-m="hk-kaynaklar">Kaynaklar</h3>
     <ul data-m="hk-kaynaklar-liste">
@@ -624,7 +624,7 @@ const SIMGE_ADI = { gemi: "Vapur yolculuğu", ferman: "Genelge", belge: "İstifa
                     kosk: "Çankaya Köşkü", yildiz: "Cumhuriyet'in ilanı" };
 const cerceveAdres = ad => new URL("img/simge/cerceve/" + (ad || "yildiz") + ".png?v=1", location.href).href;
 const simgeAdres = ad => new URL("img/simge/" + (ad || "yildiz") + ".png?v=5", location.href).href;
-const AYAR = { kmSaniye: 100, enAzYol: 5, durakSaniye: 7, kameraUzak: 90000, kameraYuksek: 55000, yumusak: 0.04, takip: 1, maket: 6, okumaKelimeSaniye: 3.2 };
+const AYAR = { kmSaniye: 100, enAzYol: 5, durakSaniye: 4, kameraUzak: 90000, kameraYuksek: 55000, maket: 6, okumaKelimeSaniye: 3.2 };
 const turAdi = t => yaz("tur-" + t, TURLER[t]?.ad || "");
 const simgeAdi = ad => yaz("simge-" + ad, SIMGE_ADI[ad]);
 require([
@@ -1059,7 +1059,7 @@ require([
     const surukBas = e => {
       if (!darEkran.matches || e.target.closest("#durak-kapat")) return;
       surukle = { y: e.clientY, h: durakKart.getBoundingClientRect().height, oynadi: false, id: e.pointerId };
-      e.currentTarget.setPointerCapture?.(e.pointerId);
+      try { e.currentTarget.setPointerCapture(e.pointerId); } catch (hata) {}
     };
     const surukOyna = e => {
       if (!surukle || e.pointerId !== surukle.id) return;
@@ -1286,22 +1286,21 @@ require([
         ...SIMGE_MAKET
       };
       BINA.kongre_erzurum = BINA.kongre_sivas = BINA.kongre;
-      const konulan = [];
+      const obekler = [];
       kayitlar.forEach(f => {
         const tur = (DETAY[f.attributes.id] || {}).simge;
         if (!BINA[tur]) return;
         const k = [f.geometry.x, f.geometry.y];
-        if (konulan.some(q => q.tur === tur && Math.hypot(q.k[0] - k[0], q.k[1] - k[1]) < 0.01)) return;
-        const komsu = konulan.filter(q => Math.hypot(q.k[0] - k[0], q.k[1] - k[1]) < 0.04).length;
-        konulan.push({ tur, k });
+        let obek = obekler.findIndex(q => Math.hypot(q[0] - k[0], q[1] - k[1]) < 0.04);
+        if (obek < 0) { obekler.push(k); obek = obekler.length - 1; }
         const temel = BINA[tur](); temel.rotate(0, 0, -20, { origin: MERKEZ });
         const [x, y] = wmu.lngLatToXY(k[0], k[1]);
-        const [ox, oy] = wmu.lngLatToXY(k[0] + 0.02 + komsu * 0.045, k[1] - 0.015);
-        binalar.add(new Graphic({ attributes: { bas: f.attributes.zaman_bas, temel, x, y, dx: ox - x, dy: oy - y }, visible: false, symbol: { type: "mesh-3d", symbolLayers: [{ type: "fill" }] } }));
+        const [ox, oy] = wmu.lngLatToXY(k[0] + 0.02, k[1] - 0.015);
+        binalar.add(new Graphic({ attributes: { bas: f.attributes.zaman_bas, obek, temel, x, y, dx: ox - x, dy: oy - y }, visible: false, symbol: { type: "mesh-3d", symbolLayers: [{ type: "fill" }] } }));
       });
       const aracGrafik = new Graphic({ symbol: { type: "mesh-3d", symbolLayers: [{ type: "fill" }] } });
       arac.add(aracGrafik);
-      return { sView, izler, aktif, aracGrafik, modeller: {}, maketler: binalar.graphics.toArray(), gorunenler: [...binalar.graphics.toArray(), ...yerler.graphics.toArray()] };
+      return { sView, izler, aktif, aracGrafik, modeller: {}, maketler: binalar.graphics.toArray(), yerAdlari: yerler.graphics.toArray() };
     }
     const duraklar = kayitlar.map(f => ({ ...f.attributes, k: [f.geometry.x, f.geometry.y] })).sort((a, b) => a.zaman_bas - b.zaman_bas || a.zaman_bit - b.zaman_bit);
     const yolParcalari = yollar.map(f => ({ ...f.attributes, h: hat(f.geometry.paths.flat()), ayak: ayak(f) })).sort((a, b) => a.zaman_bas - b.zaman_bas);
@@ -1315,8 +1314,8 @@ require([
     });
     const okumaSuresi = d => String(alanAl(DETAY[d.id], "kisa") || "").split(/\s+/).length / AYAR.okumaKelimeSaniye;
     sahneler.forEach(s => { s.sure = s.tur === "durak" ? Math.max(AYAR.durakSaniye, okumaSuresi(s.d)) : Math.max(AYAR.enAzYol, s.uzunluk / AYAR.kmSaniye); });
-    const SES_ARA = 0.8;
-    const SES_BEKLEME = 8;
+    const SES_ARA = 0.2;
+    const SES_BEKLEME = 4;
     const sesler = new Map();
     let sessiz = false;
     const ingilizceSes = id => DIL === "en" && !!(DETAY[id] || {}).kisa_ses_en;
@@ -1398,17 +1397,29 @@ require([
       m.offset(x, y, 0);
       uc.aracGrafik.geometry = m;
     }
-    let kamYon = 0, kamHedef = null, yakinlik = 1;
+    const EGIM0 = der(Math.atan2(AYAR.kameraUzak, AYAR.kameraYuksek)), MESAFE0 = Math.hypot(AYAR.kameraUzak, AYAR.kameraYuksek);
+    let kamYon = 0, kamEgim = EGIM0, kamHedef = null, yakinlik = 1;
+    let elde = false, kaydirildi = false;
     const aracOlcegi = () => Math.pow(yakinlik, 1.6);
     const hedefHiz = () => Math.pow(yakinlik, 1.7);
     let yolHizi = 1;
-    function kameraTakip(k, hedefYon, ani) {
-      const fark = ((hedefYon - kamYon + 540) % 360) - 180;
-      kamYon = ani ? hedefYon : (kamYon + fark * AYAR.yumusak + 360) % 360;
-      kamHedef = ani || !kamHedef ? k : [kamHedef[0] + (k[0] - kamHedef[0]) * AYAR.takip, kamHedef[1] + (k[1] - kamHedef[1]) * AYAR.takip];
-      const geri = kaydir(kamHedef, (kamYon + 180) % 360, AYAR.kameraUzak * yakinlik / 1000);
-      uc.sView.camera = new Camera({ position: { longitude: geri[0], latitude: geri[1], z: AYAR.kameraYuksek * yakinlik },
-                                     heading: kamYon, tilt: der(Math.atan2(AYAR.kameraUzak, AYAR.kameraYuksek)) });
+    function kameraHesap(k) {
+      const D = MESAFE0 * yakinlik, e = rad(kamEgim);
+      const geri = kaydir(k, (kamYon + 180) % 360, D * Math.sin(e) / 1000);
+      return new Camera({ position: { longitude: geri[0], latitude: geri[1], z: D * Math.cos(e) }, heading: kamYon, tilt: kamEgim });
+    }
+    function kameraTakip(k) {
+      kamHedef = k;
+      if (elde || kaydirildi) return;
+      uc.sView.camera = kameraHesap(k);
+    }
+    function kameradanOku() {
+      const c = uc.sView.camera;
+      kamYon = (c.heading + 360) % 360;
+      kamEgim = Math.max(5, Math.min(80, c.tilt));
+      const D = c.position.z / Math.max(0.15, Math.cos(rad(kamEgim)));
+      yakinlik = Math.min(3, Math.max(0.12, D / MESAFE0));
+      maketleriOlcekle();
     }
     const cumleler = {};
     function cumleleriAl(d) {
@@ -1462,7 +1473,7 @@ require([
         uc.aracGrafik.visible = false;
         ucTarih = d.zaman_bas + (d.zaman_bit - d.zaman_bas) * Math.min(1, oran);
         varilanlariGoster();
-        kameraTakip(d.k, kamYon + (ani ? 0 : 0.05), ani);
+        kameraTakip(d.k);
         altyazi(ucTarih, d, "", oran);
         uc.aktif.removeAll();
         return;
@@ -1481,7 +1492,7 @@ require([
       if (kismi.length > 1) uc.aktif.add(new Graphic({ geometry: cizgi(kismi), symbol: yolSembolu(renkOf(p), 3, 1) }));
       ucTarih = p.zaman_bas + (p.zaman_bit - p.zaman_bas) * (kalan / (p.h.uzunluk || 1));
       varilanlariGoster();
-      kameraTakip(nokta, yonDer, ani);
+      kameraTakip(nokta);
       const arac = turAdi(p.ulasim);
       altyazi(ucTarih, null, (arac ? arac + " · " : "") + kisaAd(p.baslangic) + " → " + kisaAd(p.bitis));
     }
@@ -1500,11 +1511,17 @@ require([
     }
     function varilanlariGoster() {
       maketleriOlcekle();
-      uc.gorunenler.forEach(g => { const v = g.attributes.bas <= ucTarih; if (g.visible !== v) g.visible = v; });
+      uc.yerAdlari.forEach(g => { const v = g.attributes.bas <= ucTarih; if (g.visible !== v) g.visible = v; });
+      const son = new Map();
+      uc.maketler.forEach(g => {
+        const a = g.attributes, s = son.get(a.obek);
+        if (a.bas <= ucTarih && (!s || a.bas >= s.attributes.bas)) son.set(a.obek, g);
+      });
+      uc.maketler.forEach(g => { const v = son.get(g.attributes.obek) === g; if (g.visible !== v) g.visible = v; });
     }
     const ucSvg = $("#u-cizelge-svg"), ucCz = $("#u-cizelge");
     function sahneyeGit(n, oran = 0) {
-      sira = Math.max(0, Math.min(sahneler.length - 1, n)); gecen = sahneler[sira].sure * oran;
+      sira = Math.max(0, Math.min(sahneler.length - 1, n)); gecen = sahneler[sira].sure * oran; kaydirildi = false;
       sesleriDurdur(); const a = durakSesi(sahneler[sira]); if (a && a.ended) a.currentTime = 0;
       izleriCiz(sira); sahneyiCiz(sahneler[sira], oran, true); cizelge(ucSvg, ucCz, ucTarih);
     }
@@ -1523,7 +1540,10 @@ require([
       cizelge(ucSvg, ucCz, ucTarih);
       requestAnimationFrame(kare);
     }
-    function ucOynat() { oynuyor = true; onceKare = null; $("#u-oynat").innerHTML = DUR_SVG; $("#u-oynat").setAttribute("aria-label", yaz("durdur", "Durdur")); requestAnimationFrame(kare); }
+    async function ucOynat() {
+      if (kaydirildi && kamHedef) { kaydirildi = false; await uc.sView.goTo(kameraHesap(kamHedef), { duration: 700 }).catch(() => {}); }
+      kaydirildi = false;
+      oynuyor = true; onceKare = null; $("#u-oynat").innerHTML = DUR_SVG; $("#u-oynat").setAttribute("aria-label", yaz("durdur", "Durdur")); requestAnimationFrame(kare); }
     function ucDurdur() { oynuyor = false; sesleriDurdur(); $("#u-oynat").innerHTML = OYNAT_SVG; $("#u-oynat").setAttribute("aria-label", yaz("oynat", "Oynat")); }
     $("#u-oynat").addEventListener("click", () => {
       if (oynuyor) return ucDurdur();
@@ -1551,24 +1571,36 @@ require([
         await ucModulleri();
         if ($("#uc").hidden) return;
         uc = ucKur();
-        uc.sView.on("mouse-wheel", e => { if (!oynuyor) return; e.stopPropagation(); yakinlastir(e.deltaY > 0 ? 1.15 : 1 / 1.15); });
-        uc.sView.on("drag", e => { if (oynuyor) e.stopPropagation(); });
+        uc.sView.on("mouse-wheel", e => { e.stopPropagation(); yakinlastir(e.deltaY > 0 ? 1.15 : 1 / 1.15); });
+        uc.sView.on("double-click", e => e.stopPropagation());
+        let surukTur = null;
+        uc.sView.on("drag", e => {
+          if (e.action === "start") { elde = true; surukTur = e.button === 0 ? "kaydir" : "dondur"; }
+          else if (e.action === "added") surukTur = "dondur";
+          else if (e.action === "end") {
+            elde = false;
+            if (surukTur === "kaydir") { kaydirildi = true; if (oynuyor) ucDurdur(); }
+            else if (!kaydirildi) kameradanOku();
+            if (!oynuyor && !kaydirildi) sahneyiCiz(sahneler[sira], gecen / sahneler[sira].sure, true);
+          }
+        });
         await uc.sView.when();
       }
       const ucKapandi = () => !uc || $("#uc").hidden;
       if (ucKapandi()) return;
       const n = tariheSahne(t), s = sahneler[n], k = s.tur === "durak" ? s.d.k : s.parcalar[0].h.koordlar[0];
       altyazi(s.bas, s.tur === "durak" ? s.d : null, "");
-      await uc.sView.goTo({ position: { longitude: k[0], latitude: k[1] - 0.12, z: AYAR.kameraYuksek }, heading: 0,
-                             tilt: der(Math.atan2(AYAR.kameraUzak, AYAR.kameraYuksek)) }, { duration: 3500, easing: "in-out-cubic" }).catch(() => {});
+      yakinlik = 1; kamYon = 0; kamEgim = EGIM0; maketOlcegi = null;
+      await uc.sView.goTo(kameraHesap(k), { duration: 3500, easing: "in-out-cubic" }).catch(() => {});
       if (ucKapandi()) return;
-      kamYon = 0; kamHedef = null;
+      kamYon = 0; kamEgim = EGIM0; kamHedef = null; kaydirildi = false; elde = false;
       sahneyeGit(n);
       ucOynat();
     }
     function yakinlastir(kat) {
       yakinlik = Math.min(3, Math.max(0.12, yakinlik * kat));
       maketleriOlcekle();
+      if (uc && kaydirildi && !oynuyor) { kaydirildi = false; }
       if (!oynuyor && uc) sahneyiCiz(sahneler[sira], gecen / sahneler[sira].sure, true);
     }
     const SES_SVG = '<svg viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
