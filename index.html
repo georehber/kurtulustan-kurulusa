@@ -114,9 +114,6 @@
   .kapat-dugme svg { width: 16px; height: 16px; }
   .durak-govde { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 14px 16px 16px; scrollbar-width: thin; }
   .durak-alt { flex: none; padding: 6px 14px 12px; border-top: 1px solid var(--cizgi); background: #f6f2e9; }
-  .durak-cizelge { position: relative; height: 44px; cursor: pointer; }
-  .durak-cizelge svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-  .durak-cizelge text { font-size: 10.5px; fill: var(--soluk); }
   .durak-gecis { display: grid; grid-template-columns: 1fr 1.35fr; gap: 8px; margin-top: 4px; }
   .durak-gecis.tek { grid-template-columns: 1fr; }
   .gecis { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; min-width: 0; padding: 8px 12px; border-radius: 12px;
@@ -129,6 +126,7 @@
   .gecis.ileri .gecis-ust::after { content: " →"; }
   .gecis:hover { border-color: var(--vurgu); }
   .gecis.ileri:hover { filter: brightness(1.08); }
+  .tutamak, #d-devami { display: none; }
   #durak-ac { position: fixed; z-index: 20; top: calc(var(--baslik) + var(--kenar) + env(safe-area-inset-top)); right: var(--kenar);
               padding: 10px 16px; box-shadow: 0 10px 28px rgba(31, 29, 26, .22); }
   #durak.son-durak::before { height: 6px; background: #e30a17; }
@@ -153,16 +151,8 @@
   .pp .bitis blockquote p::after { content: "”"; }
   .pp .bitis blockquote p.ozgun { margin-top: 6px; font-size: 13.5px; color: var(--soluk); }
   .pp .bitis cite { display: block; margin-top: 8px; font-style: normal; font-size: 11.5px; color: var(--soluk); }
-  .uc-gec { position: fixed; z-index: 20; left: var(--kenar); bottom: calc(30px + env(safe-area-inset-bottom)); display: flex; align-items: center; gap: 10px;
-            padding: 6px 16px 6px 6px; border: 1px solid var(--cizgi); border-radius: 999px; background: #fffdf8; color: var(--metin); cursor: pointer; text-align: left;
-            box-shadow: 0 10px 28px rgba(31, 29, 26, .2); transition: transform .2s, box-shadow .2s; }
-  .uc-gec:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(31, 29, 26, .26); }
-  .uc-gec-simge { width: 42px; height: 42px; flex: none; display: grid; place-items: center; border-radius: 50%; color: #fff;
-                  background: linear-gradient(135deg, #0072b2, #009e73); }
-  .uc-gec-simge svg { width: 24px; height: 24px; }
-  .uc-gec-yazi { display: grid; line-height: 1.15; }
-  .uc-gec-yazi small { font-size: 10.5px; font-weight: 600; letter-spacing: .7px; text-transform: uppercase; color: var(--kor); }
-  .uc-gec-yazi b { font-family: var(--serif); font-size: 17px; font-weight: 600; }
+  .uc-gec svg { width: 20px; height: 20px; }
+  #harita .uc-gec { margin-top: 8px; display: flex; align-items: center; justify-content: center; color: #0072b2; }
   .pp .yol-satir { display: flex; align-items: center; gap: 10px; padding: 8px 12px 0; }
   .pp .yol-satir svg { flex: none; width: 34px; height: 12px; }
   .pp .yol-satir b { display: block; font-size: 13.5px; }
@@ -198,7 +188,7 @@
   .kart, dialog { background: #fffdf8; color: var(--metin); border: 1px solid var(--cizgi); border-radius: 18px;
                   box-shadow: 0 24px 60px rgba(31, 29, 26, .25); }
   #acilis .kart { width: min(600px, 100%); max-height: calc(100dvh - 2 * var(--kenar)); overflow-y: auto; padding: 34px 34px 26px; text-align: center; }
-  #acilis blockquote { margin: 0; font-family: var(--serif); font-style: italic; font-size: clamp(22px, 4.2vw, 32px); line-height: 1.25; color: var(--vurgu); }
+  #acilis blockquote { margin: 0; font-family: var(--serif); font-style: italic; font-size: clamp(20px, 3.2vw, 25px); line-height: 1.25; color: var(--vurgu); }
   #acilis blockquote::before { content: "“"; } #acilis blockquote::after { content: "”"; }
   #acilis .kimden { margin: 12px 0 18px; font-size: 14.5px; color: var(--metin); letter-spacing: .3px; }
   #acilis .bilgi { margin: 0 0 22px; font-size: 14.5px; line-height: 1.5; color: var(--soluk); text-align: left; }
@@ -281,22 +271,32 @@
     .dil-dugme .bayrak { width: 22px; height: 22px; }
     html[lang="en"] .marka h1 { white-space: normal; font-size: 16px; line-height: 1.1; }
     html[lang="en"] .marka .alt { display: none; }
-    #durak { top: auto; left: 0; right: 0; bottom: 0; width: 100%; height: min(56dvh, 560px); border-radius: 18px 18px 0 0; border-width: 1px 0 0;
-             padding-bottom: env(safe-area-inset-bottom); }
+    #durak { top: auto; left: 0; right: 0; bottom: 0; width: 100%; height: max(260px, 40dvh); border-radius: 18px 18px 0 0; border-width: 1px 0 0;
+             padding-bottom: env(safe-area-inset-bottom); transition: height .28s ease; }
+    #durak.tam { height: calc(100dvh - var(--baslik) - env(safe-area-inset-top) - 10px); }
+    #durak.serit { height: auto; padding-bottom: calc(18px + env(safe-area-inset-bottom)); }
+    #durak.suruklen { transition: none; }
+    #durak.serit .durak-govde, #durak.serit .durak-alt { display: none; }
+    #durak::before { display: none; }
+    .tutamak { display: block; flex: none; height: 22px; padding: 0; border: 0; background: transparent; cursor: grab; touch-action: none; position: relative; }
+    .tutamak::after { content: ""; position: absolute; left: 50%; top: 8px; width: 40px; height: 5px; margin-left: -20px; border-radius: 3px; background: rgba(31, 29, 26, .25); }
+    #durak.son-durak .tutamak { background: #e30a17; }
+    #durak.son-durak .tutamak::after { background: rgba(255, 255, 255, .6); }
+    .durak-ust { touch-action: none; }
+    #durak.kisa .pp > .kutu:has(table) { display: none; }
+    #durak.kisa .durak-govde { overflow: hidden; position: relative; cursor: pointer; }
+    #durak.kisa #d-devami { display: flex; position: relative; z-index: 1; flex: none; margin-top: -64px; justify-content: center; align-items: flex-end;
+                            height: 64px; padding: 0 0 10px; border: 0; background: linear-gradient(rgba(255, 253, 248, 0), #fffdf8 62%);
+                            color: var(--vurgu); font: inherit; font-size: 13.5px; font-weight: 600; cursor: pointer; }
     .durak-ust { padding: 9px 10px 8px 16px; }
     #d-baslik { font-size: 18px; }
     .durak-govde { padding: 12px; }
     #acilis .kart { padding: 24px 16px 18px; }
-    .durak-alt { padding: 4px 10px 10px; }
+    .durak-alt { padding: 4px 10px 22px; }
     .gecis { padding: 7px 10px; }
     .gecis-ad { font-size: 12.5px; }
     #durak-ac { top: auto; right: var(--kenar); bottom: calc(30px + env(safe-area-inset-bottom)); }
-    .uc-gec { left: 12px; bottom: calc(min(56dvh, 560px) + 26px); padding: 5px 13px 5px 5px; gap: 8px; }
-    .kart-kapali .uc-gec { bottom: calc(30px + env(safe-area-inset-bottom)); }
-    .uc-gec-simge { width: 36px; height: 36px; }
-    .uc-gec-simge svg { width: 21px; height: 21px; }
-    .uc-gec-yazi b { font-size: 15px; }
-    #lejant { left: 60px; right: 12px; width: auto; max-height: calc(100dvh - var(--baslik) - min(56dvh, 560px) - 40px); }
+    #lejant { left: 60px; right: 12px; width: auto; max-height: calc(100dvh - var(--baslik) - max(260px, 40dvh) - 40px); }
     #altyazi { bottom: 128px; }
     #uc .alt { gap: 6px; }
     #u-cik { padding: 0; width: 36px; height: 36px; justify-content: center; }
@@ -313,10 +313,9 @@
     #durak { top: calc(var(--baslik) + 8px + env(safe-area-inset-top)); bottom: calc(8px + env(safe-area-inset-bottom)); width: 340px; }
     .durak-ust { padding: 8px 10px 7px 14px; }
     #d-baslik { font-size: 17px; }
-    .durak-cizelge { height: 38px; }
     #acilis { align-items: start; overflow-y: auto; padding: 12px; }
     #acilis .kart { max-height: none; padding: 20px 24px 16px; }
-    #acilis blockquote { font-size: 22px; }
+    #acilis blockquote { font-size: 19px; }
     #acilis .bilgi { font-size: 13px; margin-bottom: 14px; }
     #adim-dil .soru { margin: 4px 0 12px; }
     .dil-secim .bayrak-serit { aspect-ratio: 3 / 1; }
@@ -362,7 +361,23 @@
   .tam-ekran-dugme svg { width: 18px; height: 18px; }
   #harita .tam-ekran-dugme { margin-top: 8px; display: flex; align-items: center; justify-content: center; }
   #harita .tam-ekran-dugme[hidden] { display: none; }
-  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }</style>
+  #baslangic-halka { position: fixed; z-index: 15; width: 74px; height: 74px; margin: -37px 0 0 -37px; border-radius: 50%; pointer-events: none;
+                     border: 2.5px solid var(--vurgu); animation: nabiz 1.8s ease-out infinite; }
+  @keyframes nabiz { from { transform: scale(.55); opacity: .95; } to { transform: scale(1.35); opacity: 0; } }
+  #baslangic { position: fixed; z-index: 15; transform: translate(-50%, 0); margin-top: 46px; display: grid; justify-items: center; gap: 8px;
+               padding: 12px 16px 14px; background: #fffdf8; border: 1px solid var(--cizgi); border-radius: 14px; text-align: center;
+               box-shadow: 0 14px 36px rgba(31, 29, 26, .22); white-space: nowrap; }
+  #baslangic::before { content: ""; position: absolute; top: -7px; left: 50%; width: 12px; height: 12px; margin-left: -6px; background: #fffdf8;
+                       border: 1px solid var(--cizgi); border-width: 1px 0 0 1px; transform: rotate(45deg); }
+  #baslangic small { font-size: 11px; font-weight: 600; letter-spacing: .6px; text-transform: uppercase; color: var(--soluk); }
+  #baslangic b { font-family: var(--serif); font-size: 18px; font-weight: 600; }
+  #baslangic .dugme { padding: 9px 18px; font-size: 14.5px; }
+  #baslangic[hidden], #baslangic-halka[hidden] { display: none; }
+  #durak.belir { animation: belir .45s ease-out; }
+  body > .esri-attribution { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; }
+  #harita[hidden] ~ .esri-attribution { display: none; }
+  @keyframes belir { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } #baslangic-halka, #durak.belir { animation: none; } }</style>
 <link rel="stylesheet" href="duzen.css">
 </head>
 <body>
@@ -380,15 +395,16 @@
   </button>
 </header>
 <div id="harita" role="application" aria-label="Kurtuluştan Kuruluşa haritası" data-m-aria="aria-harita"></div>
-<aside id="durak" aria-labelledby="d-baslik">
+<aside id="durak" class="kisa" aria-labelledby="d-baslik">
+  <button type="button" class="tutamak" id="d-tutamak" aria-label="Kartı büyüt ya da küçült" data-m-aria="tutamak"></button>
   <div class="durak-ust">
     <span id="d-sira"></span>
     <h2 id="d-baslik"></h2>
     <button type="button" id="durak-kapat" class="kapat-dugme" aria-label="Kartı kapat" data-m-aria="karti-kapat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
   </div>
   <div class="durak-govde" id="d-govde"></div>
+  <button type="button" id="d-devami" data-m="devamini-oku">Devamını oku</button>
   <div class="durak-alt">
-    <div class="durak-cizelge" id="d-cizelge"><svg id="d-cizelge-svg" aria-hidden="true"></svg></div>
     <div class="durak-gecis" id="d-gecis">
       <button type="button" class="gecis geri" id="d-onceki"><span class="gecis-ust" data-m="bir-onceki">Bir önceki durak</span><span class="gecis-ad"></span></button>
       <button type="button" class="gecis ileri" id="d-sonraki"><span class="gecis-ust"></span><span class="gecis-ad"></span></button>
@@ -405,7 +421,12 @@
   <div id="lj-yollar"></div>
   <p class="lj-not" data-m="lejant-not">Çizgiler yolun bugünkü karşılığını izler. Belirgin olan son yolculuk, soluklar geride kalan yollar.</p>
 </div>
-<button type="button" id="uc-gec" class="uc-gec"><span class="uc-gec-simge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 19.5l6-8.5 4 5 3-3.5 6 7z" fill="currentColor" opacity=".9"/><path d="M4 8.5c3-4 9-5 14-2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-dasharray="2 2.4"/><circle cx="19" cy="7.5" r="1.8" fill="currentColor"/></svg></span><span class="uc-gec-yazi"><small data-m="uc-gec-ust">Üç boyutlu anlatım</small><b data-m="uc-gec-ad">Yolculuğu izle</b></span></button>
+<div id="baslangic-halka" hidden></div>
+<div id="baslangic" hidden>
+  <small data-m="baslangic-ust">16 Mayıs 1919 · İstanbul</small>
+  <b data-m="baslangic-ad">Bandırma Vapuru yola çıkıyor</b>
+  <button type="button" id="baslangic-dugme" class="dugme vurgu" data-m="baslangic-dugme">Yolculuğa başla</button>
+</div>
 <div id="sahne" hidden aria-label="Üç boyutlu yolculuk" data-m-aria="aria-sahne"></div>
 <div id="uc" hidden>
   <div class="ust">
@@ -437,10 +458,9 @@
     <div class="adimlar" aria-hidden="true"><i class="etkin"></i><i></i></div>
   </div>
   <div class="kart" id="adim-giris" role="dialog" aria-modal="true" aria-labelledby="acilis-soz" hidden>
-    <blockquote id="acilis-soz" data-m="acilis-soz">1919 senesi Mayısının 19 uncu günü Samsun'a çıktım.</blockquote>
-    <p class="kimden" data-m="acilis-kimden">Mustafa Kemal Atatürk, Nutuk (1927)</p>
-    <p class="bilgi" data-m="acilis-bilgi">Nutuk, Mustafa Kemal Atatürk'ün 1927'de okuduğu, Millî Mücadele'yi ve Cumhuriyet'in kuruluşunu anlatan büyük konuşmadır ve bu cümleyle başlar. Bu harita, 16 Mayıs 1919'dan 29 Ekim 1923'e uzanan o yolculuğu dönüm noktalarıyla anlatıyor.
-      <small>Kaynak: Nutuk–Söylev, I. Cilt, s. 2, T.C. Kültür ve Turizm Bakanlığı e-kitap (<a href="https://ekitap.ktb.gov.tr/TR-273376/nutuk.html" target="_blank" rel="noopener">ekitap.ktb.gov.tr</a>).</small></p>
+    <blockquote id="acilis-soz" data-m="acilis-soz">Geldikleri gibi giderler.</blockquote>
+    <p class="kimden" data-m="acilis-kimden">Mustafa Kemal, İstanbul, 13 Kasım 1918</p>
+    <p class="bilgi" data-m="acilis-bilgi">Mustafa Kemal Atatürk, yurt düşman işgalindeyken böyle demişti. Altı ay sonra Samsun'a çıktı ve kurtuluşun ilk adımını attı. Bu harita, 16 Mayıs 1919'dan 29 Ekim 1923'e uzanan o yolculuğu dönüm noktalarıyla anlatıyor.</p>
     <div class="secenekler">
       <button type="button" id="acilis-devam" class="dugme vurgu" data-m="haritaya-basla">Haritaya başla</button>
     </div>
@@ -459,14 +479,15 @@
     <h3 data-m="hk-nasil">Nasıl okunur</h3>
     <ul data-m="hk-nasil-liste">
       <li>Haritada dönemin dönüm noktaları ve onları birbirine bağlayan yolculuklar var. Her durağın anlatımı ve fotoğrafları durak kartında yer alır.</li>
-      <li>Kartın altındaki "Yolculuğa devam" ile bir sonraki durağa geçilir ve yol haritada çizilerek ilerler; "Bir önceki durak" ile geri dönülür. Çizelgedeki simgelere dokunarak da istenen durağa geçilir.</li>
+      <li>Kartın altındaki "Yolculuğa devam" ile bir sonraki durağa geçilir ve yol haritada çizilerek ilerler; "Bir önceki durak" ile geri dönülür.</li>
       <li>Bulunulan durağın simgesi ince turuncu bir çizgiyle çevrilidir ve tam renklidir, öncekiler soluk görünür; son çizilen yol da en belirgin olandır. Aynı şehirde birden çok durak varsa haritada yalnız en sonuncusu görünür.</li>
       <li>Yolların rengi ulaşım şeklini gösterir; her kartın "Buraya nasıl gelindi" bölümünde yazar. Nasıl gidildiği kaynakta geçmiyorsa çizgi gridir. Renkler renk körlüğüne uygun Okabe-Ito paletindendir. Simgelerin ve renklerin anlamı sol üstteki lejant düğmesindedir.</li>
-      <li>Sol alttaki "Yolculuğu izle" ile yolculuk baştan sona üç boyutlu izlenir: kamera yolu izler, araç yol boyunca ilerler, duraklarda orada olanlar bir iki cümleyle anlatılır ve seslendirilir, olayı simgeleyen maket belirir. + ve − düğmeleriyle ya da fare tekerleğiyle yaklaşınca araç küçülür ve yavaşlar, uzaklaşınca büyür ve hızlanır. Nasıl gidildiği bilinmeyen yollarda araç yarı saydamdır.</li>
+      <li>Sol üstteki düğmelerin en altındaki dağ simgeli "Yolculuğu izle" düğmesiyle yolculuk baştan sona üç boyutlu izlenir: kamera yolu izler, araç yol boyunca ilerler, duraklarda orada olanlar bir iki cümleyle anlatılır ve seslendirilir, olayı simgeleyen maket belirir. + ve − düğmeleriyle ya da fare tekerleğiyle yaklaşınca araç küçülür ve yavaşlar, uzaklaşınca büyür ve hızlanır. Nasıl gidildiği bilinmeyen yollarda araç yarı saydamdır.</li>
     </ul>
     <h3 data-m="hk-kaynaklar">Kaynaklar</h3>
     <ul data-m="hk-kaynaklar-liste">
-      <li>Gazi Mustafa Kemal, Nutuk–Söylev, T.C. Kültür ve Turizm Bakanlığı e-kitap (ekitap.ktb.gov.tr). Açılıştaki alıntı özgün metinden, cilt ve sayfasıyla.</li>
+      <li>Gazi Mustafa Kemal, Nutuk–Söylev, T.C. Kültür ve Turizm Bakanlığı e-kitap (ekitap.ktb.gov.tr).</li>
+      <li>Açılıştaki söz, Mustafa Kemal'in 13 Kasım 1918'de İstanbul'a dönüşünde söylediği, yanındakilerin anılarıyla bize ulaşan sözdür.</li>
       <li>Atatürk Ansiklopedisi, Atatürk Araştırma Merkezi (ataturkansiklopedisi.gov.tr).</li>
       <li>Ara durakların tarihleri için ayrıca: Ö. Toraman, Vakanüvis 8 (Özel Sayı), 2023; O. Akandere, Atatürk Araştırma Merkezi Dergisi.</li>
     </ul>
@@ -535,15 +556,11 @@ const tamEkranMi = () => !!(document.fullscreenElement || document.webkitFullscr
 const uygulamaMi = () => matchMedia("(display-mode: standalone), (display-mode: fullscreen)").matches || navigator.standalone === true;
 const iosMu = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 function anaEkranKarti() {
-  let goruldu = false;
-  try { goruldu = !!localStorage.getItem("anaEkranKarti"); } catch (e) {}
-  if (!iosMu || /CriOS|FxiOS|EdgiOS|OPiOS/.test(navigator.userAgent) || uygulamaMi() || goruldu) return;
+  if (!iosMu || /CriOS|FxiOS|EdgiOS|OPiOS/.test(navigator.userAgent) || uygulamaMi()) return false;
   document.getElementById("ana-ekran").hidden = false;
+  return true;
 }
-document.getElementById("ae-tamam").addEventListener("click", () => {
-  document.getElementById("ana-ekran").hidden = true;
-  try { localStorage.setItem("anaEkranKarti", "1"); } catch (e) {}
-});
+document.getElementById("ae-tamam").addEventListener("click", () => { document.getElementById("ana-ekran").hidden = true; });
 function ipucu(metin) {
   const el = document.getElementById("ipucu");
   el.textContent = metin; el.hidden = false;
@@ -554,6 +571,8 @@ async function tamEkran() {
     document.documentElement.classList.toggle("genis");
     document.dispatchEvent(new Event("genisdegisti"));
     tamEkranDugmeleri();
+    if (!genisMi()) document.getElementById("ana-ekran").hidden = true;
+    else if (anaEkranKarti()) return;
     if (genisMi() && matchMedia("(orientation: portrait)").matches)
       ipucu(yaz("ipucu-yan", "Daha geniş görmek için telefonu yan çevirin.") + (uygulamaMi() ? "" : " " + yaz("ipucu-ana-ekran", "Adres çubuğu olmadan açmak için: Paylaş → Ana Ekrana Ekle.")));
     return;
@@ -641,12 +660,9 @@ require([
     " · <a href=\"" + commonsSayfa(f.dosya) + "\" target=\"_blank\" rel=\"noopener\">Wikimedia Commons</a></small></figcaption></figure>";
   function durakIcerigi(a, yolculuk, bitis = "") {
     const ek = DETAY[a.id] || {};
-    const donem = alanAl(ek, "yer_donem") || a.yer_adi_donem;
-    const yer = donem && kisaAd(a.yer_adi_donem) !== kisaAd(a.yer_adi_bugun) ? donem : "";
     return "<div class=\"pp\">" +
-      "<div class=\"rozetler\">" + rozet(tarihMetni(a.tarih_metni), "altin") + rozet(ek.simge ? simgeAdi(ek.simge) : yaz("olay-" + a.olay_turu, TUR_ADI[a.olay_turu])) +
-        "</div>" +
-      "<div class=\"kutu\"><table>" + satir(yaz("pp-yer", "Yer"), yerAdi(a)) + satir(yaz("pp-donem-adi", "O günkü adı"), yer) + satir(yaz("pp-il", "İl"), a.il) + "</table></div>" +
+      "<div class=\"rozetler\">" + rozet(tarihMetni(a.tarih_metni), "altin") + "</div>" +
+      "<div class=\"kutu\"><table>" + satir(yaz("pp-yer", "Yer"), yerAdi(a)) + "</table></div>" +
       (ek.anlatim ? "<div class=\"kutu\"><span class=\"bolum-baslik\" data-m=\"pp-ne-oldu\">" + yaz("pp-ne-oldu", "Ne oldu") + "</span><div class=\"metin\" data-veri=\"" + a.id + "|anlatim\">" + kacis(anlatimMetni(ek)) + "</div></div>"
                   : a.aciklama ? "<div class=\"kutu metin\">" + kacis(a.aciklama) + "</div>" : "") +
       (ek.fotograflar || []).map((f, n) => fotoHtml(f).replace("<span class=\"foto-yazi\">", "<span class=\"foto-yazi\" data-veri=\"" + a.id + "|fotograflar." + n + ".aciklama\">")).join("") +
@@ -810,6 +826,12 @@ require([
     const lejantEtiketi = () => { lejantDugme.setAttribute("aria-label", yaz("lejant", "Lejant")); lejantDugme.title = yaz("lejant", "Lejant"); };
     lejantEtiketi(); document.addEventListener("dildegisti", lejantEtiketi);
     view.ui.add(lejantDugme, "top-left");
+    const ucDugme = document.createElement("button");
+    ucDugme.type = "button"; ucDugme.id = "uc-gec"; ucDugme.className = "esri-widget--button esri-widget uc-gec";
+    ucDugme.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 19.5l6-8.5 4 5 3-3.5 6 7z" fill="currentColor" opacity=".9"/><path d="M4 8.5c3-4 9-5 14-2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-dasharray="2 2.4"/><circle cx="19" cy="7.5" r="1.8" fill="currentColor"/></svg>';
+    const ucEtiketi = () => { const ad = yaz("uc-gec-ad", "Yolculuğu izle") + (DIL === "en" ? " (3D)" : " (3B)"); ucDugme.setAttribute("aria-label", ad); ucDugme.title = ad; };
+    ucEtiketi(); document.addEventListener("dildegisti", ucEtiketi);
+    view.ui.add(ucDugme, "top-left");
     const lejantPanel = $("#lejant");
     lejantDugme.addEventListener("click", () => { lejantDoldur(); lejantPanel.hidden = !lejantPanel.hidden; lejantDugme.classList.toggle("acik", !lejantPanel.hidden); });
     $("#lejant-kapat").addEventListener("click", () => { lejantPanel.hidden = true; lejantDugme.classList.remove("acik"); });
@@ -826,6 +848,11 @@ require([
     paddingGuncelle();
     window.addEventListener("resize", paddingGuncelle);
     await view.when();
+    const kaynakTasi = (n = 0) => {
+      const el = view.container.querySelector(".esri-attribution");
+      if (el) document.body.appendChild(el); else if (n < 60) requestAnimationFrame(() => kaynakTasi(n + 1));
+    };
+    kaynakTasi();
     view.goTo(TURKIYE, { animate: false }).catch(() => {});
     const perdeyiKaldir = () => setTimeout(() => $("#yukleniyor").classList.add("bitti"), Math.max(0, 2400 - performance.now()));
     setTimeout(perdeyiKaldir, 3000);
@@ -995,7 +1022,7 @@ require([
         yoluCiz(i, jeton, () => { if (cizimJetonu !== jeton) return; cizimKatmani.removeAll(); haritayiCiz(i); });
       } else { cizimKatmani.removeAll(); haritayiCiz(i); }
     }
-    const durakKart = $("#durak"), kartGovde = $("#d-govde"), cetvel = $("#d-cizelge"), csvg = $("#d-cizelge-svg");
+    const durakKart = $("#durak"), kartGovde = $("#d-govde");
     const durakBasligi = f => alanAl(DETAY[f.attributes.id], "baslik") || f.attributes.baslik;
     function kartiDoldur(i) {
       const a = sirali2[i].attributes, onceki = sirali2[i - 1], sonraki = sirali2[i + 1];
@@ -1011,35 +1038,72 @@ require([
       $("#d-sonraki .gecis-ust").textContent = sonraki ? yaz("devam", "Yolculuğa devam") : yaz("son-gecis-ust", "Samsun'dan Cumhuriyet'e");
       $("#d-sonraki .gecis-ad").textContent = sonraki ? durakBasligi(sonraki) : yaz("son-gecis-ad", "Bütün yolculuğu 3B izle");
       $("#d-gecis").classList.toggle("tek", !onceki);
-      cizelge(csvg, cetvel, gun);
     }
     $("#d-onceki").addEventListener("click", () => durakGoster(simdi2 - 1, false));
     $("#d-sonraki").addEventListener("click", () => simdi2 < sirali2.length - 1 ? durakGoster(simdi2 + 1, true) : ucaGec(BAS));
-    cetvel.addEventListener("click", e => {
-      const tas = enYakinTas(csvg, cetvel, e.clientX);
-      const i = tas ? sirali2.findIndex(f => f.attributes.id === tas.id) : -1;
-      if (i >= 0) durakGoster(i, i === simdi2 + 1);
-    });
     function kartAcik(acik) {
+      if (acik) { baslangicBitir(); haliSec("kisa"); }
       durakKart.hidden = !acik; $("#durak-ac").hidden = acik;
       document.body.classList.toggle("kart-kapali", !acik);
       paddingGuncelle();
-      if (acik) cizelge(csvg, cetvel, gun);
     }
     $("#durak-kapat").addEventListener("click", () => kartAcik(false));
+    const HALLER = ["serit", "kisa", "tam"];
+    const kartHali = () => HALLER.find(c => durakKart.classList.contains(c)) || "kisa";
+    function haliSec(hal) {
+      HALLER.forEach(c => durakKart.classList.toggle(c, c === hal));
+      durakKart.style.height = "";
+      if (hal !== "tam") kartGovde.scrollTop = 0;
+    }
+    let surukle = null;
+    const surukBas = e => {
+      if (!darEkran.matches || e.target.closest("#durak-kapat")) return;
+      surukle = { y: e.clientY, h: durakKart.getBoundingClientRect().height, oynadi: false, id: e.pointerId };
+      e.currentTarget.setPointerCapture?.(e.pointerId);
+    };
+    const surukOyna = e => {
+      if (!surukle || e.pointerId !== surukle.id) return;
+      const dy = e.clientY - surukle.y;
+      if (!surukle.oynadi && Math.abs(dy) < 6) return;
+      surukle.oynadi = true;
+      durakKart.classList.add("suruklen");
+      const enCok = window.innerHeight - $("#harita").getBoundingClientRect().top - 10;
+      durakKart.style.height = Math.max(70, Math.min(enCok, surukle.h - dy)) + "px";
+    };
+    const surukBit = e => {
+      if (!surukle || e.pointerId !== surukle.id) return;
+      const { oynadi, y } = surukle, dy = e.clientY - y, sira = HALLER.indexOf(kartHali());
+      surukle = null; durakKart.classList.remove("suruklen");
+      if (!oynadi) { if (e.currentTarget.id === "d-tutamak" || kartHali() === "serit") haliSec(kartHali() === "kisa" ? "tam" : "kisa"); return; }
+      const adim = Math.abs(dy) > window.innerHeight * 0.45 ? 2 : Math.abs(dy) > 40 ? 1 : 0;
+      haliSec(HALLER[Math.max(0, Math.min(2, sira + (dy < 0 ? adim : -adim)))]);
+    };
+    [$("#d-tutamak"), durakKart.querySelector(".durak-ust")].forEach(el => {
+      el.addEventListener("pointerdown", surukBas);
+      el.addEventListener("pointermove", surukOyna);
+      el.addEventListener("pointerup", surukBit);
+      el.addEventListener("pointercancel", () => { surukle = null; durakKart.classList.remove("suruklen"); durakKart.style.height = ""; });
+    });
+    $("#d-devami").addEventListener("click", () => haliSec("tam"));
+    kartGovde.addEventListener("click", e => {
+      if (darEkran.matches && kartHali() === "kisa" && !e.target.closest("a, button, img, video, iframe")) haliSec("tam");
+    });
+    darEkran.addEventListener("change", () => haliSec("kisa"));
     $("#durak-ac").addEventListener("click", () => kartAcik(true));
     $("#uc-gec").addEventListener("click", () => ucaGec(BAS));
-    new ResizeObserver(() => { if (!durakKart.hidden) cizelge(csvg, cetvel, gun); paddingGuncelle(); }).observe(durakKart);
+    new ResizeObserver(() => paddingGuncelle()).observe(durakKart);
     view.on("click", async e => {
       const r = await view.hitTest(e, { include: [olaylar] }).catch(() => null);
       const id = r?.results?.[0]?.graphic?.attributes?.id;
       const i = sirali2.findIndex(f => f.attributes.id === id);
       if (i < 0) return;
+      if (baslangicta && i === 0) return baslat();
       kartAcik(true); durakGoster(i, i === simdi2 + 1);
     });
     document.addEventListener("keydown", e => {
       if (!$("#uc").hidden || !$("#acilis").hidden || document.querySelector("dialog[open]")) return;
-      if (e.key === "ArrowRight" && simdi2 < sirali2.length - 1) durakGoster(simdi2 + 1, true);
+      if (baslangicta && e.key === "ArrowRight") baslat();
+      else if (e.key === "ArrowRight" && simdi2 < sirali2.length - 1) durakGoster(simdi2 + 1, true);
       else if (e.key === "ArrowLeft") durakGoster(simdi2 - 1, false);
     });
     const R = 6371, rad = d => d * Math.PI / 180, der = r => r * 180 / Math.PI;
@@ -1480,7 +1544,7 @@ require([
       if (tas) sahneyeGit(tariheSahne(tas.gun));
     });
     async function ucaGec(t) {
-      $("#acilis").hidden = true;
+      $("#acilis").hidden = true; baslangicBitir();
       $("#sahne").hidden = false; $("#uc").hidden = false;
       $("#harita").hidden = true;
       if (!uc) {
@@ -1537,6 +1601,36 @@ require([
     });
     if (location.hash) history.replaceState(null, "", location.pathname + location.search);
     durakGoster(0, false);
+    let baslangicta = true;
+    const halka = $("#baslangic-halka"), cagri = $("#baslangic"), gemi = sirali2[0].geometry;
+    const cagriKonumla = () => {
+      if (!baslangicta) return;
+      const p = view.toScreen(gemi), h = $("#harita").getBoundingClientRect();
+      if (!p) return;
+      halka.style.left = cagri.style.left = (h.left + p.x) + "px";
+      halka.style.top = cagri.style.top = (h.top + p.y) + "px";
+    };
+    function baslangicBitir() {
+      if (!baslangicta) return;
+      baslangicta = false; halka.hidden = cagri.hidden = true;
+    }
+    async function baslat() {
+      if (!baslangicta) return;
+      baslangicBitir();
+      durakKart.style.visibility = "hidden"; kartAcik(true);
+      $("#durak-ac").hidden = true;
+      const turkiyeCizgi = new Polyline({ paths: [[[TURKIYE.xmin, TURKIYE.ymin], [TURKIYE.xmax, TURKIYE.ymax]]], spatialReference: { wkid: 4326 } });
+      await view.goTo(turkiyeCizgi, { duration: 1500, easing: "ease-in-out", animate: !matchMedia("(prefers-reduced-motion: reduce)").matches }).catch(() => {});
+      durakKart.style.visibility = ""; durakKart.classList.remove("belir"); void durakKart.offsetWidth; durakKart.classList.add("belir");
+      goruneGetir(sirali2[0]);
+    }
+    kartAcik(false); $("#durak-ac").hidden = true;
+    view.goTo({ center: gemi, zoom: darEkran.matches ? 8 : 9 }, { animate: false }).then(() => {
+      if (!baslangicta) return;
+      halka.hidden = cagri.hidden = false; cagriKonumla();
+    }).catch(() => {});
+    reactiveUtils.watch(() => [view.extent, view.size], cagriKonumla);
+    $("#baslangic-dugme").addEventListener("click", baslat);
     const vv = window.visualViewport;
     const basaDon = () => requestAnimationFrame(() => {
       const kaydi = window.scrollY || document.documentElement.scrollTop || (vv && vv.scale <= 1.01 && vv.offsetTop > 0.5);
@@ -1547,7 +1641,7 @@ require([
     vv?.addEventListener("scroll", basaDon);
     document.querySelectorAll("dialog").forEach(d => d.addEventListener("close", basaDon));
     const acilis = $("#acilis"), kartiKapat = () => { acilis.hidden = true; [0, 300, 900].forEach(ms => setTimeout(basaDon, ms)); };
-    const kapat = () => { kartiKapat(); anaEkranKarti(); };
+    const kapat = kartiKapat;
     const odakla = el => { if (!matchMedia("(pointer: coarse)").matches) el?.focus({ preventScroll: true }); };
     acilis.hidden = false;
     odakla($("#adim-dil [data-dil=\"" + DIL + "\"]"));
