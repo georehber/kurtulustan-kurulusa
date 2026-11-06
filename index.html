@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Kurtuluştan Kuruluşa</title>
 <meta name="description" content="Mustafa Kemal Atatürk'ün 16 Mayıs 1919'dan 29 Ekim 1923'e uzanan yolculuğu, dönüm noktaları ve yolları ile haritada; üç boyutlu anlatımla.">
-<meta name="theme-color" content="#f3efe6">
+<meta name="theme-color" content="#fffdf8">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Kurtuluştan Kuruluşa">
 <meta property="og:description" content="Mustafa Kemal Atatürk'ün Samsun'dan Cumhuriyet'e yolculuğu, dönüm noktalarıyla haritada.">
@@ -69,6 +69,12 @@
            background: rgba(255, 253, 248, .95); border-bottom: 1px solid var(--cizgi); }
   .marka { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; color: inherit; text-decoration: none; }
   .marka img { width: 38px; height: 38px; flex: none; object-fit: contain; }
+  .baslik-goz { display: none; }
+  @media (min-width: 900px) {
+    .marka { flex: 0 1 auto; }
+    .baslik-goz { display: block; flex: 1 1 258px; min-width: 258px; align-self: stretch;
+                  background: url(img/baslik_goz.webp) center / auto 100% no-repeat; }
+  }
   .marka h1 { margin: 0; font-family: var(--serif); font-weight: 600; font-size: 23px; line-height: 1.1; white-space: nowrap; }
   .marka .alt { display: block; margin-top: 3px; font-size: 12.5px; color: var(--soluk); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .dugme { border: 1px solid var(--cizgi); background: rgba(31, 29, 26, .04); border-radius: 999px; padding: 7px 14px;
@@ -103,6 +109,10 @@
   .adimlar i { width: 22px; height: 4px; border-radius: 2px; background: var(--cizgi); }
   .adimlar i.etkin { background: var(--vurgu); }
   #harita, #sahne { position: fixed; top: calc(var(--baslik) + env(safe-area-inset-top)); left: 0; right: 0; bottom: 0; }
+  @supports (height: 100lvh) {
+    #harita { bottom: auto; height: calc(100lvh - var(--baslik) - env(safe-area-inset-top)); }
+    #sahne { bottom: auto; height: 100lvh; }
+  }
   #sahne { top: 0; z-index: 40; background: var(--zemin); }
   #durak { position: fixed; z-index: 20; top: calc(var(--baslik) + var(--kenar) + env(safe-area-inset-top)); right: var(--kenar);
            bottom: calc(var(--kenar) + env(safe-area-inset-bottom)); width: 410px; display: flex; flex-direction: column; overflow: hidden;
@@ -389,6 +399,7 @@
     <img src="img/logo.png" alt="BakırçayCBS logosu" width="38" height="38">
     <span><h1 data-m="baslik">Kurtuluştan Kuruluşa</h1><span class="alt" data-m="altbaslik">Atatürk'ün izinde · 16 Mayıs 1919 – 29 Ekim 1923</span></span>
   </a>
+  <span class="baslik-goz" aria-hidden="true"></span>
   <div class="dil-dugme" role="group" aria-label="Dil / Language">
     <button type="button" data-dil="tr" aria-pressed="true" lang="tr" aria-label="Türkçe"><i class="bayrak" aria-hidden="true"></i><span data-m="dil-kisa-tr">TR</span></button><button type="button" data-dil="en" aria-pressed="false" lang="en" aria-label="English"><i class="bayrak" aria-hidden="true"></i><span data-m="dil-kisa-en">EN</span></button>
   </div>
@@ -481,11 +492,11 @@
     </div>
     <h3 data-m="hk-nasil">Nasıl okunur</h3>
     <ul data-m="hk-nasil-liste">
-      <li>Haritada dönemin dönüm noktaları ve onları birbirine bağlayan yolculuklar var. Her durağın anlatımı ve fotoğrafları durak kartında yer alır.</li>
-      <li>Kartın altındaki "Yolculuğa devam" ile bir sonraki durağa geçilir ve yol haritada çizilerek ilerler; "Bir önceki durak" ile geri dönülür.</li>
+      <li>Harita İstanbul'da, yolculuğun başladığı yerde açılır; "Yolculuğa başla"ya ya da gemiye dokununca harita Türkiye'ye açılır ve ilk durağın kartı gelir. Haritada dönemin dönüm noktaları ve onları birbirine bağlayan yolculuklar var; her durağın anlatımı ve fotoğrafları durak kartında yer alır.</li>
+      <li>Kartın altındaki "Yolculuğa devam" ile bir sonraki durağa geçilir ve yol haritada çizilerek ilerler; "Bir önceki durak" ile geri dönülür. Haritada gidilmiş bir yerin simgesine dokunarak da o durağa geçilir. Telefonda kart üç hâllidir: tutamağı yukarı çekince ya da "Devamını oku"ya dokununca tam açılır, aşağı çekince yalnız başlığın göründüğü şerite iner.</li>
       <li>Bulunulan durağın simgesi ince turuncu bir çizgiyle çevrilidir ve tam renklidir, öncekiler soluk görünür; son çizilen yol da en belirgin olandır. Aynı şehirde birden çok durak varsa haritada yalnız en sonuncusu görünür.</li>
-      <li>Yolların rengi ulaşım şeklini gösterir; her kartın "Buraya nasıl gelindi" bölümünde yazar. Nasıl gidildiği kaynakta geçmiyorsa çizgi gridir. Renkler renk körlüğüne uygun Okabe-Ito paletindendir. Simgelerin ve renklerin anlamı sol üstteki lejant düğmesindedir.</li>
-      <li>Sol üstteki düğmelerin en altındaki dağ simgeli "Yolculuğu izle" düğmesiyle yolculuk baştan sona üç boyutlu izlenir: kamera yolu izler, araç yol boyunca ilerler, duraklarda orada olanlar bir iki cümleyle anlatılır ve seslendirilir, olayı simgeleyen maket belirir. + ve − düğmeleriyle ya da fare tekerleğiyle yaklaşınca araç küçülür ve yavaşlar, uzaklaşınca büyür ve hızlanır. Sağ tıkla (telefonda iki parmakla) sürükleyerek bakış açısı değiştirilir; sol tıkla sürükleyince oynatma durur, oynat düğmesiyle kamera araca döner. Nasıl gidildiği bilinmeyen yollarda araç yarı saydamdır.</li>
+      <li>Yolların rengi ulaşım şeklini gösterir; her kartın "Buraya nasıl gelindi" bölümünde yazar. Yol renkleri renk körlüğüne uygun Okabe-Ito paletindendir; nasıl gidildiği kaynakta geçmeyen yollar gridir. Simgelerin ve renklerin anlamı sol üstteki lejant düğmesindedir.</li>
+      <li>Sol üstteki düğmelerin en altındaki dağ simgeli "Yolculuğu izle" düğmesiyle yolculuk baştan sona üç boyutlu izlenir: araç yol boyunca ilerler, kamera onu arkadan izler ve her durakta o durağa gelinen yönden bakar; duraklarda orada olanlar bir iki cümleyle anlatılır ve seslendirilir, olayı simgeleyen maket belirir. + ve − düğmeleriyle ya da fare tekerleğiyle yaklaşınca araç küçülür ve yavaşlar, uzaklaşınca büyür ve hızlanır. Sağ tıkla (telefonda iki parmakla) sürükleyerek bakış açısı değiştirilir; sol tıkla sürükleyince oynatma durur, oynat düğmesiyle kamera araca döner. Nasıl gidildiği bilinmeyen yollarda araç yarı saydamdır.</li>
     </ul>
     <h3 data-m="hk-kaynaklar">Kaynaklar</h3>
     <ul data-m="hk-kaynaklar-liste">
@@ -497,7 +508,7 @@
     <h3 data-m="hk-yollar">Yollar ve araçlar</h3>
     <p data-m="hk-yollar-metin">O yılların yolları bugün yok; çizgiler aynı güzergâhın bugünkü yol ve demiryolu karşılığını izler. Vapur yolu yaklaşıktır. Üç boyutlu görünümdeki vapur, otomobil ve tren dönemin taşıtlarını anımsatan maketlerdir; duraklardaki yapı ve nesneler de temsilidir; aracın yol üzerindeki yeri yolculuğun başlangıç ve bitiş günlerine göre yaklaşık hesaplanır.</p>
     <h3 data-m="hk-kunye">Künye</h3>
-    <p data-m="hk-kunye-metin">Hazırlayan: Mehmet Ali Yanmaz · <a href="https://georehber.com/" target="_blank" rel="noopener">georehber.com</a> · Harita verisi © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap katkıcıları</a> (ODbL) · Yol hesabı: <a href="https://project-osrm.org/" target="_blank" rel="noopener">OSRM</a> · Ülke sınırları: <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth</a> · Altlık: Esri Light Gray Canvas ve World Hillshade; üç boyutlu görünümde Esri World Imagery ve arazi yükseltisi · Seslendirme: Adam Stone (ElevenLabs) · Yazı tipleri: Lora, Inter (SIL Open Font License) · Renkler: Okabe-Ito paleti, renk körlüğüne uygun · Araçlar: Claude, Python, ArcGIS Online, ArcGIS Maps SDK for JavaScript</p>
+    <p data-m="hk-kunye-metin">Hazırlayan: Mehmet Ali Yanmaz · <a href="https://georehber.com/" target="_blank" rel="noopener">georehber.com</a> · Harita verisi © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap katkıcıları</a> (ODbL) · Yol hesabı: <a href="https://project-osrm.org/" target="_blank" rel="noopener">OSRM</a> · Ülke sınırları: <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth</a> · Altlık: Esri Light Gray Canvas ve World Hillshade; üç boyutlu görünümde Esri World Imagery ve arazi yükseltisi · Seslendirme: Adam Stone (ElevenLabs) · Durak simgeleri ve başlıktaki göz çizimi: Google Gemini ile üretildi; göz çizimi Library of Congress'teki kamu malı bir portreden (Bain News Service, 1920'ler, <a href="https://commons.wikimedia.org/wiki/File:Ghazi_Moustapha_Kemal_Pasha_LCCN2014716853_(cropped).jpg" target="_blank" rel="noopener">Wikimedia Commons</a>) · Yazı tipleri: Lora, Inter (SIL Open Font License) · Renkler: Okabe-Ito paleti, renk körlüğüne uygun · Araçlar: Claude, Python, ArcGIS Online, ArcGIS Maps SDK for JavaScript</p>
     <h3 data-m="hk-topluluk">Topluluk</h3>
     <p data-m="hk-topluluk-metin">Bu harita, İzmir Bakırçay Üniversitesi Coğrafi Bilgi Sistemleri Topluluğu (BakırçayCBS) bünyesinde düzenlenen #30DayMapChallenge 2026 etkinliğinin 10. günü (“Prompting only”) için hazırlandı. Koordinatör: Dr. Şevki Danacıoğlu · <a href="https://sdanacioglu.github.io/30daymapchallenge-2026/" target="_blank" rel="noopener">BakırçayCBS #30DayMapChallenge 2026</a></p>
   </div>
@@ -1397,10 +1408,9 @@ require([
     }
     function karoIndir() {
       while (karoSuruyor < 4 && karoKuyrugu.length) {
-        const [adres, uydu] = karoKuyrugu.shift(), bitti = () => { karoSuruyor--; karoIndir(); };
+        const [adres] = karoKuyrugu.shift(), bitti = () => { karoSuruyor--; karoIndir(); };
         karoSuruyor++;
-        if (uydu) { const r = new Image(); r.crossOrigin = "anonymous"; r.onload = r.onerror = bitti; r.src = adres; }
-        else fetch(adres, { priority: "low" }).then(y => y.arrayBuffer()).catch(() => {}).finally(bitti);
+        fetch(adres, { priority: "low", mode: "cors", credentials: "omit" }).then(y => y.arrayBuffer()).catch(() => {}).finally(bitti);
       }
     }
     function karolariHazirla(n) {
@@ -1548,6 +1558,7 @@ require([
       }
     }
     let sira = 0, gecen = 0, oynuyor = false, onceKare = null, ucTarih = BAS;
+    let yolDurum = { s: null, i: -1, kismi: null, son: 0, arac: 0 };
     function sahneyiCiz(s, oran, ani) {
       if (s.tur === "durak") {
         const d = s.d;
@@ -1556,7 +1567,7 @@ require([
         varilanlariGoster();
         kameraTakip(d.k, s.yon, ani);
         altyazi(ucTarih, d, "", oran);
-        uc.aktif.removeAll();
+        if (yolDurum.s) { uc.aktif.removeAll(); yolDurum = { s: null, i: -1, kismi: null, son: 0, arac: 0 }; }
         return;
       }
       let kalan = s.uzunluk * oran, i = 0;
@@ -1565,12 +1576,20 @@ require([
       const { nokta, i: j } = hattaNokta(p.h, kalan);
       const ileri = hattaNokta(p.h, kalan + 8).nokta;
       const yonDer = km(nokta, ileri) > 0.05 ? yon(nokta, ileri) : otoYon;
-      araciKoy(p.ulasim in MODELLER ? p.ulasim : "bilinmiyor", nokta, yonDer);
+      const simdi = performance.now();
+      if (ani || simdi - yolDurum.arac > 33) { araciKoy(p.ulasim in MODELLER ? p.ulasim : "bilinmiyor", nokta, yonDer); yolDurum.arac = simdi; }
       uc.aracGrafik.visible = true;
-      uc.aktif.removeAll();
-      s.parcalar.slice(0, i).forEach(q => uc.aktif.add(new Graphic({ geometry: cizgi(q.h.koordlar), symbol: yolSembolu(renkOf(q), 3, 1) })));
-      const kismi = [...p.h.koordlar.slice(0, j), nokta];
-      if (kismi.length > 1) uc.aktif.add(new Graphic({ geometry: cizgi(kismi), symbol: yolSembolu(renkOf(p), 3, 1) }));
+      if (yolDurum.s !== s || yolDurum.i !== i) {
+        uc.aktif.removeAll();
+        s.parcalar.slice(0, i).forEach(q => uc.aktif.add(new Graphic({ geometry: cizgi(q.h.koordlar), symbol: yolSembolu(renkOf(q), 3, 1) })));
+        yolDurum = { s, i, kismi: new Graphic({ symbol: yolSembolu(renkOf(p), 3, 1) }), son: 0, arac: yolDurum.arac };
+        uc.aktif.add(yolDurum.kismi);
+      }
+      if (ani || simdi - yolDurum.son > 120) {
+        const kismi = [...p.h.koordlar.slice(0, j), nokta];
+        yolDurum.kismi.geometry = kismi.length > 1 ? cizgi(kismi) : null;
+        yolDurum.son = simdi;
+      }
       ucTarih = p.zaman_bas + (p.zaman_bit - p.zaman_bas) * (kalan / (p.h.uzunluk || 1));
       varilanlariGoster();
       kameraTakip(nokta, yonDer, ani);
@@ -1700,7 +1719,7 @@ require([
       ucDurdur();
       $("#sahne").hidden = true; $("#uc").hidden = true;
       if (uc) { uc.sView.destroy(); uc = null; maketOlcegi = null; }
-      karoKuyrugu = []; karoSahnesi = -1;
+      karoKuyrugu = []; karoSahnesi = -1; yolDurum = { s: null, i: -1, kismi: null, son: 0, arac: 0 };
       $("#harita").hidden = false;
       durakGoster(simdi2, false); kartAcik(true);
     }
