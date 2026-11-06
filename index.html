@@ -4,19 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Kurtuluştan Kuruluşa</title>
-<meta name="description" content="Mustafa Kemal Atatürk'ün 16 Mayıs 1919'dan 29 Ekim 1923'e kadar bulunduğu yerler ve yolculukları, gün gün haritada.">
+<meta name="description" content="Mustafa Kemal Atatürk'ün 16 Mayıs 1919'dan 29 Ekim 1923'e uzanan yolculuğu, dönüm noktaları ve yolları ile haritada; üç boyutlu anlatımla.">
 <meta name="theme-color" content="#f3efe6">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Kurtuluştan Kuruluşa">
-<meta property="og:description" content="Atatürk'ün izinde, Samsun'dan Cumhuriyet'e gün gün.">
+<meta property="og:description" content="Mustafa Kemal Atatürk'ün Samsun'dan Cumhuriyet'e yolculuğu, dönüm noktalarıyla haritada.">
 <meta property="og:url" content="https://georehber.com/kurtulustan-kurulusa/">
-<meta property="og:image" content="https://georehber.com/kurtulustan-kurulusa/img/onizleme.jpg?v=4">
+<meta property="og:image" content="https://georehber.com/kurtulustan-kurulusa/img/onizleme.jpg?v=5">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Kurtuluştan Kuruluşa: Atatürk'ün 1919-1923 yolculukları Türkiye haritası üzerinde">
+<meta property="og:image:alt" content="Kurtuluştan Kuruluşa: Mustafa Kemal Atatürk'ün 1919-1923 yolculuğu ve dönüm noktaları Türkiye haritası üzerinde">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://georehber.com/kurtulustan-kurulusa/img/onizleme.jpg?v=4">
+<meta name="twitter:title" content="Kurtuluştan Kuruluşa">
+<meta name="twitter:description" content="Mustafa Kemal Atatürk'ün Samsun'dan Cumhuriyet'e yolculuğu, dönüm noktalarıyla haritada.">
+<meta name="twitter:image" content="https://georehber.com/kurtulustan-kurulusa/img/onizleme.jpg?v=5">
 <link rel="icon" type="image/png" href="img/favicon.png">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="img/ikon-180.png">
@@ -24,6 +26,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Kurtuluş">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:locale:alternate" content="en_GB">
 <link rel="preconnect" href="https://js.arcgis.com">
 <link rel="preconnect" href="https://basemaps.arcgis.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -229,7 +233,6 @@
   .pp .rozet { display: inline-flex; align-items: center; gap: 6px; padding: 3px 11px; border-radius: 999px; font-size: 12.5px; font-weight: 600;
                border: 1px solid var(--cizgi); background: rgba(31, 29, 26, .04); color: var(--metin); }
   .pp .rozet.altin { border-color: rgba(0, 114, 178, .55); background: rgba(0, 114, 178, .12); color: var(--vurgu); }
-  .pp .rozet i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
   .pp .kutu { border: 1px solid var(--cizgi); border-radius: 12px; background: rgba(31, 29, 26, .03); overflow: hidden; }
   .pp table { width: 100%; border-collapse: collapse; }
   .pp td { padding: 8px 12px; border-bottom: 1px dashed var(--cizgi); vertical-align: top; line-height: 1.35; }
@@ -387,7 +390,7 @@
     <span><h1 data-m="baslik">Kurtuluştan Kuruluşa</h1><span class="alt" data-m="altbaslik">Atatürk'ün izinde · 16 Mayıs 1919 – 29 Ekim 1923</span></span>
   </a>
   <div class="dil-dugme" role="group" aria-label="Dil / Language">
-    <button type="button" data-dil="tr" aria-pressed="true" lang="tr" aria-label="Türkçe"><i class="bayrak" aria-hidden="true"></i>TR</button><button type="button" data-dil="en" aria-pressed="false" lang="en" aria-label="English"><i class="bayrak" aria-hidden="true"></i>EN</button>
+    <button type="button" data-dil="tr" aria-pressed="true" lang="tr" aria-label="Türkçe"><i class="bayrak" aria-hidden="true"></i><span data-m="dil-kisa-tr">TR</span></button><button type="button" data-dil="en" aria-pressed="false" lang="en" aria-label="English"><i class="bayrak" aria-hidden="true"></i><span data-m="dil-kisa-en">EN</span></button>
   </div>
   <button class="dugme" type="button" id="hakkinda-ac" aria-haspopup="dialog" aria-label="Hakkında" data-m-aria="hakkinda">
     <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6M12 7.2v.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
@@ -449,11 +452,11 @@
 </div>
 <div id="acilis" hidden>
   <div class="kart" id="adim-dil" role="dialog" aria-modal="true" aria-labelledby="dil-baslik">
-    <h2 id="dil-baslik"><span lang="tr">Kurtuluştan Kuruluşa</span><span lang="en">From Liberation to Foundation</span></h2>
-    <p class="soru"><span lang="tr">Dil seçin</span> · <span lang="en">Choose your language</span></p>
+    <h2 id="dil-baslik"><span lang="tr" data-m="dil-kart-baslik-tr">Kurtuluştan Kuruluşa</span><span lang="en" data-m="dil-kart-baslik-en">From Liberation to Foundation</span></h2>
+    <p class="soru"><span lang="tr" data-m="dil-sor-tr">Dil seçin</span> · <span lang="en" data-m="dil-sor-en">Choose your language</span></p>
     <div class="dil-secim">
-      <button type="button" data-dil="tr" lang="tr"><i class="bayrak-serit" aria-hidden="true"></i><b>Türkçe</b><span>Türkçe devam et</span></button>
-      <button type="button" data-dil="en" lang="en"><i class="bayrak-serit" aria-hidden="true"></i><b>English</b><span>Continue in English</span></button>
+      <button type="button" data-dil="tr" lang="tr"><i class="bayrak-serit" aria-hidden="true"></i><b data-m="dil-tr-ad">Türkçe</b><span data-m="dil-tr-alt">Türkçe devam et</span></button>
+      <button type="button" data-dil="en" lang="en"><i class="bayrak-serit" aria-hidden="true"></i><b data-m="dil-en-ad">English</b><span data-m="dil-en-alt">Continue in English</span></button>
     </div>
     <div class="adimlar" aria-hidden="true"><i class="etkin"></i><i></i></div>
   </div>
@@ -597,9 +600,9 @@ function lejantDoldur() {
   const cizgi = t => '<svg viewBox="0 0 34 18" aria-hidden="true"><line x1="2" y1="9" x2="32" y2="9" stroke="' + hex(TURLER[t].renk) + '" stroke-width="' + (t === "bilinmiyor" ? 2.2 : 3.2) +
     '" stroke-linecap="round"' + (t === "vapur" ? ' stroke-dasharray="5 4"' : "") + "/></svg>";
   const UZUN = { tren: "Trenle", otomobil: "Otomobille", vapur: "Vapurla", bilinmiyor: "Nasıl gittiği bilinmiyor" };
-  document.getElementById("lj-simgeler").innerHTML = SIMGELER.map(ad => '<div><img src="' + simgeAdres(ad) + '" alt="">' + simgeAdi(ad) + "</div>").join("");
+  document.getElementById("lj-simgeler").innerHTML = SIMGELER.map(ad => '<div><img src="' + simgeAdres(ad) + '" alt=""><span data-m="simge-' + ad + '">' + simgeAdi(ad) + "</span></div>").join("");
   document.getElementById("lj-yollar").innerHTML = ["tren", "otomobil", "vapur", "bilinmiyor"]
-    .map(t => '<div class="lj-satir">' + cizgi(t) + "<span>" + yaz("tur-" + t + "-uzun", UZUN[t]) + "</span></div>").join("");
+    .map(t => '<div class="lj-satir">' + cizgi(t) + "<span data-m=\"tur-" + t + "-uzun\">" + yaz("tur-" + t + "-uzun", UZUN[t]) + "</span></div>").join("");
 }
 document.addEventListener("dildegisti", () => { if (document.getElementById("lj-simgeler").innerHTML) lejantDoldur(); });
 const deger = v => (DIL === "en" && CEVIRI.degerler?.[v]) || v;
@@ -627,6 +630,7 @@ const simgeAdres = ad => new URL("img/simge/" + (ad || "yildiz") + ".png?v=5", l
 const AYAR = { kmSaniye: 100, enAzYol: 5, durakSaniye: 4, kameraUzak: 90000, kameraYuksek: 55000, maket: 6, okumaKelimeSaniye: 3.2 };
 const turAdi = t => yaz("tur-" + t, TURLER[t]?.ad || "");
 const simgeAdi = ad => yaz("simge-" + ad, SIMGE_ADI[ad]);
+const yerYaz = ad => yaz("yer-" + ad, ad);
 require([
   "esri/Map", "esri/views/MapView", "esri/layers/FeatureLayer", "esri/layers/GraphicsLayer",
   "esri/Graphic", "esri/Camera", "esri/widgets/Home", "esri/widgets/Zoom", "esri/core/reactiveUtils",
@@ -646,26 +650,30 @@ require([
   const kacis = s => String(s ?? "").replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\"", "&quot;");
   const darEkran = window.matchMedia("(max-width: 720px)");
   const telefonMu = () => darEkran.matches || matchMedia("(pointer: coarse)").matches;
-  const satir = (ad, deger) => deger ? "<tr><td>" + ad + "</td><td>" + kacis(deger) + "</td></tr>" : "";
-  const TUR_ADI = { kongre: "Kongre", genelge: "Genelge", muharebe: "Muharebe", karar: "Karar", toplanti: "Toplantı",
-                   varis: "Varış", yolculuk: "Yolculuk", konaklama: "Konaklama", diger: "Olay" };
-  const rozet = (metin, sinif, renk) => metin ? "<span class=\"rozet " + (sinif || "") + "\">" + (renk ? "<i style=\"background:" + renk + "\"></i>" : "") + kacis(metin) + "</span>" : "";
+  const ms = (anahtar, tr) => "<span data-m=\"" + anahtar + "\">" + kacis(yaz(anahtar, tr)) + "</span>";
+  const yerHtml = ad => "<span data-m=\"yer-" + kacis(ad) + "\">" + kacis(yerYaz(ad)) + "</span>";
+  const satir = (ad, degerHtml) => degerHtml ? "<tr><td>" + ad + "</td><td>" + degerHtml + "</td></tr>" : "";
   let DETAY = {};
   window.detaySozu.then(d => { DETAY = d || {}; });
   const yerAdi = a => alanAl(DETAY[a.id], "yer") || a.yer_adi_bugun;
   const commonsAdres = (dosya, en) => "https://commons.wikimedia.org/wiki/Special:FilePath/" + encodeURIComponent(dosya) + (en ? "?width=" + en : "");
   const commonsSayfa = dosya => "https://commons.wikimedia.org/wiki/File:" + encodeURIComponent(dosya.replaceAll(" ", "_"));
-  const fotoHtml = f => "<figure class=\"kutu foto\"><img loading=\"lazy\" src=\"" + commonsAdres(f.dosya, 800) + "\" data-buyuk=\"" + commonsAdres(f.dosya, 1600) +
-    "\" alt=\"" + kacis(alanAl(f, "aciklama")) + "\"><figcaption><span class=\"foto-yazi\">" + kacis(alanAl(f, "aciklama")) + "</span><small>" + kacis(deger(f.lisans)) + " · " + kacis(deger(f.eser_sahibi)) +
-    " · <a href=\"" + commonsSayfa(f.dosya) + "\" target=\"_blank\" rel=\"noopener\">Wikimedia Commons</a></small></figcaption></figure>";
+  const fotoHtml = (f, id, n) => {
+    const yol = alan => "<span data-veri=\"" + id + "|fotograflar." + n + "." + alan + "\">";
+    const kisa = alan => (DIL === "en" && f[alan + "_en"]) || deger(f[alan]);
+    return "<figure class=\"kutu foto\"><img loading=\"lazy\" src=\"" + commonsAdres(f.dosya, 800) + "\" data-buyuk=\"" + commonsAdres(f.dosya, 1600) +
+      "\" alt=\"" + kacis(alanAl(f, "aciklama")) + "\"><figcaption><span class=\"foto-yazi\" data-veri=\"" + id + "|fotograflar." + n + ".aciklama\">" + kacis(alanAl(f, "aciklama")) + "</span><small>" +
+      yol("lisans") + kacis(kisa("lisans")) + "</span> · " + yol("eser_sahibi") + kacis(kisa("eser_sahibi")) + "</span>" +
+      " · <a href=\"" + commonsSayfa(f.dosya) + "\" target=\"_blank\" rel=\"noopener\">" + ms("pp-commons", "Wikimedia Commons") + "</a></small></figcaption></figure>";
+  };
   function durakIcerigi(a, yolculuk, bitis = "") {
     const ek = DETAY[a.id] || {};
     return "<div class=\"pp\">" +
-      "<div class=\"rozetler\">" + rozet(tarihMetni(a.tarih_metni), "altin") + "</div>" +
-      "<div class=\"kutu\"><table>" + satir(yaz("pp-yer", "Yer"), yerAdi(a)) + "</table></div>" +
+      "<div class=\"rozetler\"><span class=\"rozet altin\" data-veri=\"" + a.id + "|tarih\">" + kacis(alanAl(ek, "tarih") || tarihMetni(a.tarih_metni)) + "</span></div>" +
+      "<div class=\"kutu\"><table>" + satir(ms("pp-yer", "Yer"), "<span data-veri=\"" + a.id + "|yer\">" + kacis(yerAdi(a)) + "</span>") + "</table></div>" +
       (ek.anlatim ? "<div class=\"kutu\"><span class=\"bolum-baslik\" data-m=\"pp-ne-oldu\">" + yaz("pp-ne-oldu", "Ne oldu") + "</span><div class=\"metin\" data-veri=\"" + a.id + "|anlatim\">" + kacis(anlatimMetni(ek)) + "</div></div>"
                   : a.aciklama ? "<div class=\"kutu metin\">" + kacis(a.aciklama) + "</div>" : "") +
-      (ek.fotograflar || []).map((f, n) => fotoHtml(f).replace("<span class=\"foto-yazi\">", "<span class=\"foto-yazi\" data-veri=\"" + a.id + "|fotograflar." + n + ".aciklama\">")).join("") +
+      (ek.fotograflar || []).map((f, n) => fotoHtml(f, a.id, n)).join("") +
       (ek.video ? videoHtml(ek.video) : "") +
       bitis +
       yolculuk +
@@ -675,12 +683,12 @@ require([
   const BITIS_SOZ = "Türkiye Cumhuriyeti dünyada işgal ettiği yere lâyık olduğunu eserleriyle ispatlayacaktır. Türkiye Cumhuriyeti mutlu, muvaffak ve muzaffer olacaktır.";
   function bitisHtml(gunSay, durakSay, km) {
     const rakam = (n, ad) => "<div><b>" + sayi(n) + "</b>" + ad + "</div>";
-    return "<div class=\"bitis\"><div class=\"bitis-ust\">" + AY_YILDIZ + "<b>" + yaz("bitis-baslik", "Yolculuk tamamlandı") + "</b><span>" +
-      tarihYaz(BAS) + " – " + tarihYaz(BIT) + "</span></div>" +
-      "<div class=\"bitis-rakam\">" + rakam(gunSay, yaz("hk-gun", "gün")) + rakam(durakSay, yaz("hk-nokta", "dönüm noktası")) + rakam(km, yaz("hk-km", "km yolculuk")) + "</div>" +
-      "<blockquote><p>" + kacis(yaz("bitis-soz", BITIS_SOZ)) + "</p>" + (DIL === "en" ? "<p class=\"ozgun\" lang=\"tr\">" + kacis(BITIS_SOZ) + "</p>" : "") +
-      "<cite>" + kacis(yaz("bitis-soz-kim", "Gazi Mustafa Kemal, Cumhurbaşkanı seçildikten sonra Meclis'teki teşekkür konuşması, 29 Ekim 1923")) +
-      " · Atatürk Ansiklopedisi</cite></blockquote></div>";
+    return "<div class=\"bitis\"><div class=\"bitis-ust\">" + AY_YILDIZ + "<b>" + ms("bitis-baslik", "Yolculuk tamamlandı") + "</b><span>" +
+      ms("bitis-tarih", tarihYaz(BAS) + " – " + tarihYaz(BIT)) + "</span></div>" +
+      "<div class=\"bitis-rakam\">" + rakam(gunSay, ms("hk-gun", "gün")) + rakam(durakSay, ms("hk-nokta", "dönüm noktası")) + rakam(km, ms("hk-km", "km yolculuk")) + "</div>" +
+      "<blockquote><p>" + ms("bitis-soz", BITIS_SOZ) + "</p>" + (DIL === "en" ? "<p class=\"ozgun\" lang=\"tr\">" + kacis(BITIS_SOZ) + "</p>" : "") +
+      "<cite>" + ms("bitis-soz-kim", "Gazi Mustafa Kemal, Cumhurbaşkanı seçildikten sonra Meclis'teki teşekkür konuşması, 29 Ekim 1923") +
+      " · " + ms("bitis-soz-kaynak", "Atatürk Ansiklopedisi") + "</cite></blockquote></div>";
   }
   const TUR_UZUN = { tren: "Trenle", otomobil: "Otomobille", vapur: "Vapurla", bilinmiyor: "Nasıl gittiği bilinmiyor" };
   const yolOrnegi = t => "<svg viewBox=\"0 0 34 12\" aria-hidden=\"true\"><line x1=\"2\" y1=\"6\" x2=\"32\" y2=\"6\" stroke=\"" + hex(TURLER[t].renk) +
@@ -688,26 +696,27 @@ require([
   function yolculukHtml(liste) {
     if (!liste.length) return "";
     const deniz = liste.some(f => f.attributes.ulasim === "vapur");
-    return "<div class=\"kutu yolculuk\"><span class=\"bolum-baslik\">" + yaz("nasil-gelindi", "Buraya nasıl gelindi") + "</span>" +
+    return "<div class=\"kutu yolculuk\"><span class=\"bolum-baslik\" data-m=\"nasil-gelindi\">" + kacis(yaz("nasil-gelindi", "Buraya nasıl gelindi")) + "</span>" +
       liste.map(f => {
         const a = f.attributes, t = TURLER[a.ulasim] ? a.ulasim : "bilinmiyor", km = geometryEngine.geodesicLength(f.geometry, "kilometers");
-        return "<div class=\"yol-satir\">" + yolOrnegi(t) + "<span><b>" + kacis(kisaAd(a.baslangic)) + " → " + kacis(kisaAd(a.bitis)) + "</b><small>" +
-          kacis(yaz("tur-" + t + "-uzun", TUR_UZUN[t])) + (km ? " · " + kacis(yaz("pp-yaklasik-km", "yaklaşık {n} km").replace("{n}", sayi(km))) : "") +
-          " · " + kacis(tarihMetni(a.tarih_metni)) + "</small></span></div>";
+        return "<div class=\"yol-satir\">" + yolOrnegi(t) + "<span><b>" + yerHtml(kisaAd(a.baslangic)) + " → " + yerHtml(kisaAd(a.bitis)) + "</b><small>" +
+          ms("tur-" + t + "-uzun", TUR_UZUN[t]) + (km ? " · " + ms("pp-km-on", "yaklaşık") + " " + ms("rota-" + a.id + "-km", sayi(km)) + " " + ms("pp-km-son", "km") : "") +
+          " · " + ms("rota-" + a.id + "-tarih", tarihMetni(a.tarih_metni)) + "</small></span></div>";
       }).join("") +
-      "<p class=\"not\">" + yaz("pp-cizgi", "Çizgi yolun bugünkü karşılığını izler.") + (deniz ? " " + yaz("pp-deniz", "Deniz yolu yaklaşıktır.") : "") + "</p></div>";
+      "<p class=\"not\">" + ms("pp-cizgi", "Çizgi yolun bugünkü karşılığını izler.") + (deniz ? " " + ms("pp-deniz", "Deniz yolu yaklaşıktır.") : "") + "</p></div>";
   }
   function baglantiHtml(a, ek) {
     const liste = [], gor = new Set();
-    const ekle = (ad, url) => { if (url && !gor.has(url)) { gor.add(url); liste.push([ad, url]); } };
-    (ek.baglantilar || []).forEach(b => ekle(b.ad, b.url));
-    [[a.kaynak_1, a.kaynak_1_url_sayfa], [a.kaynak_2, a.kaynak_2_url_sayfa]].forEach(([ad, url]) => ekle(String(ad || "").replace(/^Atatürk Ansiklopedisi \(ATAM\), /, "Atatürk Ansiklopedisi: "), url));
-    return liste.length ? "<div class=\"kutu\"><span class=\"bolum-baslik\">" + yaz("pp-kaynaklar", "Kaynaklar ve daha fazlası") + "</span><div class=\"baglantilar\">" +
-      liste.map(([ad, url]) => "<a href=\"" + kacis(url) + "\" target=\"_blank\" rel=\"noopener\">" + kacis(ad) + "</a>").join("") + "</div></div>" : "";
+    const ekle = (ad, url, alan) => { if (url && !gor.has(url)) { gor.add(url); liste.push([ad, url, alan]); } };
+    (ek.baglantilar || []).forEach((b, n) => ekle(alanAl(b, "ad"), b.url, "baglantilar." + n + ".ad"));
+    [[1, a.kaynak_1, a.kaynak_1_url_sayfa], [2, a.kaynak_2, a.kaynak_2_url_sayfa]].forEach(([n, ad, url]) =>
+      ekle(alanAl(ek, "kaynak_" + n + "_ad") || String(ad || "").replace(/^Atatürk Ansiklopedisi \(ATAM\), /, "Atatürk Ansiklopedisi: "), url, "kaynak_" + n + "_ad"));
+    return liste.length ? "<div class=\"kutu\"><span class=\"bolum-baslik\" data-m=\"pp-kaynaklar\">" + kacis(yaz("pp-kaynaklar", "Kaynaklar ve daha fazlası")) + "</span><div class=\"baglantilar\">" +
+      liste.map(([ad, url, alan]) => "<a href=\"" + kacis(url) + "\" target=\"_blank\" rel=\"noopener\"><span data-veri=\"" + a.id + "|" + alan + "\">" + kacis(ad) + "</span></a>").join("") + "</div></div>" : "";
   }
   const videoHtml = v => "<figure class=\"kutu foto video\"><video controls preload=\"metadata\" playsinline>" +
     (v.kaynaklar || []).map(k => "<source src=\"" + kacis(k.url) + "\" type=\"" + kacis(k.tur) + "\">").join("") +
-    "<a href=\"" + commonsSayfa(v.dosya) + "\" target=\"_blank\" rel=\"noopener\">" + yaz("pp-video", "Videoyu Wikimedia Commons'ta izle") + "</a></video><figcaption>" + kacis(alanAl(v, "aciklama")) +
+    "<a href=\"" + commonsSayfa(v.dosya) + "\" target=\"_blank\" rel=\"noopener\"><span data-m=\"pp-video\">" + yaz("pp-video", "Videoyu Wikimedia Commons'ta izle") + "</span></a></video><figcaption>" + kacis(alanAl(v, "aciklama")) +
     "<small>" + kacis(deger(v.lisans)) + " · " + kacis(deger(v.eser_sahibi)) + " · <a href=\"" + commonsSayfa(v.dosya) + "\" target=\"_blank\" rel=\"noopener\">Wikimedia Commons</a></small></figcaption></figure>";
   const buyukFoto = $("#buyuk-foto");
   document.addEventListener("click", e => {
@@ -885,8 +894,9 @@ require([
       return { k: c.k, ad: illi ? illi.il : kisaAd(c.uyeler[0].yer_adi_bugun).split(" ")[0],
                bas: Math.min(...c.uyeler.map(a => a.zaman_bas)) };
     });
+    window.haritaYerAdlari = yerAdlari.map(y => y.ad);
     yerAdlari.forEach((y, i) => adKatmani.add(new Graphic({ geometry: { type: "point", longitude: y.k[0], latitude: y.k[1] }, attributes: { bas: y.bas, ad: y.ad, kume: i },
-      symbol: { type: "text", text: y.ad, color: [31, 29, 26], haloColor: [255, 253, 248, 0.95], haloSize: 1.5, yoffset: 18,
+      symbol: { type: "text", text: yerYaz(y.ad), color: [31, 29, 26], haloColor: [255, 253, 248, 0.95], haloSize: 1.5, yoffset: 18,
                 font: { family: "Inter", size: 10.5, weight: "bold" } } })));
     const AD_YERLERI = [[0, -29], [0, 31], [1, 0], [-1, 0]];
     function adlariYerlestir() {
@@ -1028,15 +1038,20 @@ require([
       const a = sirali2[i].attributes, onceki = sirali2[i - 1], sonraki = sirali2[i + 1];
       const sonMu = !sonraki;
       durakKart.classList.toggle("son-durak", sonMu);
-      $("#d-sira").textContent = (sonMu ? yaz("son-durak", "Son durak") + " · " : "") + yaz("durak-sira", "Durak {i} / {n}").replace("{i}", i + 1).replace("{n}", sirali2.length);
+      $("#d-sira").innerHTML = (sonMu ? ms("son-durak", "Son durak") + " · " : "") +
+        ms("durak-sira-on", "Durak") + " " + (i + 1) + " " + ms("durak-sira-ara", "/") + " " + sirali2.length;
       $("#d-baslik").textContent = durakBasligi(sirali2[i]);
       $("#d-baslik").dataset.veri = sirali2[i].attributes.id + "|baslik";
       kartGovde.innerHTML = durakIcerigi(a, yolculukHtml(ayakYollari(i)), sonMu ? bitisHtml(GUN_SAYISI, sirali2.length, toplamKm) : "");
       kartGovde.scrollTop = 0;
       $("#d-onceki").hidden = !onceki;
-      if (onceki) $("#d-onceki .gecis-ad").textContent = durakBasligi(onceki);
-      $("#d-sonraki .gecis-ust").textContent = sonraki ? yaz("devam", "Yolculuğa devam") : yaz("son-gecis-ust", "Samsun'dan Cumhuriyet'e");
-      $("#d-sonraki .gecis-ad").textContent = sonraki ? durakBasligi(sonraki) : yaz("son-gecis-ad", "Bütün yolculuğu 3B izle");
+      if (onceki) { $("#d-onceki .gecis-ad").textContent = durakBasligi(onceki); $("#d-onceki .gecis-ad").dataset.veri = onceki.attributes.id + "|baslik"; }
+      const gUst = $("#d-sonraki .gecis-ust"), gAd = $("#d-sonraki .gecis-ad");
+      gUst.dataset.m = sonraki ? "devam" : "son-gecis-ust";
+      gUst.textContent = sonraki ? yaz("devam", "Yolculuğa devam") : yaz("son-gecis-ust", "Samsun'dan Cumhuriyet'e");
+      gAd.textContent = sonraki ? durakBasligi(sonraki) : yaz("son-gecis-ad", "Bütün yolculuğu 3B izle");
+      if (sonraki) { delete gAd.dataset.m; gAd.dataset.veri = sonraki.attributes.id + "|baslik"; }
+      else { delete gAd.dataset.veri; gAd.dataset.m = "son-gecis-ad"; }
       $("#d-gecis").classList.toggle("tek", !onceki);
     }
     $("#d-onceki").addEventListener("click", () => durakGoster(simdi2 - 1, false));
@@ -1267,7 +1282,7 @@ require([
       });
       document.documentElement.style.setProperty("--uc-alt", $("#uc .alt").offsetHeight + "px");
       yerAdlari.forEach(y => yerler.add(new Graphic({ geometry: new Point({ longitude: y.k[0], latitude: y.k[1] }), attributes: { bas: y.bas }, visible: false,
-        symbol: { type: "point-3d", verticalOffset: { screenLength: 20 }, symbolLayers: [{ type: "text", text: y.ad, size: 11, material: { color: [238, 241, 247] },
+        symbol: { type: "point-3d", verticalOffset: { screenLength: 20 }, symbolLayers: [{ type: "text", text: yerYaz(y.ad), size: 11, material: { color: [238, 241, 247] },
           halo: { color: [7, 11, 22, 0.9], size: 1.4 }, font: { family: "Inter", weight: "bold" }, verticalAlignment: "bottom" }] } })));
       const binalar = new GraphicsLayer({ elevationInfo: { mode: "relative-to-ground" } });
       sView.map.add(binalar, 3);
@@ -1293,9 +1308,11 @@ require([
         const k = [f.geometry.x, f.geometry.y];
         let obek = obekler.findIndex(q => Math.hypot(q[0] - k[0], q[1] - k[1]) < 0.04);
         if (obek < 0) { obekler.push(k); obek = obekler.length - 1; }
-        const temel = BINA[tur](); temel.rotate(0, 0, -20, { origin: MERKEZ });
+        const durakYonu = sahneler.find(s => s.tur === "durak" && s.d.id === f.attributes.id)?.yon || 0;
+        const temel = BINA[tur](); temel.rotate(0, 0, -20 - durakYonu, { origin: MERKEZ });
         const [x, y] = wmu.lngLatToXY(k[0], k[1]);
-        const [ox, oy] = wmu.lngLatToXY(k[0] + 0.02, k[1] - 0.015);
+        const yan = kaydir(kaydir(k, durakYonu + 90, 1.8), durakYonu + 180, 1.6);
+        const [ox, oy] = wmu.lngLatToXY(yan[0], yan[1]);
         binalar.add(new Graphic({ attributes: { bas: f.attributes.zaman_bas, obek, temel, x, y, dx: ox - x, dy: oy - y }, visible: false, symbol: { type: "mesh-3d", symbolLayers: [{ type: "fill" }] } }));
       });
       const aracGrafik = new Graphic({ symbol: { type: "mesh-3d", symbolLayers: [{ type: "fill" }] } });
@@ -1313,6 +1330,19 @@ require([
       sahneler.push({ tur: "durak", d, bas: d.zaman_bas });
     });
     const okumaSuresi = d => String(alanAl(DETAY[d.id], "kisa") || "").split(/\s+/).length / AYAR.okumaKelimeSaniye;
+    const yolYonu = (h, sondan) => {
+      const a = sondan ? hattaNokta(h, Math.max(0, h.uzunluk - 8)).nokta : h.koordlar[0];
+      const b = sondan ? h.koordlar[h.koordlar.length - 1] : hattaNokta(h, Math.min(h.uzunluk, 8)).nokta;
+      return km(a, b) > 0.05 ? yon(a, b) : null;
+    };
+    let sonYon = 0;
+    sahneler.forEach((s, i) => {
+      if (s.tur !== "durak") return;
+      const once = sahneler[i - 1], sonra = sahneler[i + 1];
+      const y = once?.tur === "yol" ? yolYonu(once.parcalar[once.parcalar.length - 1].h, true)
+              : !once && sonra?.tur === "yol" ? yolYonu(sonra.parcalar[0].h, false) : null;
+      s.yon = sonYon = y ?? sonYon;
+    });
     sahneler.forEach(s => { s.sure = s.tur === "durak" ? Math.max(AYAR.durakSaniye, okumaSuresi(s.d)) : Math.max(AYAR.enAzYol, s.uzunluk / AYAR.kmSaniye); });
     const SES_ARA = 0.2;
     const SES_BEKLEME = 4;
@@ -1352,6 +1382,50 @@ require([
         const a = durakSesi(x);
         if (a && !a.hata && a.preload === "none") { a.preload = "auto"; a.load(); }
       });
+    }
+    const KARO_UYDU = y => "https://" + (y % 2 ? "server" : "services") + ".arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/";
+    const KARO_YUKSELTI = "https://elevation3d.arcgis.com/arcgis/rest/services/WorldElevation3D/Terrain3D/ImageServer/tile/";
+    const istenenKaro = new Set();
+    let karoKuyrugu = [], karoSuruyor = 0, karoSahnesi = -1;
+    const karoNo = (b, e, z) => {
+      const n = 2 ** z, f = rad(Math.max(-85, Math.min(85, e)));
+      return [Math.floor((b + 180) / 360 * n), Math.floor((1 - Math.log(Math.tan(f) + 1 / Math.cos(f)) / Math.PI) / 2 * n)];
+    };
+    function karoEkle(adres, uydu) {
+      if (istenenKaro.has(adres)) return;
+      istenenKaro.add(adres); karoKuyrugu.push([adres, uydu]);
+    }
+    function karoIndir() {
+      while (karoSuruyor < 4 && karoKuyrugu.length) {
+        const [adres, uydu] = karoKuyrugu.shift(), bitti = () => { karoSuruyor--; karoIndir(); };
+        karoSuruyor++;
+        if (uydu) { const r = new Image(); r.crossOrigin = "anonymous"; r.onload = r.onerror = bitti; r.src = adres; }
+        else fetch(adres, { priority: "low" }).then(y => y.arrayBuffer()).catch(() => {}).finally(bitti);
+      }
+    }
+    function karolariHazirla(n) {
+      if (n === karoSahnesi || navigator.connection?.saveData) return;
+      karoSahnesi = n;
+      karoKuyrugu = [];
+      const seviye = Math.max(6, Math.min(16, Math.round(11 + Math.log2(YAKINLIK0 / yakinlik)) - (telefonMu() ? 1 : 0)));
+      let durak = 0;
+      for (let i = n; i < sahneler.length && durak < 3; i++) {
+        const s = sahneler[i];
+        if (s.tur === "durak") { durak++; continue; }
+        s.parcalar.forEach(p => {
+          for (let m = 0; m <= p.h.uzunluk; m += 4) {
+            const [b, e] = hattaNokta(p.h, m).nokta;
+            [[seviye, 1], [seviye - 1, 1], [seviye - 2, 0]].forEach(([z, cevre]) => {
+              const [x, y] = karoNo(b, e, z);
+              for (let dx = -cevre; dx <= cevre; dx++) for (let dy = -cevre; dy <= cevre; dy++)
+                karoEkle(KARO_UYDU(y + dy) + z + "/" + (y + dy) + "/" + (x + dx), true);
+            });
+            const [x, y] = karoNo(b, e, seviye - 2);
+            for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) karoEkle(KARO_YUKSELTI + (seviye - 2) + "/" + (y + dy) + "/" + (x + dx), false);
+          }
+        });
+      }
+      karoIndir();
     }
     function sesleriDurdur() { sesler.forEach(a => { if (!a.paused || a.bekliyor) a.pause(); a.bekliyor = null; }); }
     function sesEsle(s) {
@@ -1398,7 +1472,8 @@ require([
       uc.aracGrafik.geometry = m;
     }
     const EGIM0 = der(Math.atan2(AYAR.kameraUzak, AYAR.kameraYuksek)), MESAFE0 = Math.hypot(AYAR.kameraUzak, AYAR.kameraYuksek);
-    let kamYon = 0, kamEgim = EGIM0, kamHedef = null, yakinlik = 1;
+    const YAKINLIK0 = 0.6;
+    let otoYon = 0, yonFark = 0, kamYon = 0, kamEgim = EGIM0, kamHedef = null, yakinlik = YAKINLIK0;
     let elde = false, kaydirildi = false;
     const aracOlcegi = () => Math.pow(yakinlik, 1.6);
     const hedefHiz = () => Math.pow(yakinlik, 1.7);
@@ -1408,13 +1483,17 @@ require([
       const geri = kaydir(k, (kamYon + 180) % 360, D * Math.sin(e) / 1000);
       return new Camera({ position: { longitude: geri[0], latitude: geri[1], z: D * Math.cos(e) }, heading: kamYon, tilt: kamEgim });
     }
-    function kameraTakip(k) {
+    function kameraTakip(k, hedefYon, ani) {
+      const fark = ((hedefYon - otoYon + 540) % 360) - 180;
+      otoYon = ani ? hedefYon : (otoYon + fark * 0.05 + 360) % 360;
+      kamYon = (otoYon + yonFark + 360) % 360;
       kamHedef = k;
       if (elde || kaydirildi) return;
       uc.sView.camera = kameraHesap(k);
     }
     function kameradanOku() {
       const c = uc.sView.camera;
+      yonFark = ((c.heading - otoYon + 540) % 360) - 180;
       kamYon = (c.heading + 360) % 360;
       kamEgim = Math.max(5, Math.min(80, c.tilt));
       const D = c.position.z / Math.max(0.15, Math.cos(rad(kamEgim)));
@@ -1437,7 +1516,8 @@ require([
       let birikim = 0;
       return (cumleler[anahtar] = parca.map(c => ({ metin: c, bitis: (birikim += c.length) / toplam })));
     }
-    let altyaziDurak = null, altyaziCumle = "";
+    let altyaziDurak = null, altyaziCumle = "", ustMetin = null;
+    const ustYaz = html => { if (html !== ustMetin) { ustMetin = html; $("#a-olay").innerHTML = html; } };
     function cumleYaz(metin) {
       if (metin === altyaziCumle) return;
       altyaziCumle = metin;
@@ -1451,7 +1531,8 @@ require([
       if (d) {
         if (altyaziDurak !== d) {
           altyaziDurak = d;
-          $("#a-olay").textContent = (alanAl(DETAY[d.id], "baslik") || d.baslik) + " · " + kisaAd(yerAdi(d));
+          ustYaz("<span data-veri=\"" + d.id + "|baslik\">" + kacis(alanAl(DETAY[d.id], "baslik") || d.baslik) + "</span> · " +
+                 "<span data-veri=\"" + d.id + "|yer\">" + kacis(kisaAd(yerAdi(d))) + "</span>");
         }
         const a = sesler.get(d.id), sesVar = a && !a.hata, c = cumleleriAl(d), zamanlar = sesZamanlari(d.id);
         if (sesVar && Array.isArray(zamanlar) && zamanlar.length === c.length) {
@@ -1462,7 +1543,7 @@ require([
         }
       } else {
         altyaziDurak = null;
-        $("#a-olay").textContent = yolMetni || "";
+        ustYaz(yolMetni || "");
         cumleYaz("");
       }
     }
@@ -1473,7 +1554,7 @@ require([
         uc.aracGrafik.visible = false;
         ucTarih = d.zaman_bas + (d.zaman_bit - d.zaman_bas) * Math.min(1, oran);
         varilanlariGoster();
-        kameraTakip(d.k);
+        kameraTakip(d.k, s.yon, ani);
         altyazi(ucTarih, d, "", oran);
         uc.aktif.removeAll();
         return;
@@ -1483,7 +1564,7 @@ require([
       const p = s.parcalar[i];
       const { nokta, i: j } = hattaNokta(p.h, kalan);
       const ileri = hattaNokta(p.h, kalan + 8).nokta;
-      const yonDer = km(nokta, ileri) > 0.05 ? yon(nokta, ileri) : kamYon;
+      const yonDer = km(nokta, ileri) > 0.05 ? yon(nokta, ileri) : otoYon;
       araciKoy(p.ulasim in MODELLER ? p.ulasim : "bilinmiyor", nokta, yonDer);
       uc.aracGrafik.visible = true;
       uc.aktif.removeAll();
@@ -1492,9 +1573,10 @@ require([
       if (kismi.length > 1) uc.aktif.add(new Graphic({ geometry: cizgi(kismi), symbol: yolSembolu(renkOf(p), 3, 1) }));
       ucTarih = p.zaman_bas + (p.zaman_bit - p.zaman_bas) * (kalan / (p.h.uzunluk || 1));
       varilanlariGoster();
-      kameraTakip(nokta);
+      kameraTakip(nokta, yonDer, ani);
       const arac = turAdi(p.ulasim);
-      altyazi(ucTarih, null, (arac ? arac + " · " : "") + kisaAd(p.baslangic) + " → " + kisaAd(p.bitis));
+      const t = p.ulasim in TURLER ? p.ulasim : "bilinmiyor";
+      altyazi(ucTarih, null, (arac ? ms("tur-" + t, TURLER[t]?.ad || "") + " · " : "") + yerHtml(kisaAd(p.baslangic)) + " → " + yerHtml(kisaAd(p.bitis)));
     }
     const MAKET_KATSAYI = 0.6;
     let maketOlcegi = null;
@@ -1523,7 +1605,7 @@ require([
     function sahneyeGit(n, oran = 0) {
       sira = Math.max(0, Math.min(sahneler.length - 1, n)); gecen = sahneler[sira].sure * oran; kaydirildi = false;
       sesleriDurdur(); const a = durakSesi(sahneler[sira]); if (a && a.ended) a.currentTime = 0;
-      izleriCiz(sira); sahneyiCiz(sahneler[sira], oran, true); cizelge(ucSvg, ucCz, ucTarih);
+      izleriCiz(sira); sahneyiCiz(sahneler[sira], oran, true); cizelge(ucSvg, ucCz, ucTarih); karolariHazirla(sira);
     }
     function kare(zaman) {
       if (!oynuyor || !uc) return;
@@ -1533,7 +1615,7 @@ require([
       sesEsle(sahneler[sira]);
       if (gecen >= sahneler[sira].sure) {
         if (sira >= sahneler.length - 1) { ucDurdur(); return; }
-        sira++; gecen = 0; izleriCiz(sira);
+        sira++; gecen = 0; izleriCiz(sira); karolariHazirla(sira);
         sesEsle(sahneler[sira]);
       }
       sahneyiCiz(sahneler[sira], gecen / sahneler[sira].sure, false);
@@ -1590,10 +1672,11 @@ require([
       if (ucKapandi()) return;
       const n = tariheSahne(t), s = sahneler[n], k = s.tur === "durak" ? s.d.k : s.parcalar[0].h.koordlar[0];
       altyazi(s.bas, s.tur === "durak" ? s.d : null, "");
-      yakinlik = 1; kamYon = 0; kamEgim = EGIM0; maketOlcegi = null;
+      yakinlik = YAKINLIK0; yonFark = 0; kamEgim = EGIM0; maketOlcegi = null;
+      otoYon = kamYon = s.tur === "durak" ? s.yon : (yolYonu(s.parcalar[0].h, false) ?? 0);
       await uc.sView.goTo(kameraHesap(k), { duration: 3500, easing: "in-out-cubic" }).catch(() => {});
       if (ucKapandi()) return;
-      kamYon = 0; kamEgim = EGIM0; kamHedef = null; kaydirildi = false; elde = false;
+      kamHedef = null; kaydirildi = false; elde = false;
       sahneyeGit(n);
       ucOynat();
     }
@@ -1617,6 +1700,7 @@ require([
       ucDurdur();
       $("#sahne").hidden = true; $("#uc").hidden = true;
       if (uc) { uc.sView.destroy(); uc = null; maketOlcegi = null; }
+      karoKuyrugu = []; karoSahnesi = -1;
       $("#harita").hidden = false;
       durakGoster(simdi2, false); kartAcik(true);
     }
@@ -1628,7 +1712,7 @@ require([
     });
     document.addEventListener("dildegisti", () => {
       kartiDoldur(simdi2); adlariYerlestir();
-      altyaziDurak = null; altyaziCumle = "";
+      altyaziDurak = null; altyaziCumle = ""; ustMetin = null;
       if (uc) sahneyiCiz(sahneler[sira], gecen / sahneler[sira].sure, true);
     });
     if (location.hash) history.replaceState(null, "", location.pathname + location.search);
@@ -1685,7 +1769,7 @@ require([
     acilis.addEventListener("click", e => { if (e.target === acilis && $("#adim-dil").hidden) kapat(); });
     window.sayfaHazir = true;
   }).catch(hata => {
-    $("#d-baslik").textContent = yaz("hata", "Harita yüklenemedi. Sayfayı yenileyin.");
+    $("#d-baslik").textContent = yaz("hata", "Harita yüklenemedi. Sayfayı yenileyin."); $("#d-baslik").dataset.m = "hata";
     $("#yukleniyor").classList.add("bitti");
     window.sayfaHatasi = String(hata);
   });
