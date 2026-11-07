@@ -1033,6 +1033,7 @@ require([
     }
     function durakGoster(i, ileri) {
       i = Math.max(0, Math.min(sirali2.length - 1, i));
+      if (i !== simdi2 && darEkran.matches && !durakKart.hidden && typeof haliSec === "function") haliSec("kisa");
       const cizerek = ileri && i === simdi2 + 1;
       simdi2 = i; gun = sirali2[i].attributes.zaman_bas;
       const jeton = cizimJetonu = {};
