@@ -1341,6 +1341,8 @@ require([
       }
       sahneler.push({ tur: "durak", d, bas: d.zaman_bas });
     });
+    sahneler.push({ tur: "durak", kapanis: true, bas: BIT + 1,
+                    d: { id: "KAPANIS", k: [34.8, 39.1], zaman_bas: BIT, zaman_bit: BIT, baslik: "Kurtuluştan Kuruluşa", yer_adi_bugun: "Türkiye" } });
     const okumaSuresi = d => String(alanAl(DETAY[d.id], "kisa") || "").split(/\s+/).length / AYAR.okumaKelimeSaniye;
     const yolYonu = (h, sondan) => {
       const a = sondan ? hattaNokta(h, Math.max(0, h.uzunluk - 8)).nokta : h.koordlar[0];
@@ -1452,7 +1454,7 @@ require([
         return;
       }
       if (a.paused) {
-        if (a.ended && gecen >= a.currentTime - 0.3) return;
+        if (a.ended) { gecen = Math.max(gecen, a.duration || gecen); return; }
         if (gecen < (a.duration || Infinity) - 0.05) {
           a.bekliyor = { gecen, zaman: performance.now() };
           if (Math.abs(a.currentTime - gecen) > 0.25) a.currentTime = gecen;
@@ -1560,7 +1562,47 @@ require([
     }
     let sira = 0, gecen = 0, oynuyor = false, onceKare = null, ucTarih = BAS;
     let yolDurum = { s: null, i: -1, kismi: null, son: 0, arac: 0 };
+    let kapanisKamerasi = null, kapanisOlcek = 1, kapanisBas = 0, kapanisSon = 0, kapanisGrafik = null;
+    const KAPANIS_RENK = [255, 196, 64];
+    function kapanisCiz(ani) {
+      const simdi = performance.now();
+      if (!ani && simdi - kapanisSon < 80) return;
+      kapanisSon = simdi;
+      const t = ani ? 4 : (simdi - kapanisBas) / 1000, gecis = Math.min(1, t / 3.5), nabiz = 0.5 + 0.5 * Math.sin(t * 1.6);
+      const sembol = { type: "line-3d", symbolLayers: [
+        { type: "line", size: 9 + 8 * nabiz, material: { color: [...KAPANIS_RENK, (0.22 + 0.28 * nabiz) * gecis] }, cap: "round", join: "round" },
+        { type: "line", size: 4.5, material: { color: [255, 214, 110, 0.75 * gecis] }, cap: "round", join: "round" },
+        { type: "line", size: 2.2, material: { color: [255, 246, 214, gecis] }, cap: "round", join: "round" }] };
+      kapanisGrafik.symbol = sembol;
+      uc.izler.opacity = 1 - gecis;
+      const olcek = 1 - 0.65 * gecis;
+      if (Math.abs(olcek - kapanisOlcek) > 0.01) { kapanisOlcek = olcek; maketleriOlcekle(); }
+    }
+    function kapanistanCik() {
+      if (!kapanisKamerasi) return;
+      kapanisKamerasi = null;
+      if (kapanisGrafik) { uc.aktif.remove(kapanisGrafik); kapanisGrafik = null; }
+      uc.izler.opacity = 1; kapanisOlcek = 1; maketleriOlcekle();
+    }
     function sahneyiCiz(s, oran, ani) {
+      if (s.kapanis) {
+        uc.aracGrafik.visible = false;
+        ucTarih = BIT;
+        varilanlariGoster();
+        altyazi(ucTarih, s.d, "", oran);
+        if (kapanisKamerasi !== s) {
+          if (yolDurum.s) { uc.aktif.removeAll(); yolDurum = { s: null, i: -1, kismi: null, son: 0, arac: 0 }; }
+          kapanisKamerasi = s; kapanisBas = performance.now(); kapanisSon = 0;
+          const yollar = sahneler.filter(x => x.tur === "yol").flatMap(x => x.parcalar.map(p => p.h.koordlar));
+          kapanisGrafik = new Graphic({ geometry: new Polyline({ paths: yollar, spatialReference: { wkid: 4326 } }) });
+          uc.aktif.add(kapanisGrafik);
+          uc.sView.goTo({ position: { longitude: 34.3, latitude: 38.3, z: 2100000 }, heading: -5, tilt: 0 },
+                        { duration: ani ? 0 : 5000, easing: "in-out-cubic" }).catch(() => {});
+        }
+        kapanisCiz(ani);
+        return;
+      }
+      kapanistanCik();
       if (s.tur === "durak") {
         const d = s.d;
         uc.aracGrafik.visible = false;
@@ -1601,7 +1643,7 @@ require([
     const MAKET_KATSAYI = 0.6;
     let maketOlcegi = null;
     function maketleriOlcekle() {
-      const olcek = MAKET_KATSAYI * aracOlcegi();
+      const olcek = MAKET_KATSAYI * aracOlcegi() * kapanisOlcek;
       if (!uc || olcek === maketOlcegi) return;
       maketOlcegi = olcek;
       uc.maketler.forEach(g => {
@@ -1721,6 +1763,7 @@ require([
       $("#sahne").hidden = true; $("#uc").hidden = true;
       if (uc) { uc.sView.destroy(); uc = null; maketOlcegi = null; }
       karoKuyrugu = []; karoSahnesi = -1; yolDurum = { s: null, i: -1, kismi: null, son: 0, arac: 0 };
+      kapanisKamerasi = null; kapanisGrafik = null; kapanisOlcek = 1;
       $("#harita").hidden = false;
       durakGoster(simdi2, false); kartAcik(true);
     }
