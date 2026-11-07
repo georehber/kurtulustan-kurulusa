@@ -70,7 +70,7 @@
   .marka { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; color: inherit; text-decoration: none; }
   .marka img { width: 38px; height: 38px; flex: none; object-fit: contain; }
   .baslik-goz { display: none; }
-  @media (min-width: 900px) {
+  @media (min-width: 1100px) {
     .marka { flex: 0 1 auto; }
     .baslik-goz { display: block; flex: 1 1 258px; min-width: 258px; align-self: stretch;
                   background: url(img/baslik_goz.webp) center / auto 100% no-repeat; }
@@ -82,6 +82,9 @@
   .dugme:hover { border-color: var(--vurgu); }
   .dugme.vurgu { background: var(--vurgu); border-color: var(--vurgu); color: #fff; font-weight: 600; }
   .dugme.vurgu:hover { filter: brightness(1.08); }
+  .nutuk-dugme { display: inline-flex; align-items: center; gap: 8px; padding: 2px 14px 2px 2px; color: var(--metin); text-decoration: none; font-weight: 500; flex: none; }
+  .nutuk-dugme img { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; display: block; }
+  .nutuk-dugme:hover { border-color: var(--vurgu); }
   .dil-dugme { display: inline-flex; padding: 2px; border: 1px solid var(--cizgi); border-radius: 999px; background: rgba(31, 29, 26, .04); }
   .dil-dugme button { display: inline-flex; align-items: center; gap: 6px; border: 0; background: none; padding: 4px 10px 4px 4px; border-radius: 999px; font-size: 12.5px; font-weight: 600;
                       letter-spacing: .5px; color: var(--soluk); cursor: pointer; }
@@ -280,6 +283,11 @@
     .dil-dugme button { font-size: 11.5px; }
     #hakkinda-ac { padding: 7px 9px; }
     #hakkinda-ac span { display: none; }
+    .nutuk-dugme { padding: 2px; } .nutuk-dugme span { display: none; }
+  }
+  @media (max-width: 420px) {
+    .marka img { display: none; }
+    .marka h1 { font-size: 16.5px; }
     .dil-dugme button { padding: 3px; gap: 0; font-size: 0; }
     .dil-dugme .bayrak { width: 22px; height: 22px; }
     html[lang="en"] .marka h1 { white-space: normal; font-size: 16px; line-height: 1.1; }
@@ -403,6 +411,7 @@
   <div class="dil-dugme" role="group" aria-label="Dil / Language">
     <button type="button" data-dil="tr" aria-pressed="true" lang="tr" aria-label="Türkçe"><i class="bayrak" aria-hidden="true"></i><span data-m="dil-kisa-tr">TR</span></button><button type="button" data-dil="en" aria-pressed="false" lang="en" aria-label="English"><i class="bayrak" aria-hidden="true"></i><span data-m="dil-kisa-en">EN</span></button>
   </div>
+  <a class="dugme nutuk-dugme" href="https://kho.msu.edu.tr/hakkinda/harbiyeli_ataturk/nutuk/nutuk.html" target="_blank" rel="noopener" title="Nutuk" aria-label="Nutuk" data-m-aria="nutuk-aria"><img src="img/nutuk.webp" alt="" width="30" height="30"><span data-m="nutuk-dugme">Nutuk</span></a>
   <button class="dugme" type="button" id="hakkinda-ac" aria-haspopup="dialog" aria-label="Hakkında" data-m-aria="hakkinda">
     <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6M12 7.2v.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
     <span data-m="hakkinda">Hakkında</span>
@@ -500,7 +509,7 @@
     </ul>
     <h3 data-m="hk-kaynaklar">Kaynaklar</h3>
     <ul data-m="hk-kaynaklar-liste">
-      <li>Gazi Mustafa Kemal, Nutuk–Söylev, T.C. Kültür ve Turizm Bakanlığı e-kitap (ekitap.ktb.gov.tr).</li>
+      <li>Gazi Mustafa Kemal, <a href="https://kho.msu.edu.tr/hakkinda/harbiyeli_ataturk/nutuk/nutuk.html" target="_blank" rel="noopener">Nutuk</a> (tam metin: Millî Savunma Üniversitesi Kara Harp Okulu).</li>
       <li>Açılıştaki söz, Mustafa Kemal'in 13 Kasım 1918'de İstanbul'a dönüşünde söylediği, yanındakilerin anılarıyla bize ulaşan sözdür.</li>
       <li>Atatürk Ansiklopedisi, Atatürk Araştırma Merkezi (ataturkansiklopedisi.gov.tr).</li>
       <li>Ara durakların tarihleri için ayrıca: Ö. Toraman, Vakanüvis 8 (Özel Sayı), 2023; O. Akandere, Atatürk Araştırma Merkezi Dergisi.</li>
@@ -508,7 +517,7 @@
     <h3 data-m="hk-yollar">Yollar ve araçlar</h3>
     <p data-m="hk-yollar-metin">O yılların yolları bugün yok; çizgiler aynı güzergâhın bugünkü yol ve demiryolu karşılığını izler. Vapur yolu yaklaşıktır. Üç boyutlu görünümdeki vapur, otomobil ve tren dönemin taşıtlarını anımsatan maketlerdir; duraklardaki yapı ve nesneler de temsilidir; aracın yol üzerindeki yeri yolculuğun başlangıç ve bitiş günlerine göre yaklaşık hesaplanır.</p>
     <h3 data-m="hk-kunye">Künye</h3>
-    <p data-m="hk-kunye-metin">Hazırlayan: Mehmet Ali Yanmaz · <a href="https://georehber.com/" target="_blank" rel="noopener">georehber.com</a> · Harita verisi © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap katkıcıları</a> (ODbL) · Yol hesabı: <a href="https://project-osrm.org/" target="_blank" rel="noopener">OSRM</a> · Ülke sınırları: <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth</a> · Altlık: Esri Light Gray Canvas ve World Hillshade; üç boyutlu görünümde Esri World Imagery ve arazi yükseltisi · Seslendirme: Adam Stone (ElevenLabs) · Durak simgeleri ve başlıktaki göz çizimi: Google Gemini ile üretildi; göz çizimi Library of Congress'teki kamu malı bir portreden (Bain News Service, 1920'ler, <a href="https://commons.wikimedia.org/wiki/File:Ghazi_Moustapha_Kemal_Pasha_LCCN2014716853_(cropped).jpg" target="_blank" rel="noopener">Wikimedia Commons</a>) · Yazı tipleri: Lora, Inter (SIL Open Font License) · Renkler: Okabe-Ito paleti, renk körlüğüne uygun · Araçlar: Claude, Python, ArcGIS Online, ArcGIS Maps SDK for JavaScript</p>
+    <p data-m="hk-kunye-metin">Hazırlayan: Mehmet Ali Yanmaz · <a href="https://georehber.com/" target="_blank" rel="noopener">georehber.com</a> · Harita verisi © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap katkıcıları</a> (ODbL) · Yol hesabı: <a href="https://project-osrm.org/" target="_blank" rel="noopener">OSRM</a> · Ülke sınırları: <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth</a> · Altlık: Esri Light Gray Canvas ve World Hillshade; üç boyutlu görünümde Esri World Imagery ve arazi yükseltisi · Seslendirme: Adam Stone (ElevenLabs) · Durak simgeleri ve başlıktaki göz çizimi: Google Gemini ile üretildi · Yazı tipleri: Lora, Inter (SIL Open Font License) · Renkler: Okabe-Ito paleti, renk körlüğüne uygun · Araçlar: Claude, Python, ArcGIS Online, ArcGIS Maps SDK for JavaScript</p>
     <h3 data-m="hk-topluluk">Topluluk</h3>
     <p data-m="hk-topluluk-metin">Bu harita, İzmir Bakırçay Üniversitesi Coğrafi Bilgi Sistemleri Topluluğu (BakırçayCBS) bünyesinde düzenlenen #30DayMapChallenge 2026 etkinliğinin 10. günü (“Prompting only”) için hazırlandı. Koordinatör: Dr. Şevki Danacıoğlu · <a href="https://sdanacioglu.github.io/30daymapchallenge-2026/" target="_blank" rel="noopener">BakırçayCBS #30DayMapChallenge 2026</a></p>
   </div>
