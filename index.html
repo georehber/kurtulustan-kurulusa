@@ -1605,7 +1605,8 @@ require([
           const yollar = sahneler.filter(x => x.tur === "yol").flatMap(x => x.parcalar.map(p => p.h.koordlar));
           kapanisGrafik = new Graphic({ geometry: new Polyline({ paths: yollar, spatialReference: { wkid: 4326 } }) });
           uc.aktif.add(kapanisGrafik);
-          uc.sView.goTo({ position: { longitude: 34.3, latitude: 38.3, z: 2100000 }, heading: -5, tilt: 0 },
+          const oran = uc.sView.width / Math.max(1, uc.sView.height), yukseklik = 2100000 * Math.max(1, 1.5 / oran);
+          uc.sView.goTo({ position: { longitude: 34.3, latitude: 38.3, z: yukseklik }, heading: -5, tilt: 0 },
                         { duration: ani ? 0 : 5000, easing: "in-out-cubic" }).catch(() => {});
         }
         kapanisCiz(ani);
@@ -1664,7 +1665,8 @@ require([
     }
     function varilanlariGoster() {
       maketleriOlcekle();
-      uc.yerAdlari.forEach(g => { const v = g.attributes.bas <= ucTarih; if (g.visible !== v) g.visible = v; });
+      const adlarGizli = kapanisKamerasi && darEkran.matches;
+      uc.yerAdlari.forEach(g => { const v = !adlarGizli && g.attributes.bas <= ucTarih; if (g.visible !== v) g.visible = v; });
       const son = new Map();
       uc.maketler.forEach(g => {
         const a = g.attributes, s = son.get(a.obek);
