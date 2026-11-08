@@ -914,7 +914,6 @@ require([
       return { k: c.k, ad: illi ? illi.il : kisaAd(c.uyeler[0].yer_adi_bugun).split(" ")[0],
                bas: Math.min(...c.uyeler.map(a => a.zaman_bas)) };
     });
-    window.haritaYerAdlari = yerAdlari.map(y => y.ad);
     yerAdlari.forEach((y, i) => adKatmani.add(new Graphic({ geometry: { type: "point", longitude: y.k[0], latitude: y.k[1] }, attributes: { bas: y.bas, ad: y.ad, kume: i },
       symbol: { type: "text", text: yerYaz(y.ad), color: [31, 29, 26], haloColor: [255, 253, 248, 0.95], haloSize: 1.5, yoffset: 18,
                 font: { family: "Inter", size: 10.5, weight: "bold" } } })));
