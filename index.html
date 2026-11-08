@@ -1578,10 +1578,11 @@ require([
       if (!ani && simdi - kapanisSon < 80) return;
       kapanisSon = simdi;
       const t = ani ? 4 : (simdi - kapanisBas) / 1000, gecis = Math.min(1, t / 3.5), nabiz = 0.5 + 0.5 * Math.sin(t * 1.6);
+      const k = darEkran.matches ? 0.36 : 1;
       const sembol = { type: "line-3d", symbolLayers: [
-        { type: "line", size: 9 + 8 * nabiz, material: { color: [...KAPANIS_RENK, (0.22 + 0.28 * nabiz) * gecis] }, cap: "round", join: "round" },
-        { type: "line", size: 4.5, material: { color: [255, 214, 110, 0.75 * gecis] }, cap: "round", join: "round" },
-        { type: "line", size: 2.2, material: { color: [255, 246, 214, gecis] }, cap: "round", join: "round" }] };
+        { type: "line", size: (9 + 8 * nabiz) * k, material: { color: [...KAPANIS_RENK, (0.22 + 0.28 * nabiz) * gecis] }, cap: "round", join: "round" },
+        { type: "line", size: 4.5 * k, material: { color: [255, 214, 110, 0.75 * gecis] }, cap: "round", join: "round" },
+        { type: "line", size: Math.max(1.4, 2.2 * k), material: { color: [255, 246, 214, gecis] }, cap: "round", join: "round" }] };
       kapanisGrafik.symbol = sembol;
       uc.izler.opacity = 1 - gecis;
       const olcek = 1 - 0.65 * gecis;
@@ -1605,7 +1606,7 @@ require([
           const yollar = sahneler.filter(x => x.tur === "yol").flatMap(x => x.parcalar.map(p => p.h.koordlar));
           kapanisGrafik = new Graphic({ geometry: new Polyline({ paths: yollar, spatialReference: { wkid: 4326 } }) });
           uc.aktif.add(kapanisGrafik);
-          const oran = uc.sView.width / Math.max(1, uc.sView.height), yukseklik = 2100000 * Math.max(1, 1.5 / oran);
+          const oran = uc.sView.width / Math.max(1, uc.sView.height), yukseklik = Math.max(2100000, 770000 / (0.5206 * oran));
           uc.sView.goTo({ position: { longitude: 34.3, latitude: 38.3, z: yukseklik }, heading: -5, tilt: 0 },
                         { duration: ani ? 0 : 5000, easing: "in-out-cubic" }).catch(() => {});
         }
