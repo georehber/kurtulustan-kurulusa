@@ -517,7 +517,7 @@
     <h3 data-m="hk-yollar">Yollar ve araçlar</h3>
     <p data-m="hk-yollar-metin">O yılların yolları bugün yok; çizgiler aynı güzergâhın bugünkü yol ve demiryolu karşılığını izler. Vapur yolu yaklaşıktır. Üç boyutlu görünümdeki vapur, otomobil ve tren dönemin taşıtlarını anımsatan maketlerdir; duraklardaki yapı ve nesneler de temsilidir; aracın yol üzerindeki yeri yolculuğun başlangıç ve bitiş günlerine göre yaklaşık hesaplanır.</p>
     <h3 data-m="hk-kunye">Künye</h3>
-    <p data-m="hk-kunye-metin">Hazırlayan: Mehmet Ali Yanmaz · <a href="https://georehber.com/" target="_blank" rel="noopener">georehber.com</a> · Harita verisi © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap katkıcıları</a> (ODbL) · Yol hesabı: <a href="https://project-osrm.org/" target="_blank" rel="noopener">OSRM</a> · Ülke sınırları: <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth</a> · Altlık: Esri Light Gray Canvas ve World Hillshade; üç boyutlu görünümde Esri World Imagery ve arazi yükseltisi · Seslendirme: Adam Stone (ElevenLabs) · Durak simgeleri ve başlıktaki göz çizimi: Google Gemini ile üretildi · Yazı tipleri: Lora, Inter (SIL Open Font License) · Renkler: Okabe-Ito paleti, renk körlüğüne uygun · Araçlar: Claude, Python, ArcGIS Online, ArcGIS Maps SDK for JavaScript</p>
+    <p data-m="hk-kunye-metin">Hazırlayan: Mehmet Ali Yanmaz · <a href="https://georehber.com/" target="_blank" rel="noopener">georehber.com</a> · Harita verisi © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap katkıcıları</a> (ODbL) · Yol hesabı: <a href="https://project-osrm.org/" target="_blank" rel="noopener">OSRM</a> · Ülke sınırları: <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth</a> · Koordinat sistemi: WGS 84 / Pseudo-Mercator (EPSG:3857), veri WGS 84 (EPSG:4326) · Altlık: Esri Light Gray Canvas ve World Hillshade; üç boyutlu görünümde Esri World Imagery ve arazi yükseltisi · Seslendirme: Adam Stone (ElevenLabs) · Durak simgeleri ve başlıktaki göz çizimi: Google Gemini ile üretildi · Yazı tipleri: Lora, Inter (SIL Open Font License) · Renkler: Okabe-Ito paleti, renk körlüğüne uygun · Araçlar: Claude, Python, ArcGIS Online, ArcGIS Maps SDK for JavaScript</p>
     <h3 data-m="hk-topluluk">Topluluk</h3>
     <p data-m="hk-topluluk-metin">Bu harita, İzmir Bakırçay Üniversitesi Coğrafi Bilgi Sistemleri Topluluğu (BakırçayCBS) bünyesinde düzenlenen #30DayMapChallenge 2026 etkinliğinin 10. günü (“Prompting only”) için hazırlandı. Koordinatör: Dr. Şevki Danacıoğlu · <a href="https://sdanacioglu.github.io/30daymapchallenge-2026/" target="_blank" rel="noopener">BakırçayCBS #30DayMapChallenge 2026</a></p>
   </div>
@@ -653,11 +653,11 @@ const simgeAdi = ad => yaz("simge-" + ad, SIMGE_ADI[ad]);
 const yerYaz = ad => yaz("yer-" + ad, ad);
 require([
   "esri/Map", "esri/views/MapView", "esri/layers/FeatureLayer", "esri/layers/GraphicsLayer",
-  "esri/Graphic", "esri/Camera", "esri/widgets/Home", "esri/widgets/Zoom", "esri/core/reactiveUtils",
+  "esri/Graphic", "esri/Camera", "esri/widgets/Home", "esri/widgets/Zoom", "esri/widgets/ScaleBar", "esri/widgets/Compass", "esri/core/reactiveUtils",
   "esri/renderers/UniqueValueRenderer", "esri/layers/support/FeatureFilter",
   "esri/layers/support/FeatureEffect", "esri/TimeExtent", "esri/geometry/geometryEngine", "esri/geometry/Point",
   "esri/geometry/Polyline", "esri/geometry/support/webMercatorUtils", "esri/layers/TileLayer", "esri/config"
-], (EsriMap, MapView, FeatureLayer, GraphicsLayer, Graphic, Camera, Home, Zoom, reactiveUtils,
+], (EsriMap, MapView, FeatureLayer, GraphicsLayer, Graphic, Camera, Home, Zoom, ScaleBar, Compass, reactiveUtils,
     UniqueValueRenderer, FeatureFilter, FeatureEffect, TimeExtent, geometryEngine, Point,
     Polyline, wmu, TileLayer, esriConfig) => {
   let SceneView, Mesh, meshUtils, MeshLocalVertexSpace, ucYukleniyor = null;
@@ -845,6 +845,8 @@ require([
     view.highlightOptions = { color: [...VURGU, 1], haloOpacity: 0.9, fillOpacity: 0 };
     view.ui.add(new Zoom({ view }), "top-left");
     view.ui.add(new Home({ view, viewpoint: { targetGeometry: TURKIYE } }), "top-left");
+    view.ui.add(new ScaleBar({ view, unit: "metric", style: "line" }), "bottom-left");
+    view.ui.add(new Compass({ view }), "bottom-left");
     const tamDugme = document.createElement("button");
     tamDugme.type = "button"; tamDugme.className = "esri-widget--button esri-widget tam-ekran-dugme";
     view.ui.add(tamDugme, "top-left");
